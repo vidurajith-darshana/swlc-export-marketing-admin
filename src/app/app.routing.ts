@@ -9,7 +9,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'manage-product',
     pathMatch: 'full',
   }, {
     path: '',
@@ -31,7 +31,7 @@ const routes: Routes =[
     ]
   }, {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'manage-product'
   }
 ];
 
@@ -40,7 +40,7 @@ const routes: Routes =[
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes,{
-      useHash: true
+      useHash: false
     })
   ],
   exports: [

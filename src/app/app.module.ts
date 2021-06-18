@@ -12,6 +12,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
+import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
+import { ManageCategoriesComponent } from './pages/manage-categories/manage-categories.component';
+import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
+import { CreateProductComponent } from './pages/create-product/create-product.component';
+import { CreateCategoryComponent } from './pages/create-category/create-category.component';
 
 
 @NgModule({
@@ -27,7 +32,12 @@ import { ComponentsModule } from './components/components.module';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    ManageProductsComponent,
+    ManageCategoriesComponent,
+    ManageOrdersComponent,
+    CreateProductComponent,
+    CreateCategoryComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
