@@ -1,3 +1,4 @@
+import { JwPaginationModule } from 'jw-angular-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +28,8 @@ import { CreateCategoryComponent } from './pages/create-category/create-category
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JwPaginationModule
   ],
   declarations: [
     AppComponent,

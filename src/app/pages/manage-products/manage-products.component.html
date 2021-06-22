@@ -1,1 +1,191 @@
 <p>manage-products works!</p>
+<div class="row class-body">
+    <div class="col-6">
+        <form>
+           <div class="row">
+              <div class="col-md-6" style="text-align: center;">
+                <div class="form-group">
+                  <div class="input-group input-group-alternative mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                    </div>
+                    <input class="form-control form-control-alternative" placeholder="Search Product By Name" type="text">
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-6 add-button">
+        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#ModalLoginForm">Add New Product</button>
+    </div>
+</div>
+<div class="row">
+<div class="col-12 product-table">
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Product Id</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Thumbnail</th>
+          <th scope="col">Code</th>
+          <th scope="col">Price</th>
+          <th scope="col">Status</th>
+          <th scope="col">Total Qty</th>
+          <th scope="col">Currunt Qty</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let products of product">
+        <tr>
+          <th scope="row">
+            <div class="media align-items-center">
+              {{products.productId}}
+             </div>
+          </th>
+          <td>
+            <div class="media-body">
+                <span class="mb-0 text-sm">{{products.productName}}</span>
+              </div>
+          </td>
+          <td>
+            <span class="badge badge-dot mr-4">
+                <a href="#" class="avatar rounded-circle mr-3">
+                    <img alt="Image placeholder" src="{{products.productThumbnail}}">
+                  </a>
+            </span>
+          </td>
+          <th>
+              {{products.productCode}}
+          </th>
+          <td>
+         {{products.productPrice}}
+           </td>
+          <td>
+            <div class="d-flex align-items-center">
+              {{products.productStatus}}
+              <div>
+                </div>
+            </div>
+          </td>
+          <td>
+         {{products.totalQty}}
+        </td>
+        <td>
+         {{products.curruntQty}}
+        </td>
+        <td>
+            <button type="button" class="btn btn-secondary">Edit</button>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+  </div>
+  </div>
+  <div class="card-footer pb-0 pt-3">
+    <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+</div>
+</div>
+
+
+<!-- Modal HTML Markup -->
+<div id="ModalLoginForm" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Add Products</h1>
+            </div>
+            <div class="modal-body">
+             <form role="form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Product Id</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="product Id" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Product Name</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="product Name" value="">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Thumbnail</label>
+                            <div>
+                                <input type="file" class="form-control-file">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Code</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="code" value="">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Price</label>
+                                <div>
+                                    <input type="text" class="form-control input-lg" name="price" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Status</label>
+                                <div>
+                                    <select class="browser-default custom-select">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">Active</option>
+                                        <option value="2">Inactive</option>
+                                        <option value="3">Delete</option>
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Total Qty</label>
+                                    <div>
+                                        <input type="text" class="form-control input-lg" name="total qty" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Current Qty</label>
+                                    <div>
+                                        <input type="text" class="form-control input-lg" name="currunt qty" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+               <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-success">
+                                Add Product
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
