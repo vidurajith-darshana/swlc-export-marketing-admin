@@ -1,4 +1,4 @@
-<p>manage-products works!</p>
+
 <div class="row class-body">
     <div class="col-6">
         <form>
@@ -76,10 +76,116 @@
          {{products.curruntQty}}
         </td>
         <td>
-            <button type="button" class="btn btn-secondary">Edit</button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ModalEditProduct">Edit</button>
         </td>
         </tr>
         </tbody>
+
+
+
+<!-- Modal HTML Markup  for edit products-->
+<div id="ModalEditProduct" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Edit Products</h1>
+            </div>
+            <div class="modal-body">
+             <form role="form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Product Id</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="product Id" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Product Name</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="product Name" value="">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Thumbnail</label>
+                            <div>
+                                <input type="file" class="form-control-file">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Code</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="code" value="">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Price</label>
+                                <div>
+                                    <input type="text" class="form-control input-lg" name="price" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Status</label>
+                                <div>
+                                    <select class="browser-default custom-select">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">Active</option>
+                                        <option value="2">Inactive</option>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Total Qty</label>
+                                    <div>
+                                        <input type="text" class="form-control input-lg" name="total qty" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Current Qty</label>
+                                    <div>
+                                        <input type="text" class="form-control input-lg" name="currunt qty" value="">
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+               <div class="form-group">
+                <div class="button-set">
+                    <button type="button" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
     </table>
   </div>
   </div>
@@ -152,7 +258,6 @@
                                         <option selected>Open this select menu</option>
                                         <option value="1">Active</option>
                                         <option value="2">Inactive</option>
-                                        <option value="3">Delete</option>
                                       </select>
                                 </div>
                             </div>
@@ -175,7 +280,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </div>
+                         </div>
                <div class="form-group">
                         <div>
                             <button type="submit" class="btn btn-success">
@@ -185,7 +290,7 @@
                     </div>
                 </form>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 
