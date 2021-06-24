@@ -76,110 +76,112 @@
          {{products.curruntQty}}
         </td>
         <td>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ModalEditProduct">Edit</button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                    [attr.data-target]="'#ModalEditProduct'+ products.productId">Edit</button>
         </td>
+            <!-- Modal HTML Markup  for edit products-->
+            <div id="ModalEditProduct{{products.productId}}" class="modal fade">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title">Edit Products</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Product Id</label>
+                                            <div>
+                                                <input type="text" class="form-control input-lg" name="product Id" value="{{products.productId}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Product Name</label>
+                                            <div>
+                                                <input type="text" class="form-control input-lg" name="product Name" value="{{products.productName}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Thumbnail</label>
+                                            <div>
+                                                <input type="file" class="form-control-file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Code</label>
+                                            <div>
+                                                <input type="text" class="form-control input-lg" name="code" value="{{products.productCode}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Price</label>
+                                            <div>
+                                                <input type="text" class="form-control input-lg" name="price" value="{{products.productPrice}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Status</label>
+                                            <div>
+                                                <select class="browser-default custom-select" value="{{products.productStatus}}">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Total Qty</label>
+                                            <div>
+                                                <input type="text" class="form-control input-lg" name="total qty" value="{{products.totalQty}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Current Qty</label>
+                                            <div>
+                                                <input type="text" class="form-control input-lg" name="currunt qty" value="{{products.curruntQty}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="button-set">
+                                        <button type="button" class="btn btn-primary">Update</button>
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </tr>
         </tbody>
 
 
 
-<!-- Modal HTML Markup  for edit products-->
-<div id="ModalEditProduct" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title">Edit Products</h1>
-            </div>
-            <div class="modal-body">
-             <form role="form">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label">Product Id</label>
-                            <div>
-                                <input type="text" class="form-control input-lg" name="product Id" value="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label">Product Name</label>
-                            <div>
-                                <input type="text" class="form-control input-lg" name="product Name" value="">
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label">Thumbnail</label>
-                            <div>
-                                <input type="file" class="form-control-file">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label">Code</label>
-                            <div>
-                                <input type="text" class="form-control input-lg" name="code" value="">
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Price</label>
-                                <div>
-                                    <input type="text" class="form-control input-lg" name="price" value="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Status</label>
-                                <div>
-                                    <select class="browser-default custom-select">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">Active</option>
-                                        <option value="2">Inactive</option>
-                                        </select>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Total Qty</label>
-                                    <div>
-                                        <input type="text" class="form-control input-lg" name="total qty" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Current Qty</label>
-                                    <div>
-                                        <input type="text" class="form-control input-lg" name="currunt qty" value="">
-                                    </div>
-                                </div>
-                            </div>
-                         </div>
-               <div class="form-group">
-                <div class="button-set">
-                    <button type="button" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 
