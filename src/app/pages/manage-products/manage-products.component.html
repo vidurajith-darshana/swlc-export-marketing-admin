@@ -36,7 +36,7 @@
           <th scope="col">Edit</th>
         </tr>
       </thead>
-      <tbody *ngFor="let products of product">
+      <tbody *ngFor="let products of pageOfItems">
         <tr>
           <th scope="row">
             <div class="media align-items-center">
@@ -177,22 +177,14 @@
             </div>
         </tr>
         </tbody>
-
-
-
-
-
-
-
-
-
-
     </table>
   </div>
   </div>
   <div class="card-footer pb-0 pt-3">
-    <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
-</div>
+<!--    <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>-->
+      <jw-pagination [items]="product" (changePage)="onChangePage($event)"></jw-pagination>
+
+  </div>
 </div>
 
 

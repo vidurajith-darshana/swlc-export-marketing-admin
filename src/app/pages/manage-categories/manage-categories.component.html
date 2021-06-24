@@ -35,7 +35,7 @@
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let categories of category">
+                <tbody *ngFor="let categories of pageOfItems">
                 <tr>
                     <th scope="row">
                         <div class="media align-items-center">
@@ -126,7 +126,8 @@
         </div>
     </div>
     <div class="card-footer pb-0 pt-3">
-        <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+<!--        <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>-->
+            <jw-pagination [items]="category" (changePage)="onChangePage($event)"></jw-pagination>
     </div>
 </div>
 

@@ -15,10 +15,30 @@ export class ManageCategoriesComponent implements OnInit {
     {categoryId:'3123654',categoryName:'Herbs3',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
     {categoryId:'4123654',categoryName:'Herbs4',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
     {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
+    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
     {categoryId:'6123654',categoryName:'Herbs6',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
   ]
-
+  pageOfItems: Array<any>;
   ngOnInit(): void {
   }
-
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+  }
 }
