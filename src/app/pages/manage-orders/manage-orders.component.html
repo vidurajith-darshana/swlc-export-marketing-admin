@@ -28,8 +28,7 @@
             <table class="table align-items-center table-flush">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Order Id</th>
-                    <th scope="col">Order Date</th>
+                   <th scope="col">Order Date</th>
                     <th scope="col">Bill To Name</th>
                     <th scope="col">Status</th>
                     <th scope="col">Message</th>
@@ -39,11 +38,6 @@
                 </thead>
                 <tbody  *ngFor="let manageorders of pageOfItems" >
                 <tr>
-                    <th scope="row">
-                        <div class="media align-items-center">
-                            {{manageorders.orderId}}
-                        </div>
-                    </th>
                     <td>
                         <div class="media-body">
                             <span class="mb-0 text-sm">{{manageorders.orderDate}}</span>
@@ -89,24 +83,14 @@
                             </div>
                             <div class="modal-body">
                                 <form role="form">
-                                    <div class="form-group">
-                                        <label class="control-label">Order Id</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="order Id" value="">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
+                                   <div class="form-group">
                                         <label class="control-label">Order Date</label>
                                         <div class="input-group input-group-alternative">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="ni ni-calendar-grid-58"></i></span>
+                                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                             </div>
-                                            <input class="form-control datepicker" placeholder="Select date" name="dp"
-                                                   [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
-                                                   (click)="d.toggle()" type="text"/>
-                                        </div>
+                                            <input class="form-control datepicker" placeholder="Select date" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
+                                          </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Bill To Name</label>
@@ -155,8 +139,7 @@
         </div>
     </div>
     <div class="card-footer pb-0 pt-3">
-<!--        <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>-->
-        <jw-pagination [items]="manageorder" (changePage)="onChangePage($event)"></jw-pagination>
+<jw-pagination [items]="manageorder" (changePage)="onChangePage($event)"></jw-pagination>
     </div>
 </div>
 
@@ -166,43 +149,23 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title">Edit Order</h1>
+                <h1 class="modal-title">Add Order</h1>
             </div>
             <div class="modal-body">
                 <form role="form">
-                    <div class="form-group">
-                        <label class="control-label">Order Id</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="order Id" value="">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
+                   <div class="form-group">
                         <label class="control-label">Order Date</label>
                         <div class="input-group input-group-alternative">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                             </div>
-                            <input class="form-control datepicker" placeholder="Select date" name="dp"
-                                   [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"
-                                   type="text"/>
-                        </div>
+                            <input class="form-control datepicker" placeholder="Select date" name="dpdd" [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
+                          </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Bill To Name</label>
                         <div>
                             <input type="text" class="form-control input-lg" name="bill to name" value="">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Status</label>
-                        <div>
-                            <select class="browser-default custom-select">
-                                <option selected>Open this select menu</option>
-                                <option value="1">Active</option>
-                                <option value="2">Inactive</option>
-                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -220,7 +183,7 @@
                     <div class="form-group">
                         <div>
                             <button type="submit" class="btn btn-success">
-                                Add Category
+                                Add Order
                             </button>
                         </div>
                     </div>

@@ -25,8 +25,7 @@
     <table class="table align-items-center table-flush">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Product Id</th>
-          <th scope="col">Product Name</th>
+         <th scope="col">Product Name</th>
           <th scope="col">Thumbnail</th>
           <th scope="col">Code</th>
           <th scope="col">Price</th>
@@ -38,12 +37,7 @@
       </thead>
       <tbody *ngFor="let products of pageOfItems">
         <tr>
-          <th scope="row">
-            <div class="media align-items-center">
-              {{products.productId}}
-             </div>
-          </th>
-          <td>
+           <td>
             <div class="media-body">
                 <span class="mb-0 text-sm">{{products.productName}}</span>
               </div>
@@ -88,19 +82,20 @@
                         <div class="modal-body">
                             <form role="form">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Product Id</label>
-                                            <div>
-                                                <input type="text" class="form-control input-lg" name="product Id" value="{{products.productId}}">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Product Name</label>
                                             <div>
                                                 <input type="text" class="form-control input-lg" name="product Name" value="{{products.productName}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Price</label>
+                                            <div>
+                                                <input type="text" class="form-control input-lg" name="price" value="{{products.productPrice}}">
                                             </div>
                                         </div>
                                     </div>
@@ -127,13 +122,23 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Price</label>
+                                            <label class="control-label">Total Qty</label>
                                             <div>
-                                                <input type="text" class="form-control input-lg" name="price" value="{{products.productPrice}}">
+                                                <input type="text" class="form-control input-lg" name="total qty" value="{{products.totalQty}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Current Qty</label>
+                                        <div>
+                                            <input type="text" class="form-control input-lg" name="currunt qty" value="{{products.curruntQty}}">
+                                        </div>
+                                    </div>
+                                    </div>
+                                   </div>
+                                <div class="row">
+                                <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Status</label>
                                             <div>
@@ -142,24 +147,6 @@
                                                     <option value="Active">Active</option>
                                                     <option value="Inactive">Inactive</option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Total Qty</label>
-                                            <div>
-                                                <input type="text" class="form-control input-lg" name="total qty" value="{{products.totalQty}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Current Qty</label>
-                                            <div>
-                                                <input type="text" class="form-control input-lg" name="currunt qty" value="{{products.curruntQty}}">
                                             </div>
                                         </div>
                                     </div>
@@ -181,8 +168,7 @@
   </div>
   </div>
   <div class="card-footer pb-0 pt-3">
-<!--    <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>-->
-      <jw-pagination [items]="product" (changePage)="onChangePage($event)"></jw-pagination>
+ <jw-pagination [items]="product" (changePage)="onChangePage($event)"></jw-pagination>
 
   </div>
 </div>
@@ -200,17 +186,17 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label">Product Id</label>
+                            <label class="control-label">Product Name</label>
                             <div>
-                                <input type="text" class="form-control input-lg" name="product Id" value="">
+                                <input type="text" class="form-control input-lg" name="product Name" value="">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label">Product Name</label>
+                            <label class="control-label">Price</label>
                             <div>
-                                <input type="text" class="form-control input-lg" name="product Name" value="">
+                                <input type="text" class="form-control input-lg" name="price" value="">
                             </div>
                         </div>
                     </div>
@@ -233,29 +219,7 @@
                         </div>
                     </div>
                     </div>
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Price</label>
-                                <div>
-                                    <input type="text" class="form-control input-lg" name="price" value="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Status</label>
-                                <div>
-                                    <select class="browser-default custom-select">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">Active</option>
-                                        <option value="2">Inactive</option>
-                                      </select>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
+                     
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
