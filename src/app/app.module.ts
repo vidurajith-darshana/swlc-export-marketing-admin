@@ -18,6 +18,8 @@ import { ManageCategoriesComponent } from './pages/manage-categories/manage-cate
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { CreateProductComponent } from './pages/create-product/create-product.component';
 import { CreateCategoryComponent } from './pages/create-category/create-category.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { UserRegisterComponent } from './pages/user-register/user-register.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { CreateCategoryComponent } from './pages/create-category/create-category
     ManageCategoriesComponent,
     ManageOrdersComponent,
     CreateProductComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    AdminLoginComponent,
+    UserRegisterComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

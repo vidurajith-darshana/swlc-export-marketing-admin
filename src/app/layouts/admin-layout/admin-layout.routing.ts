@@ -1,3 +1,5 @@
+import { UserRegisterComponent } from './../../pages/user-register/user-register.component';
+import { AdminLoginComponent } from './../../pages/admin-login/admin-login.component';
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
@@ -21,5 +23,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent }
+    { path: 'maps',           component: MapsComponent },
+    {path: 'adminLogin',    component:AdminLoginComponent},
+    {path: 'userRegister', component:UserRegisterComponent}
 ];
