@@ -1,44 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, VERSION} from '@angular/core';
+import {Category} from '../model/category';
+import {CategoryService} from '../service/admin-web-services/category.service';
 
 @Component({
-  selector: 'app-manage-categories',
-  templateUrl: './manage-categories.component.html',
-  styleUrls: ['./manage-categories.component.css']
+    selector: 'app-manage-categories',
+    templateUrl: './manage-categories.component.html',
+    styleUrls: ['./manage-categories.component.css']
 })
 export class ManageCategoriesComponent implements OnInit {
+    categoryName = 'Angular ' + VERSION.major;
+    private categoryList: Category[];
 
-  constructor() { }
+    constructor(
+        private categoryService: CategoryService
+    ) {
+        this.config = {
+            itemsPerPage: 1,
+            currentPage: 1,
+            totalItems: 0
+        };
+    }
 
-  category =[
-    {categoryId:'123654',categoryName:'Herbs1',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'2123654',categoryName:'Herbs2',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Inactivate'},
-    {categoryId:'3123654',categoryName:'Herbs3',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'4123654',categoryName:'Herbs4',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'5123654',categoryName:'Herbs5',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-    {categoryId:'6123654',categoryName:'Herbs6',categoryThumbnail:'https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1323/bb84496c92fd35ece3cefd6bb79bd94cac0b5d4c99eb7e172678efa41165c73ba/A',categotyStatus:'Activate'},
-  ]
-  pageOfItems: Array<any>;
-  ngOnInit(): void {
-  }
-  onChangePage(pageOfItems: Array<any>) {
-    // update current page of items
-    this.pageOfItems = pageOfItems;
-  }
+    config: any;
+    items = [];
+
+    pageChanged(event) {
+        this.config.currentPage = event;
+        const pagno = this.config.currentPage - 1;
+        this.getAllCategoryList(pagno);
+    }
+
+    ngOnInit(): void {
+        this.getAllCategoryList(0);
+    }
+
+    private getAllCategoryList(pageno) {
+        this.categoryService.getAllCategory(pageno).subscribe(
+            (data: Object[]) => {
+                this.categoryList = data['body'].content;
+                console.log(this.categoryList);
+                this.config.itemsPerPage = data['body'].size;
+                this.config.totalItems = data['body'].totalElements;
+            },
+            error => {
+            });
+    }
+
 }

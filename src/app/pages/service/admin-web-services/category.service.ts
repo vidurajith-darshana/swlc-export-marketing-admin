@@ -9,8 +9,8 @@ export class CategoryService {
 
   constructor(private httpClient : HttpClient) { }
 
-  public getAllCategory(){
-    let url = `${this.BASE_URL+'api/v1/user/category/all?page=0&size=10'}`;
+  public getAllCategory(pageno){
+    let url = `${this.BASE_URL+'api/v1/user/category/all?page=' + pageno + '&size=10 '}`;
     return this.httpClient.get(url);
   }
 }

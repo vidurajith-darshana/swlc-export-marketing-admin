@@ -20,19 +20,21 @@ import { CreateProductComponent } from './pages/create-product/create-product.co
 import { CreateCategoryComponent } from './pages/create-category/create-category.component';
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { UserRegisterComponent } from './pages/user-register/user-register.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    ComponentsModule,
-    NgbModule,
-    RouterModule,
-    AppRoutingModule,
-    JwPaginationModule
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        ComponentsModule,
+        NgbModule,
+        RouterModule,
+        AppRoutingModule,
+        JwPaginationModule,
+        NgxPaginationModule
+    ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,

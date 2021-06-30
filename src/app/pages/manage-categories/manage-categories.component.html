@@ -34,32 +34,32 @@
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let categories of pageOfItems">
+                <tbody *ngFor="let categories of categoryList  | paginate: config">
                 <tr>
                   <td>
                         <div class="media-body">
-                            <span class="mb-0 text-sm">{{categories.categoryName}}</span>
+                            <span class="mb-0 text-sm">{{categories.name}}</span>
                         </div>
                     </td>
                     <td>
                         <span class="badge badge-dot mr-4">
                             <a href="#" class="avatar rounded-circle mr-3">
-                                <img alt="Image placeholder" src="{{categories.categoryThumbnail}}">
+                                <img alt="Image placeholder" src="{{categories.thumbnail}}">
                               </a>
                         </span>
                     </td>
                     <td>
                         <div class="d-flex align-items-center">
-                            {{categories.categotyStatus}}
+                            {{categories.categoryStatus}}
                         </div>
                     </td>
                     <td>
                         <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                [attr.data-target]="'#ModalEditProduct'+ categories.categoryId" >Edit
+                                [attr.data-target]="'#ModalEditProduct'+ categories.id" >Edit
                         </button>
                     </td>
                 </tr>
-                <div id="ModalEditProduct{{categories.categoryId}}" class="modal fade">
+                <div id="ModalEditProduct{{categories.id}}" class="modal fade">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -71,7 +71,7 @@
                                         <label class="control-label">Category Name</label>
                                         <div>
                                             <input type="text" class="form-control input-lg" name="product Name"
-                                                   value="{{categories.categoryName}}">
+                                                   value="{{categories.name}}">
                                         </div>
                                     </div>
 
@@ -86,10 +86,10 @@
                                     <div class="form-group">
                                         <label class="control-label">Status</label>
                                         <div>
-                                            <select class="browser-default custom-select" value="{{categories.categotyStatus}}">
+                                            <select class="browser-default custom-select" value="{{categories.categoryStatus}}">
                                                 <option selected>Open this select menu</option>
-                                                <option value="Activate">Activate</option>
-                                                <option value="Inactivate">Inactivate</option>
+                                                <option value="ACTIVE">Activate</option>
+                                                <option value="INACTIVE">Inactivate</option>
                                             </select>
                                         </div>
                                     </div>
@@ -106,15 +106,19 @@
                 </div>
 
                 </tbody>
-
+                <div class="products-pagination">
+                            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<!--                    <pagination-controls (pageChange)="this.config.currentPage = $event"></pagination-controls>-->
+                </div>
 
                 <!-- Modal HTML Markup  for edit category-->
             </table>
         </div>
     </div>
-    <div class="card-footer pb-0 pt-3">
- <jw-pagination [items]="category" (changePage)="onChangePage($event)"></jw-pagination>
-    </div>
+<!--    <div class="card-footer pb-0 pt-3">-->
+<!-- <jw-pagination [items]="category" (changePage)="onChangePage($event)"></jw-pagination>-->
+<!--    </div>-->
+
 </div>
 
 

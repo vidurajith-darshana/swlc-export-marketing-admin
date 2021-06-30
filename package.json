@@ -29,6 +29,7 @@
     "core-js": "3.6.5",
     "jw-angular-pagination": "^1.2.0",
     "ngx-clipboard": "13.0.1",
+    "ngx-pagination": "^5.1.1",
     "ngx-toastr": "13.0.0",
     "nouislider": "14.6.2",
     "rxjs": "6.6.3",
