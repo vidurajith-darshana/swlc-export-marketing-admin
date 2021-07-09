@@ -12,6 +12,7 @@ import { CreateProductComponent } from '../../pages/create-product/create-produc
 import { ManageCategoriesComponent } from '../../pages/manage-categories/manage-categories.component';
 import { ManageProductsComponent } from '../../pages/manage-products/manage-products.component';
 import { ManageOrdersComponent } from '../../pages/manage-orders/manage-orders.component';
+import { RegistrationDEOComponent } from 'src/app/pages/registration-deo/registration-deo.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'manage-category',      component: ManageCategoriesComponent },
@@ -25,5 +26,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     {path: 'adminLogin',    component:AdminLoginComponent},
-    {path: 'userRegister', component:UserRegisterComponent}
+    {path: 'userRegister', component:UserRegisterComponent},
+    {path: 'registration_DEO',component:RegistrationDEOComponent}
 ];

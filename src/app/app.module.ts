@@ -21,6 +21,7 @@ import { CreateCategoryComponent } from './pages/create-category/create-category
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { UserRegisterComponent } from './pages/user-register/user-register.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { RegistrationDEOComponent } from './pages/registration-deo/registration-deo.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     CreateProductComponent,
     CreateCategoryComponent,
     AdminLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    RegistrationDEOComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
