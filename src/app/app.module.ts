@@ -21,7 +21,11 @@ import { CreateCategoryComponent } from './pages/create-category/create-category
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { UserRegisterComponent } from './pages/user-register/user-register.component';
 import {NgxPaginationModule} from "ngx-pagination";
+<<<<<<< HEAD
 import { CustomerReviewReportComponent } from './pages/customer-review-report/customer-review-report.component';
+=======
+import { RegistrationDEOComponent } from './pages/registration-deo/registration-deo.component';
+>>>>>>> 4a8b427cef9615ec18f0f77e506084d64f68fec5
 
 
 @NgModule({
@@ -47,7 +51,11 @@ import { CustomerReviewReportComponent } from './pages/customer-review-report/cu
     CreateCategoryComponent,
     AdminLoginComponent,
     UserRegisterComponent,
+<<<<<<< HEAD
     CustomerReviewReportComponent
+=======
+    RegistrationDEOComponent
+>>>>>>> 4a8b427cef9615ec18f0f77e506084d64f68fec5
   ],
   providers: [],
   bootstrap: [AppComponent]
