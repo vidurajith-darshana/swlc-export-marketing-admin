@@ -9,7 +9,26 @@ export class CustomerReviewReportComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  report = [
+    {
+       customer: 'frfrfff',
+        compalintype: 'fefhekhffjff',
+        message: 'defhfghfhfhhf'
+    },
+  ]
+
+
+  viewreport: Array<any>;
+    ngOnInit(): void {
+
+    }
+
+
+    onChangePage(viewreport: Array<any>) {
+        // update current page of items
+        this.viewreport = viewreport;
+    }
+
+ 
 
 }

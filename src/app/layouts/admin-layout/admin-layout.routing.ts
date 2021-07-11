@@ -13,12 +13,8 @@ import { CreateProductComponent } from '../../pages/create-product/create-produc
 import { ManageCategoriesComponent } from '../../pages/manage-categories/manage-categories.component';
 import { ManageProductsComponent } from '../../pages/manage-products/manage-products.component';
 import { ManageOrdersComponent } from '../../pages/manage-orders/manage-orders.component';
-<<<<<<< HEAD
-import { CustomerReviewReportComponent } from 'src/app/pages/customer-review-report/customer-review-report.component';
-
-=======
 import { RegistrationDEOComponent } from 'src/app/pages/registration-deo/registration-deo.component';
->>>>>>> 4a8b427cef9615ec18f0f77e506084d64f68fec5
+import { CustomerReviewReportComponent } from 'src/app/pages/customer-review-report/customer-review-report.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'manage-category',      component: ManageCategoriesComponent },
@@ -33,9 +29,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',           component: MapsComponent },
     {path: 'adminLogin',    component:AdminLoginComponent},
     {path: 'userRegister', component:UserRegisterComponent},
-<<<<<<< HEAD
-    {path: 'reviews-report', component: CustomerReviewReportComponent}
-=======
-    {path: 'registration_DEO',component:RegistrationDEOComponent}
->>>>>>> 4a8b427cef9615ec18f0f77e506084d64f68fec5
+   {path: 'registration_DEO',component:RegistrationDEOComponent},
+   {path: 'reviews',component:CustomerReviewReportComponent},
+
+
 ];
