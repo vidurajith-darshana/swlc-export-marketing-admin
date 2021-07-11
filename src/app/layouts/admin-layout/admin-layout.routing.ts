@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { UserRegisterComponent } from './../../pages/user-register/user-register.component';
 import { AdminLoginComponent } from './../../pages/admin-login/admin-login.component';
 import { Routes } from '@angular/router';
@@ -12,6 +13,8 @@ import { CreateProductComponent } from '../../pages/create-product/create-produc
 import { ManageCategoriesComponent } from '../../pages/manage-categories/manage-categories.component';
 import { ManageProductsComponent } from '../../pages/manage-products/manage-products.component';
 import { ManageOrdersComponent } from '../../pages/manage-orders/manage-orders.component';
+import { CustomerReviewReportComponent } from 'src/app/pages/customer-review-report/customer-review-report.component';
+
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'manage-category',      component: ManageCategoriesComponent },
@@ -25,5 +28,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     {path: 'adminLogin',    component:AdminLoginComponent},
-    {path: 'userRegister', component:UserRegisterComponent}
+    {path: 'userRegister', component:UserRegisterComponent},
+    {path: 'reviews-report', component: CustomerReviewReportComponent}
 ];
