@@ -10,6 +10,7 @@ import {CategoryService} from '../service/admin-web-services/category.service';
 export class ManageCategoriesComponent implements OnInit {
     categoryName = 'Angular ' + VERSION.major;
     // private categoryList: Category[];
+    private categoryList: any
 
     constructor(
         private categoryService: CategoryService
@@ -38,7 +39,7 @@ export class ManageCategoriesComponent implements OnInit {
     private getAllCategoryList(pageno) {
         this.categoryService.getAllCategory(pageno).subscribe(
             (data: Object[]) => {
-                // this.categoryList = data['body'].content;
+                this.categoryList = data['body'].content;
                 // console.log(this.categoryList);
                 this.config.itemsPerPage = data['body'].size;
                 this.config.totalItems = data['body'].totalElements;
