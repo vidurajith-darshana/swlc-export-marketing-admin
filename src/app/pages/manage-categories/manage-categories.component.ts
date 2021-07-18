@@ -1,6 +1,7 @@
 import {Component, OnInit, VERSION} from '@angular/core';
 // import {Category} from '../model/category';
 import {CategoryService} from '../service/admin-web-services/category.service';
+import {Category} from '../model/category';
 
 @Component({
     selector: 'app-manage-categories',
@@ -9,8 +10,8 @@ import {CategoryService} from '../service/admin-web-services/category.service';
 })
 export class ManageCategoriesComponent implements OnInit {
     categoryName = 'Angular ' + VERSION.major;
+    private categoryList: Category[];
     // private categoryList: Category[];
-    private categoryList: any
 
     constructor(
         private categoryService: CategoryService
