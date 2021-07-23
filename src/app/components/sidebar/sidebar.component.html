@@ -13,7 +13,7 @@
     <ul class="nav align-items-center d-md-none" style="padding-left: 1.5rem;padding-right: 1.5rem;">
       <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link nav-link-icon" role="button" ngbDropdownToggle>
-          <i class="ni ni-bell-55"></i>
+<!--          <i class="ni ni-bell-55"></i>-->
         </a>
         <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
           <a class="dropdown-item" href="javascript:void(0)">Action</a>
@@ -91,7 +91,7 @@
       <ul class="navbar-nav">
           <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
               <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link">
-                  <i class="ni {{menuItem.icon}}"></i>
+<!--                  <i class="ni {{menuItem.icon}}"></i>-->
                   {{menuItem.title}}
               </a>
           </li>

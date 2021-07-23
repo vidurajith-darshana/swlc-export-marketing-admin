@@ -1,0 +1,213 @@
+<div class="row class-body" style="margin-left: 0;margin-right: 0;">
+    <div class="col-6">
+        <form>
+            <div class="row" style="padding-right: 0;padding-left: 0;">
+                <div class="col-md-12" style="text-align: center;padding-left: 0;">
+                    <div class="form-group">
+                        <div class="input-group input-group-alternative mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            </div>
+                            <input class="form-control form-control-alternative" placeholder="Search Testimonial By Name"
+                                   type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-6 add-button" >
+        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#ModalTestimonialForm">
+            Add New Testimonial
+        </button>
+    </div>
+</div>
+<div class="row"  style="margin: 0 0 20px;">
+    <div class="col-12 product-table" style="padding-left: 0;padding-right: 0;">
+        <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Video</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Edit</th>
+                </tr>
+                </thead>
+                <tbody *ngFor="let testimonial of testimonials ">
+                <tr>
+                    <td>
+                        <div class="media-body">
+                            <span class="mb-0 text-sm">{{testimonial.id}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge badge-dot mr-4">
+                            <a href="#" class="avatar rounded-circle mr-3">
+                                <img alt="Image placeholder" src="{{testimonial.image}}">
+                              </a>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="media-body">
+                            <span class="mb-0 text-sm">{{testimonial.youtubeUrl}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="media-body">
+                            <span class="mb-0 text-sm">{{testimonial.customerName}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="media-body">
+                            <span class="mb-0 text-sm">{{testimonial.country}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="media-body">
+                            <span class="mb-0 text-sm">{{testimonial.comment}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                [attr.data-target]="'#ModalEditProduct'+ testimonial.id" >Edit
+                        </button>
+                    </td>
+                </tr>
+                <div id="ModalEditProduct{{testimonial.id}}" class="modal fade">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title">Edit Testimonial</h1>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label class="control-label">Customer Name</label>
+                                        <div>
+                                            <input type="text" class="form-control input-lg" name="product Name"
+                                                   value="{{testimonial.customerName}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Image</label>
+                                        <div>
+                                            <input type="file"   class="form-control-file">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Youtube Url</label>
+                                        <div>
+                                            <input type="text" class="form-control input-lg" name="product Name"
+                                                   value="{{testimonial.youtubeUrl}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Country</label>
+                                        <div>
+                                            <input type="text" class="form-control input-lg" name="product Name"
+                                                   value="{{testimonial.country}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Comment</label>
+                                        <div>
+                                            <textarea  class="form-control input-lg" name="product Name"
+                                                   value="{{testimonial.comment}}"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="button-set">
+                                            <button type="button" class="btn btn-primary">Update</button>
+                                            <button type="button" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </tbody>
+                <div class="products-pagination">
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                    <!--                    <pagination-controls (pageChange)="this.config.currentPage = $event"></pagination-controls>-->
+                </div>
+
+                <!-- Modal HTML Markup  for edit category-->
+            </table>
+        </div>
+    </div>
+    <!--    <div class="card-footer pb-0 pt-3">-->
+    <!-- <jw-pagination [items]="category" (changePage)="onChangePage($event)"></jw-pagination>-->
+    <!--    </div>-->
+
+</div>
+
+
+<!-- Modal HTML Markup -->
+<div id="ModalTestimonialForm" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Add Testimonial</h1>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label">Customer Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="product Name"
+                                   >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Image</label>
+                        <div>
+                            <input type="file"   class="form-control-file">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Youtube Url</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="product Name"
+                                   >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Country</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="product Name"
+                                   >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Comment</label>
+                        <div>
+                                            <textarea  class="form-control input-lg" name="product Name"
+                                                       ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="button-set">
+                            <button type="submit" class="btn btn-success">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+

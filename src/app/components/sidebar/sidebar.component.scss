@@ -1,7 +1,29 @@
-.nav-item{
-    padding: 5%;
+.nav-item {
+  padding: 5px 5%;
 }
 
-.bg-color{
-        background-color: rgb(27, 27, 75);
+.bg-color {
+  background-color: rgb(27, 27, 75);
+}
+
+@media screen and (max-width: 768px) {
+  .navbar.navbar-vertical.navbar-expand-md.navbar-light.bg-white {
+    background-color: #1b1b4b !important;
+    padding-bottom: 0;
+  }
+  .navbar-toggler {
+    background-color: white;
+    margin-left: 1.5rem;
+  }
+  .nav.align-items-center.d-md-none {
+    justify-content: flex-end;
+    padding-top: 6px;
+    li {
+      padding: 0;
+
+      a {
+        padding: 0;
+      }
+    }
+  }
 }
