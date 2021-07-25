@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class CategoryService {
   private BASE_URL = 'http://103.125.216.56:8012/';
+  // private BASE_URL = 'http://localhost:8012/';
 
   constructor(private httpClient: HttpClient) { }
 

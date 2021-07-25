@@ -11,6 +11,7 @@ import {Category} from '../model/category';
 export class ManageCategoriesComponent implements OnInit {
     categoryName = 'Angular ' + VERSION.major;
     private categoryList: Category[];
+    // private categoryList: Category[];
 
     constructor(
         private categoryService: CategoryService

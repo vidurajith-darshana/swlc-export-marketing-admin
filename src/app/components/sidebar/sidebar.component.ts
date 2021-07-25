@@ -13,11 +13,10 @@ export const ROUTES: RouteInfo[] = [
     {path: '/manage-category', title: 'Manage Category', icon: 'ni-tv-2 text-primary', class: ''},
     {path: '/manage-orders', title: 'Manage Orders', icon: 'ni-planet text-blue', class: ''},
     {path: '/manage-products', title: 'Manage Products', icon: 'ni-bullet-list-67 text-red', class: ''},
-    {path: '/adminLogin', title: 'Admin Login', icon: 'ni-key-25 text-info', class: ''},
-    {path: '/userRegister', title: 'User Register', icon: 'ni-circle-08 text-pink', class: ''},
     {path:'/registration_DEO', title: 'DEO Register', icon: '', class: ''},
     {path: '/reviews', title:'Customer Reviews Report', icon:'', class: ''},
-    
+    {path: '/testimonial', title:'Testimonial', icon:'', class: ''},
+
 ];
 
 @Component({

@@ -23,6 +23,7 @@ import { UserRegisterComponent } from './pages/user-register/user-register.compo
 import {NgxPaginationModule} from "ngx-pagination";
 import { CustomerReviewReportComponent } from './pages/customer-review-report/customer-review-report.component';
 import { RegistrationDEOComponent } from './pages/registration-deo/registration-deo.component';
+import { TestimonialComponent } from './pages/testimonial/testimonial.component';
 
 
 
@@ -50,7 +51,8 @@ import { RegistrationDEOComponent } from './pages/registration-deo/registration-
     AdminLoginComponent,
     UserRegisterComponent,
     CustomerReviewReportComponent,
-    RegistrationDEOComponent
+    RegistrationDEOComponent,
+    TestimonialComponent
 
   ],
   providers: [],
