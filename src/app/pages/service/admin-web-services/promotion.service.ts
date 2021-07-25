@@ -4,13 +4,13 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class PromotionService {
 
   private BASE_URL = 'http://103.125.216.56:8012/';
 
   constructor(private httpClient : HttpClient) { }
 
-  public getProductList(pageNo){
+  public getAllPromotions(pageNo){
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -19,12 +19,12 @@ export class ProductService {
           'Content-Type': 'application/json'
         });
 
-    const url = `${this.BASE_URL + 'api/v1/admin/product/all?page=' + pageNo + '&size=10 '}`;
+    const url = `${this.BASE_URL + 'api/v1/admin/promotion/all?page=' + pageNo + '&size=10 '}`;
     return this.httpClient.get(url,{headers});
   }
 
-  public createProduct(product){
-    let url = `${this.BASE_URL+'api/v1/admin/product/create'}`;
+  public createPromotion(promotion){
+    let url = `${this.BASE_URL+'api/v1/admin/promotion/create'}`;
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -33,11 +33,11 @@ export class ProductService {
           'Content-Type': 'application/json'
         });
 
-    return this.httpClient.post(url,product,{headers});
+    return this.httpClient.post(url,promotion,{headers});
   }
 
-  public updateProduct(product){
-    let url = `${this.BASE_URL+'api/v1/admin/product/update'}`;
+  public updatePromotion(promotion){
+    let url = `${this.BASE_URL+'api/v1/admin/promotion/update'}`;
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -46,22 +46,24 @@ export class ProductService {
           'Content-Type': 'application/json'
         });
 
-    return this.httpClient.put(url,product,{headers});
+    return this.httpClient.post(url,promotion,{headers});
   }
 
-  public updateProductStatus(productId,productStatus){
-    let url = `${this.BASE_URL+'api/v1/admin/product/update/status?productId='+productId+'&productStatus='+productStatus}`;
+  public deletePromotions(promotionId){
     let token = localStorage.getItem('access_token');
+
     const headers =
         new HttpHeaders({
-          'Authorization': 'Bearer '+token
+          'Authorization': 'Bearer '+token,
+          'Content-Type': 'application/json'
         });
 
-    return this.httpClient.put(url,'',{headers});
+    const url = `${this.BASE_URL + 'api/v1/admin/promotion/delete/'+promotionId}`;
+    return this.httpClient.delete(url,{headers});
   }
 
-  public updateProductQty(productId,qty){
-    let url = `${this.BASE_URL+'api/v1/admin/product/update/currentqty?productId='+productId+'&currentQty='+qty}`;
+  public updatePromotionStatus(promotionId,promotionStatus){
+    let url = `${this.BASE_URL+'api/v1/admin/promotion/update/'+promotionId+'/status?status='+promotionStatus}`;
     let token = localStorage.getItem('access_token');
     const headers =
         new HttpHeaders({
