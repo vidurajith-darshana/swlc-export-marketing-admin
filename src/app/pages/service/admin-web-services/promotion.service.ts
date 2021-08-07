@@ -46,7 +46,7 @@ export class PromotionService {
           'Content-Type': 'application/json'
         });
 
-    return this.httpClient.post(url,promotion,{headers});
+    return this.httpClient.put(url,promotion,{headers});
   }
 
   public deletePromotions(promotionId){

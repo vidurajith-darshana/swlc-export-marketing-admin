@@ -1,6 +1,8 @@
 import {Component, OnInit, VERSION} from '@angular/core';
 import {Category} from "../model/category";
 import {CategoryService} from "../service/admin-web-services/category.service";
+import {TestimonialService} from '../service/admin-web-services/testimonial.service';
+import {Testimonial} from '../model/testimonial';
 
 @Component({
     selector: 'app-testimonial',
@@ -11,6 +13,9 @@ export class TestimonialComponent implements OnInit {
     // categoryName = 'Angular ' + VERSION.major;
     // private categoryList: Category[];
     // private categoryList: Category[];
+
+    testimonialList : Testimonial[];
+
     testimonials = [
         {
             id: 1,
@@ -56,6 +61,7 @@ export class TestimonialComponent implements OnInit {
 
     constructor(
         // private categoryService: CategoryService
+        private testimonialService : TestimonialService
     ) {
         // this.config = {
         //   itemsPerPage: 1,
@@ -74,7 +80,7 @@ export class TestimonialComponent implements OnInit {
     // }
 
     ngOnInit(): void {
-        // this.getAllCategoryList(0);
+        this._getAllTestimonials();
     }
 
     // private getAllCategoryList(pageno) {
@@ -88,4 +94,17 @@ export class TestimonialComponent implements OnInit {
     //       error => {
     //       });
     // }
+
+    _getAllTestimonials(){
+        this.testimonialService.getAllTestimonials().subscribe((data)=>{
+            if (data['success']){
+                this.testimonialList = data['body'];
+                console.log(this.testimonialList);
+            }else {
+                alert(data['message'])
+            }
+        },error => {
+
+        })
+    }
 }
