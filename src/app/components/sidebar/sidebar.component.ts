@@ -16,6 +16,7 @@ export const ROUTES: RouteInfo[] = [
     {path:'/registration_DEO', title: 'DEO Register', icon: '', class: ''},
     {path: '/reviews', title:'Customer Reviews Report', icon:'', class: ''},
     {path: '/testimonial', title:'Testimonial', icon:'', class: ''},
+    {path: '/promotions', title:'Promotions', icon:'', class: ''},
 
 ];
 

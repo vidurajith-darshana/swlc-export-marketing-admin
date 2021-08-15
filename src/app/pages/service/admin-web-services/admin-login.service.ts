@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 })
 export class AdminLoginService {
 
-  private APP_URL = 'http://103.125.216.56:8012/';
+  private APP_URL = 'http://18.141.138.171:8012/';
 
   constructor(
       private httpClient : HttpClient,

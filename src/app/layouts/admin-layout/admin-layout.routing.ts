@@ -16,6 +16,7 @@ import {ManageOrdersComponent} from '../../pages/manage-orders/manage-orders.com
 import {RegistrationDEOComponent} from 'src/app/pages/registration-deo/registration-deo.component';
 import {CustomerReviewReportComponent} from 'src/app/pages/customer-review-report/customer-review-report.component';
 import {TestimonialComponent} from 'src/app/pages/testimonial/testimonial.component';
+import {PromotionsComponent} from 'src/app/pages/promotions/promotions.component';
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'manage-category', component: ManageCategoriesComponent},
@@ -31,4 +32,5 @@ export const AdminLayoutRoutes: Routes = [
     {path: 'registration_DEO', component: RegistrationDEOComponent},
     {path: 'reviews', component: CustomerReviewReportComponent},
     {path: 'testimonial', component: TestimonialComponent},
+    {path: 'promotions', component: PromotionsComponent},
 ];
