@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,10 @@ export class AdminLoginService {
 
   private APP_URL = 'http://103.125.216.56:8012/';
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(
+      private httpClient : HttpClient,
+      private router : Router
+  ) { }
 
   public _adminLogin(userName,userPassword){
     const params = new URLSearchParams();
@@ -27,6 +31,7 @@ export class AdminLoginService {
     this.httpClient.post(url, params.toString(), {headers: headers}).subscribe((data) => {
           this.saveToken(data);
           this._getUserDetails(userName);
+          this.router.navigate(['/dashboard']);
         }
         ,
         err => {}
@@ -54,6 +59,7 @@ export class AdminLoginService {
     const url = `${this.APP_URL + 'api/v1/user/getDetails/' + customerEmail}`;
     this.httpClient.get(url).subscribe((data: []) => {
       localStorage.setItem('adminPanelUserId', data['body'].id);
+      localStorage.setItem('adminPanelUserType' , data['body'].role)
     }, error => {
 
     });
