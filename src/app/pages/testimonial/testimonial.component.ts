@@ -137,11 +137,34 @@ export class TestimonialComponent implements OnInit {
         this.testimonialService.createTestimonials(testimonials).subscribe((data)=>{
             if (data['success']){
                 // success msg
+                this._clearText();
+                this._getAllTestimonials();
             }else {
                 // error msg
             }
         },error => {
             // error msg handle
         })
+    }
+
+    _deleteTestimonials(testimonialId){
+        this.testimonialService.deleteTestimonials(testimonialId).subscribe((data)=>{
+            if (data['success']){
+                //success message
+                this._getAllTestimonials();
+            }else {
+                // error message
+            }
+        },error => {
+            // error msg
+        })
+    }
+
+    _clearText(){
+        this.cardImageBase64 = '';
+        this.addYoutubeUrl= '';
+        this.addCustomerName = '';
+        this.addCountry = '';
+        this.addComment = '';
     }
 }
