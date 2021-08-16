@@ -37,7 +37,7 @@
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let testimonial of testimonials ">
+                <tbody *ngFor="let testimonial of testimonialList ">
                 <tr>
                     <td>
                         <div class="media-body">
@@ -163,43 +163,42 @@
                     <div class="form-group">
                         <label class="control-label">Customer Name</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="product Name"
-                                   >
+                            <input type="text" [(ngModel)]="addCustomerName" class="form-control input-lg" name="customer_name">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Image</label>
                         <div>
-                            <input type="file"   class="form-control-file">
+                            <input type="file" (change)="fileChangeEvent($event)"  class="form-control-file">
 
                         </div>
+                        {{imageError}}
                     </div>
                     <div class="form-group">
                         <label class="control-label">Youtube Url</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="product Name"
-                                   >
+                            <input type="text" [(ngModel)]="addYoutubeUrl" class="form-control input-lg" name="youtube_url">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Country</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="product Name"
+                            <input type="text" [(ngModel)]="addCountry" class="form-control input-lg" name="country"
                                    >
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Comment</label>
                         <div>
-                                            <textarea  class="form-control input-lg" name="product Name"
+                                            <textarea [(ngModel)]="addComment" class="form-control input-lg" name="comment"
                                                        ></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="button-set">
-                            <button type="submit" class="btn btn-success">
+                            <button type="button" (click)="_createTestimonials()" class="btn btn-success">
                                 Add
                             </button>
                         </div>

@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class TestimonialService {
 
-  private BASE_URL = 'http://103.125.216.56:8012/';
+  private BASE_URL = 'http://18.141.138.171:8012/';
 
   constructor(
       private httpClient : HttpClient
@@ -15,11 +15,11 @@ export class TestimonialService {
   public getAllTestimonials(){
     let token = localStorage.getItem('access_token');
 
-    // const headers =
-    //     new HttpHeaders({
-    //       'Authorization': 'Bearer '+token,
-    //       'Content-Type': 'application/json'
-    //     });
+    const headers =
+        new HttpHeaders({
+          // 'Authorization': 'Bearer '+token,
+          'Content-Type': 'application/json'
+        });
 
     const url = `${this.BASE_URL + 'api/v1/testimonial/getAll'}`;
     return this.httpClient.get(url);
