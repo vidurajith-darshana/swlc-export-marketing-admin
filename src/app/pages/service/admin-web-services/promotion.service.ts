@@ -19,7 +19,7 @@ export class PromotionService {
           'Content-Type': 'application/json'
         });
 
-    const url = `${this.BASE_URL + 'api/v1/admin/promotion/all?page=' + pageNo + '&size=10 '}`;
+    const url = `${this.BASE_URL + 'api/v1/admin/promotion/all?page=' + pageNo + '&size=10'}`;
     return this.httpClient.get(url,{headers});
   }
 

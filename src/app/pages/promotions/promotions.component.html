@@ -38,7 +38,7 @@
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let promotion of promotions ">
+                <tbody *ngFor="let promotion of promotionList ">
                 <tr>
                     <td>
                         <div class="media-body">
@@ -69,11 +69,11 @@
                     </td>
                     <td>
                         <div class="media-body">
-                            <span class="mb-0 text-sm">{{promotion.created_date}}</span>
+                            <span class="mb-0 text-sm">{{promotion.createDate}}</span>
                         </div>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                        <button (click)="_getPromotionDetailsToUpdate(promotion.description,promotion.heading,promotion.status,promotion.image)" type="button" class="btn btn-secondary" data-toggle="modal"
                                 [attr.data-target]="'#ModalEditProduct'+ promotion.id">Edit
                         </button>
                     </td>
@@ -89,22 +89,22 @@
                                     <div class="form-group">
                                         <label class="control-label">Description</label>
                                         <div>
-                                            <textarea  class="form-control input-lg" name="Description"
-                                                       value="{{promotion.description}}"></textarea>
+                                            <textarea [(ngModel)]="updatePromotionDescription" class="form-control input-lg" name="Description"></textarea>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label">Image</label>
                                         <div>
-                                            <input type="file" class="form-control-file">
+                                            <input type="file" (change)="updateFileChangeEvent($event)" class="form-control-file">
 
                                         </div>
+                                        {{updateImageError}}
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Status</label>
                                         <div>
-                                            <select class="browser-default custom-select" value="{{promotion.status}}">
+                                            <select [(ngModel)]="updatePromotionStatus" name="promotion_status" class="browser-default custom-select">
                                                 <option selected>Open this select menu</option>
                                                 <option value="ACTIVE">Active</option>
                                                 <option value="INACTIVE">Inactive</option>
@@ -114,8 +114,7 @@
                                     <div class="form-group">
                                         <label class="control-label">heading</label>
                                         <div>
-                                            <input type="text" class="form-control input-lg" name="product Name"
-                                                   value="{{promotion.heading}}">
+                                            <input type="text" [(ngModel)]="updatePromotionHeading" class="form-control input-lg" name="product_Name">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -125,13 +124,13 @@
                                                         class="ni ni-calendar-grid-58"></i></span>
                                             </div>
                                             <input class="form-control datepicker" placeholder="Created Date"
-                                                   value="{{promotion.created_date}}" name="dp" ngbDatepicker
+                                                   value="{{promotion.createDate}}" name="dp" ngbDatepicker
                                                    #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="button-set">
-                                            <button type="button" class="btn btn-primary">Update</button>
+                                            <button type="button" (click)="_updatePromotion(promotion.id)" class="btn btn-primary">Update</button>
                                             <button type="button" class="btn btn-danger">Delete</button>
                                         </div>
                                     </div>
@@ -170,49 +169,49 @@
                     <div class="form-group">
                         <label class="control-label">Description</label>
                         <div>
-                            <textarea  class="form-control input-lg" name="Description" ></textarea>
+                            <textarea [(ngModel)]="addPromotionDescription"  class="form-control input-lg" name="Description" ></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Image</label>
                         <div>
-                            <input type="file" class="form-control-file">
+                            <input type="file" (change)="fileChangeEvent($event)" class="form-control-file">
 
                         </div>
+                        {{imageError}}
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Status</label>
-                        <div>
-                            <select class="browser-default custom-select" >
-                                <option selected>Open this select menu</option>
-                                <option value="ACTIVE">Active</option>
-                                <option value="INACTIVE">Inactive</option>
-                            </select>
-                        </div>
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label class="control-label">Status</label>-->
+<!--                        <div>-->
+<!--                            <select class="browser-default custom-select" >-->
+<!--                                <option selected>Open this select menu</option>-->
+<!--                                <option value="ACTIVE">Active</option>-->
+<!--                                <option value="INACTIVE">Inactive</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="form-group">
                         <label class="control-label">Heading</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="product Name"
+                            <input type="text" [(ngModel)]="addPromotionHeading" class="form-control input-lg" name="product_Name"
                             >
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="input-group input-group-alternative">
-                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="ni ni-calendar-grid-58"></i></span>
-                            </div>
-                            <input class="form-control datepicker" placeholder="Created Date"
-                                   name="dp" ngbDatepicker
-                                   #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
-                        </div>
-                    </div>
-
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group input-group-alternative">-->
+<!--                            <div class="input-group-prepend">-->
+<!--                                                <span class="input-group-text"><i-->
+<!--                                                        class="ni ni-calendar-grid-58"></i></span>-->
+<!--                            </div>-->
+<!--                            <input class="form-control datepicker" placeholder="Created Date"-->
+<!--                                   name="dp" ngbDatepicker-->
+<!--                                   #d="ngbDatepicker" (click)="d.toggle()" type="text"/>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="form-group">
                         <div class="button-set">
-                            <button type="submit" class="btn btn-success">
+                            <button type="button" (click)="_createPromotion()" class="btn btn-success">
                                 Add
                             </button>
                         </div>

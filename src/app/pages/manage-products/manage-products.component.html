@@ -206,8 +206,9 @@
                         <div class="form-group">
                             <label class="control-label">Thumbnail</label>
                             <div>
-                                <input type="file" class="form-control-file">
+                                <input type="file" (change)="fileChangeEvent($event)" class="form-control-file">
                             </div>
+                            {{imageError}}
                         </div>
                     </div>
                     <div class="col-md-6">
