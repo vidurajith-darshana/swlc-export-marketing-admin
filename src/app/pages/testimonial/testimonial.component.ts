@@ -3,6 +3,7 @@ import {Category} from "../model/category";
 import {CategoryService} from "../service/admin-web-services/category.service";
 import {TestimonialService} from '../service/admin-web-services/testimonial.service';
 import {Testimonial} from '../model/testimonial';
+import {AlertService} from '../_alert';
 
 @Component({
     selector: 'app-testimonial',
@@ -24,10 +25,14 @@ export class TestimonialComponent implements OnInit {
     imageError: string;
     isImageSaved: boolean;
     cardImageBase64: string;
-
+    private options = {
+        autoClose: false,
+        keepAfterRouteChange: false
+    };
     constructor(
         // private categoryService: CategoryService
-        private testimonialService : TestimonialService
+        private testimonialService : TestimonialService,
+    protected alertService: AlertService
     ) {
         // this.config = {
         //   itemsPerPage: 1,
@@ -69,7 +74,7 @@ export class TestimonialComponent implements OnInit {
                 alert(data['message'])
             }
         },error => {
-
+            this.alertService.warn('Something went wrong', this.options)
         })
     }
 
@@ -137,12 +142,16 @@ export class TestimonialComponent implements OnInit {
         this.testimonialService.createTestimonials(testimonials).subscribe((data)=>{
             if (data['success']){
                 // success msg
+                this.alertService.success('testimonials added', this.options);
+
                 this._clearText();
                 this._getAllTestimonials();
             }else {
+                this.alertService.warn('Something went wrong', this.options)
                 // error msg
             }
         },error => {
+            this.alertService.warn('Something went wrong', this.options)
             // error msg handle
         })
     }
@@ -151,11 +160,14 @@ export class TestimonialComponent implements OnInit {
         this.testimonialService.deleteTestimonials(testimonialId).subscribe((data)=>{
             if (data['success']){
                 //success message
+                this.alertService.success('testimonials deleted', this.options);
                 this._getAllTestimonials();
             }else {
                 // error message
+                this.alertService.warn('Something went wrong', this.options)
             }
         },error => {
+            this.alertService.warn('Something went wrong', this.options)
             // error msg
         })
     }
