@@ -44,14 +44,12 @@ import {AlertModule} from "./pages/_alert";
         AppRoutingModule,
         JwPaginationModule,
         NgxPaginationModule,
+        AlertModule,
         NotifierModule,
         NgProgressModule.withConfig({
             color: "black"
         }),
-        NgProgressHttpModule,
-
-        NgxPaginationModule,
-        AlertModule
+        NgProgressHttpModule
     ],
     declarations: [
         AppComponent,
