@@ -25,6 +25,7 @@ import { CustomerReviewReportComponent } from './pages/customer-review-report/cu
 import { RegistrationDEOComponent } from './pages/registration-deo/registration-deo.component';
 import { TestimonialComponent } from './pages/testimonial/testimonial.component';
 import { PromotionsComponent } from './pages/promotions/promotions.component';
+import {AlertModule} from "./pages/_alert";
 
 
 
@@ -38,7 +39,8 @@ import { PromotionsComponent } from './pages/promotions/promotions.component';
         RouterModule,
         AppRoutingModule,
         JwPaginationModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        AlertModule
     ],
   declarations: [
     AppComponent,
