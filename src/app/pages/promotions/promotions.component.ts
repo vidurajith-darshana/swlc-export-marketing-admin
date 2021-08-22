@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PromotionService} from '../service/admin-web-services/promotion.service';
 import {Promotion} from '../model/promotion';
+import {AlertService} from '../_alert';
+
 
 @Component({
   selector: 'app-promotions',
@@ -116,9 +118,13 @@ export class PromotionsComponent implements OnInit {
       created_date: '2021-07-28'
     },
   ]
-
+  private options = {
+    autoClose: false,
+    keepAfterRouteChange: false
+  };
   constructor(
-      private promotionService : PromotionService
+      private promotionService : PromotionService,
+      protected alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -239,10 +245,15 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.createPromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
+        this.alertService.success('Promotion added', this.options);
       }else {
         // error msg
+        this.alertService.warn('Something went wrong', this.options)
+
       }
     },error => {
+      this.alertService.warn('Something went wrong', this.options)
+
       // error msg
     })
   }
@@ -253,8 +264,12 @@ export class PromotionsComponent implements OnInit {
         this.promotionList = data['body'].content;
       }else{
         // error
+        this.alertService.warn('Something went wrong', this.options)
+
       }
     },error => {
+      this.alertService.warn('Something went wrong', this.options)
+
       // error msg
     })
   }
@@ -272,10 +287,16 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.updatePromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
+        this.alertService.success('promotion updated', this.options);
+
       }else {
         // error msg
+        this.alertService.warn('Something went wrong', this.options)
+
       }
     },error => {
+      this.alertService.warn('Something went wrong', this.options)
+
       // error msg
     })
   }
