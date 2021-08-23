@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {constants} from '../../../constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private BASE_URL = 'http://18.141.138.171:8012/';
 
   constructor(private httpClient : HttpClient) { }
 
@@ -19,12 +19,12 @@ export class ProductService {
           'Content-Type': 'application/json'
         });
 
-    const url = `${this.BASE_URL + 'api/v1/admin/product/all?page=' + pageNo + '&size=10 '}`;
+    const url = `${constants.base_url + 'api/v1/admin/product/all?page=' + pageNo + '&size=10 '}`;
     return this.httpClient.get(url,{headers});
   }
 
   public createProduct(product){
-    let url = `${this.BASE_URL+'api/v1/admin/product/create'}`;
+    let url = `${constants.base_url+'api/v1/admin/product/create'}`;
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -37,7 +37,7 @@ export class ProductService {
   }
 
   public updateProduct(product){
-    let url = `${this.BASE_URL+'api/v1/admin/product/update'}`;
+    let url = `${constants.base_url+'api/v1/admin/product/update'}`;
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -50,7 +50,7 @@ export class ProductService {
   }
 
   public updateProductStatus(productId,productStatus){
-    let url = `${this.BASE_URL+'api/v1/admin/product/update/status?productId='+productId+'&productStatus='+productStatus}`;
+    let url = `${constants.base_url+'api/v1/admin/product/update/status?productId='+productId+'&productStatus='+productStatus}`;
     let token = localStorage.getItem('access_token');
     const headers =
         new HttpHeaders({
@@ -61,7 +61,7 @@ export class ProductService {
   }
 
   public updateProductQty(productId,qty){
-    let url = `${this.BASE_URL+'api/v1/admin/product/update/currentqty?productId='+productId+'&currentQty='+qty}`;
+    let url = `${constants.base_url+'api/v1/admin/product/update/currentqty?productId='+productId+'&currentQty='+qty}`;
     let token = localStorage.getItem('access_token');
     const headers =
         new HttpHeaders({

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {constants} from '../../../constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PromotionService {
 
-  private BASE_URL = 'http://18.141.138.171:8012/';
 
   constructor(private httpClient : HttpClient) { }
 
@@ -19,12 +19,12 @@ export class PromotionService {
           'Content-Type': 'application/json'
         });
 
-    const url = `${this.BASE_URL + 'api/v1/admin/promotion/all?page=' + pageNo + '&size=10'}`;
+    const url = `${constants.base_url + 'api/v1/admin/promotion/all?page=' + pageNo + '&size=10'}`;
     return this.httpClient.get(url,{headers});
   }
 
   public createPromotion(promotion){
-    let url = `${this.BASE_URL+'api/v1/admin/promotion/create'}`;
+    let url = `${constants.base_url+'api/v1/admin/promotion/create'}`;
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -37,7 +37,7 @@ export class PromotionService {
   }
 
   public updatePromotion(promotion){
-    let url = `${this.BASE_URL+'api/v1/admin/promotion/update'}`;
+    let url = `${constants.base_url+'api/v1/admin/promotion/update'}`;
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -58,12 +58,12 @@ export class PromotionService {
           'Content-Type': 'application/json'
         });
 
-    const url = `${this.BASE_URL + 'api/v1/admin/promotion/delete/'+promotionId}`;
+    const url = `${constants.base_url + 'api/v1/admin/promotion/delete/'+promotionId}`;
     return this.httpClient.delete(url,{headers});
   }
 
   public updatePromotionStatus(promotionId,promotionStatus){
-    let url = `${this.BASE_URL+'api/v1/admin/promotion/update/'+promotionId+'/status?status='+promotionStatus}`;
+    let url = `${constants.base_url+'api/v1/admin/promotion/update/'+promotionId+'/status?status='+promotionStatus}`;
     let token = localStorage.getItem('access_token');
     const headers =
         new HttpHeaders({

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {constants} from '../../../constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminLoginService {
 
-  private APP_URL = 'http://18.141.138.171:8012/';
 
   constructor(
       private httpClient : HttpClient,
@@ -26,7 +26,7 @@ export class AdminLoginService {
           'Content-Type': 'application/x-www-form-urlencoded'
         });
 
-    const url = `${this.APP_URL + 'api/v1/authorize'}`;
+    const url = `${constants.base_url+ 'api/v1/authorize'}`;
 
     this.httpClient.post(url, params.toString(), {headers: headers}).subscribe((data) => {
           this.saveToken(data);
@@ -56,7 +56,7 @@ export class AdminLoginService {
   }
 
   public _getUserDetails(customerEmail) {
-    const url = `${this.APP_URL + 'api/v1/user/getDetails/' + customerEmail}`;
+    const url = `${constants.base_url+ 'api/v1/user/getDetails/' + customerEmail}`;
     this.httpClient.get(url).subscribe((data: []) => {
       localStorage.setItem('adminPanelUserId', data['body'].id);
       localStorage.setItem('adminPanelUserType' , data['body'].role)
