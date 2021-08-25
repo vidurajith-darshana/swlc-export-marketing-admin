@@ -45,7 +45,7 @@ export class AdminLoginService {
   }
 
   public checkCredentials() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('access_token');
   }
 
   public logout() {
@@ -63,5 +63,9 @@ export class AdminLoginService {
     }, error => {
 
     });
+  }
+
+  public loggedIn(){
+    return !!localStorage.getItem('access_token');
   }
 }
