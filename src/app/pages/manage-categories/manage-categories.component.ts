@@ -2,6 +2,7 @@ import {Component, OnInit, VERSION} from '@angular/core';
 // import {Category} from '../model/category';
 import {CategoryService} from '../service/admin-web-services/category.service';
 import {Category} from '../model/category';
+import {AlertService} from '../_alert';
 
 @Component({
     selector: 'app-manage-categories',
@@ -18,9 +19,13 @@ export class ManageCategoriesComponent implements OnInit {
     cardImageBase64: string;
 
     addCategoryName : string;
-
+    private options = {
+        autoClose: false,
+        keepAfterRouteChange: false
+    };
     constructor(
-        private categoryService: CategoryService
+        private categoryService: CategoryService,
+        protected alertService: AlertService
     ) {
         this.config = {
             itemsPerPage: 1,
@@ -52,6 +57,7 @@ export class ManageCategoriesComponent implements OnInit {
                 this.config.totalItems = data['body'].totalElements;
             },
             error => {
+                this.alertService.warn('Something went wrong', this.options)
             });
     }
 
@@ -122,11 +128,14 @@ export class ManageCategoriesComponent implements OnInit {
         this.categoryService.createCategory(category).subscribe((data)=>{
             if (data['success']){
                 // success alert
+                this.alertService.success('Category added', this.options);
             }else{
                 // alert(data['message']); error message
+                this.alertService.warn('Something went wrong', this.options)
             }
         },error => {
             // error message
+            this.alertService.warn('Something went wrong', this.options)
         })
     }
 
