@@ -17,6 +17,7 @@ import {RegistrationDEOComponent} from 'src/app/pages/registration-deo/registrat
 import {CustomerReviewReportComponent} from 'src/app/pages/customer-review-report/customer-review-report.component';
 import {TestimonialComponent} from 'src/app/pages/testimonial/testimonial.component';
 import {PromotionsComponent} from 'src/app/pages/promotions/promotions.component';
+import {AuthGuard} from '../../auth-guard/auth-guard';
 import {Top10ProductsComponent} from '../../pages/top-10-products/top-10-products.component';
 import {Top10OrdersComponent} from '../../pages/top-10-orders/top-10-orders.component';
 
