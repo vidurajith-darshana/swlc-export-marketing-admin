@@ -29,42 +29,28 @@
             <table class="table align-items-center table-flush">
                 <thead class="thead-dark">
                 <tr>
-                   <th scope="col">Order Date</th>
-                    <th scope="col">Bill To Name</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">OrderId</th>
                     <th scope="col">Message</th>
-                    <th scope="col">Grand Total</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Total</th>
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
-                <tbody  *ngFor="let manageorders of pageOfItems" >
-                <tr>
-                    <td>
-                        <div class="media-body">
-                            <span class="mb-0 text-sm">{{manageorders.orderDate}}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="media-body">
-                            <span class="mb-0 text-sm">{{manageorders.billToName}}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="media-body">
-                            <span class="mb-0 text-sm">{{manageorders.orderstatus}}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="media-body">
-                            <span class="mb-0 text-sm">{{manageorders.message}}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="media-body">
-                            <span class="mb-0 text-sm">{{manageorders.grandTotal}}</span>
-                        </div>
-                    </td>
+                <tbody>
+                <tr *ngFor="let order of orders" >
+                    <th scope="row">
+                        {{order['id']}}
+                    </th>
 
+                    <td>
+                        {{order['message'] != null ? order['message'] : "No Message" }}
+                    </td>
+                    <td>
+                        {{order['status']}}
+                    </td>
+                    <td>
+                        {{order['total'] | currency:'LKR'}}
+                    </td>
 
                     <td>
                         <button type="button" class="btn btn-secondary" data-toggle="modal"
@@ -139,9 +125,9 @@
             </table>
         </div>
     </div>
-    <div class="card-footer pb-0 pt-3">
-<jw-pagination [items]="manageorder" (changePage)="onChangePage($event)"></jw-pagination>
-    </div>
+<!--    <div class="card-footer pb-0 pt-3">-->
+<!--<jw-pagination [items]="manageorder" (changePage)="onChangePage($event)"></jw-pagination>-->
+<!--    </div>-->
 </div>
 
 

@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~angular-notifier/styles";
+
+.modal-content{
+  width: max-content!important;
+}
+
+@media (min-width: 576px){
+  .modal-dialog {
+    max-width: max-content!important;
+  }
+}
+

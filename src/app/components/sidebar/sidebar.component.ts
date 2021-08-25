@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import { title } from 'process';
+
 
 declare interface RouteInfo {
     path: string;
@@ -8,6 +8,7 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
+
 
 export const ROUTES: RouteInfo[] = [
     {path: '/manage-category', title: 'Manage Category', icon: 'ni-tv-2 text-primary', class: ''},
@@ -17,6 +18,9 @@ export const ROUTES: RouteInfo[] = [
     {path: '/reviews', title:'Customer Reviews Report', icon:'', class: ''},
     {path: '/testimonial', title:'Testimonial', icon:'', class: ''},
     {path: '/promotions', title:'Promotions', icon:'', class: ''},
+    {path: '/promotions', title:'Promotions', icon:'', class: ''},
+    {path: '/top-products', title:'Top 10 Products', icon:'', class: ''},
+    {path: '/top-orders', title:'Top 10 Orders', icon:'', class: ''},
 
 ];
 
