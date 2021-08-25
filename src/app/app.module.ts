@@ -25,6 +25,7 @@ import { CustomerReviewReportComponent } from './pages/customer-review-report/cu
 import { RegistrationDEOComponent } from './pages/registration-deo/registration-deo.component';
 import { TestimonialComponent } from './pages/testimonial/testimonial.component';
 import { PromotionsComponent } from './pages/promotions/promotions.component';
+import {AuthGuard} from './auth-guard/auth-guard';
 
 
 
@@ -57,7 +58,7 @@ import { PromotionsComponent } from './pages/promotions/promotions.component';
     PromotionsComponent
 
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
