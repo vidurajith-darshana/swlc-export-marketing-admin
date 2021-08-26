@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {constants} from '../../../constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OperatorService {
 
-  private BASE_URL = 'http://18.141.138.171:8012/';
 
   constructor(
       private httpClient : HttpClient
   ) { }
 
   public createOperator(operator){
-    let url = `${this.BASE_URL+'api/v1/user/operator/create'}`;
+    let url = `${constants.base_url+'api/v1/user/operator/create'}`;
     let token = localStorage.getItem('access_token');
 
     const headers =

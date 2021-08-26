@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {constants} from '../../../constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestimonialService {
 
-  private BASE_URL = 'http://18.141.138.171:8012/';
 
   constructor(
       private httpClient : HttpClient
@@ -21,13 +21,13 @@ export class TestimonialService {
           'Content-Type': 'application/json'
         });
 
-    const url = `${this.BASE_URL + 'api/v1/testimonial/getAll'}`;
+    const url = `${constants.base_url + 'api/v1/testimonial/getAll'}`;
     return this.httpClient.get(url);
   }
 
   public createTestimonials(testimonial){
 
-    let url = `${this.BASE_URL+'api/v1/testimonial/create'}`;
+    let url = `${constants.base_url+'api/v1/testimonial/create'}`;
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -40,7 +40,7 @@ export class TestimonialService {
   }
 
   public deleteTestimonials(id){
-    let url = `${this.BASE_URL+'api/v1/testimonial/delete/'+id}`;
+    let url = `${constants.base_url+'api/v1/testimonial/delete/'+id}`;
     let token = localStorage.getItem('access_token');
 
     const headers =

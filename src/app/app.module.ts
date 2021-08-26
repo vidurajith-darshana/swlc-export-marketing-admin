@@ -26,6 +26,7 @@ import { RegistrationDEOComponent } from './pages/registration-deo/registration-
 import { TestimonialComponent } from './pages/testimonial/testimonial.component';
 import { PromotionsComponent } from './pages/promotions/promotions.component';
 import {AlertModule} from "./pages/_alert";
+import {AuthGuard} from './auth-guard/auth-guard';
 
 
 
@@ -59,7 +60,7 @@ import {AlertModule} from "./pages/_alert";
     PromotionsComponent
 
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

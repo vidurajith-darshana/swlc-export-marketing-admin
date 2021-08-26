@@ -35,29 +35,29 @@
           <th scope="col">Edit</th>
         </tr>
       </thead>
-      <tbody *ngFor="let products of pageOfItems">
+      <tbody *ngFor="let products of productList">
         <tr>
            <td>
             <div class="media-body">
-                <span class="mb-0 text-sm">{{products.productName}}</span>
+                <span class="mb-0 text-sm">{{products.name}}</span>
               </div>
           </td>
           <td>
             <span class="badge badge-dot mr-4">
                 <a href="#" class="avatar rounded-circle mr-3">
-                    <img alt="Image placeholder" src="{{products.productThumbnail}}">
+                    <img alt="Image placeholder" src="{{products.thumbnail}}">
                   </a>
             </span>
           </td>
           <th>
-              {{products.productCode}}
+              {{products.code}}
           </th>
           <td>
-         {{products.productPrice}}
+         {{products.price}}
            </td>
           <td>
             <div class="d-flex align-items-center">
-              {{products.productStatus}}
+              {{products.status}}
               <div>
                 </div>
             </div>
@@ -66,14 +66,14 @@
          {{products.totalQty}}
         </td>
         <td>
-         {{products.curruntQty}}
+         {{products.currentQty}}
         </td>
         <td>
             <button type="button" class="btn btn-secondary" data-toggle="modal"
-                    [attr.data-target]="'#ModalEditProduct'+ products.productId">Edit</button>
+                    [attr.data-target]="'#ModalEditProduct'+ products.id">Edit</button>
         </td>
             <!-- Modal HTML Markup  for edit products-->
-            <div id="ModalEditProduct{{products.productId}}" class="modal fade">
+            <div id="ModalEditProduct{{products.id}}" class="modal fade">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
