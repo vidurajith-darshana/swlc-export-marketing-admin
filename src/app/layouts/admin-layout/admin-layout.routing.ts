@@ -17,19 +17,18 @@ import {RegistrationDEOComponent} from 'src/app/pages/registration-deo/registrat
 import {CustomerReviewReportComponent} from 'src/app/pages/customer-review-report/customer-review-report.component';
 import {TestimonialComponent} from 'src/app/pages/testimonial/testimonial.component';
 import {PromotionsComponent} from 'src/app/pages/promotions/promotions.component';
-import {AuthGuard} from '../../auth-guard/auth-guard';
 import {Top10ProductsComponent} from '../../pages/top-10-products/top-10-products.component';
 import {Top10OrdersComponent} from '../../pages/top-10-orders/top-10-orders.component';
 import {AuthGuard} from '../../guards/auth.guard';
 
 
 export const AdminLayoutRoutes: Routes = [
+    {path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
     {path: 'manage-category', canActivate: [AuthGuard], component: ManageCategoriesComponent},
     {path: 'manage-orders', canActivate: [AuthGuard], component: ManageOrdersComponent},
     {path: 'manage-products', canActivate: [AuthGuard], component: ManageProductsComponent},
     {path: 'category', canActivate: [AuthGuard], component: CreateCategoryComponent},
     {path: 'products', canActivate: [AuthGuard], component: CreateProductComponent},
-    {path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
     {path: 'user-profile', canActivate: [AuthGuard], component: UserProfileComponent},
     {path: 'tables',  canActivate: [AuthGuard],component: TablesComponent},
     {path: 'icons', canActivate: [AuthGuard], component: IconsComponent},
@@ -40,4 +39,12 @@ export const AdminLayoutRoutes: Routes = [
     {path: 'promotions', canActivate: [AuthGuard], component: PromotionsComponent},
     {path: 'top-products', canActivate: [AuthGuard], component: Top10ProductsComponent},
     {path: 'top-orders', canActivate: [AuthGuard], component: Top10OrdersComponent},
+
 ];
+
+// export const DEOLayoutRoutes: Routes = [
+//     {path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
+//     {path: 'manage-category', canActivate: [AuthGuard], component: ManageCategoriesComponent},
+//     {path: 'manage-orders', canActivate: [AuthGuard], component: ManageOrdersComponent},
+//     {path: 'manage-products', canActivate: [AuthGuard], component: ManageProductsComponent}
+// ];
