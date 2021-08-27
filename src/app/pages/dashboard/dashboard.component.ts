@@ -8,6 +8,8 @@ import {
   chartExample1,
   chartExample2
 } from "../../variables/charts";
+import {ProductService} from '../service/admin-web-services/product.service';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,39 +24,28 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
 
-  ngOnInit() {
+  public dashData : any;
 
-    this.datasets = [
-      [0, 20, 10, 30, 15, 40, 20, 60, 60],
-      [0, 20, 5, 25, 10, 30, 15, 40, 40]
-    ];
-    this.data = this.datasets[0];
-
-
-    var chartOrders = document.getElementById('chart-orders');
-
-    parseOptions(Chart, chartOptions());
-
-
-    var ordersChart = new Chart(chartOrders, {
-      type: 'bar',
-      options: chartExample2.options,
-      data: chartExample2.data
-    });
-
-    var chartSales = document.getElementById('chart-sales');
-
-    this.salesChart = new Chart(chartSales, {
-			type: 'line',
-			options: chartExample1.options,
-			data: chartExample1.data
-		});
+  constructor(private productService:ProductService,private notifierService:NotifierService) {
+    this.getDashboardData();
   }
 
+  ngOnInit() {
 
-  public updateOptions() {
-    this.salesChart.data.datasets[0].data = this.data;
-    this.salesChart.update();
+  }
+
+  getDashboardData(){
+    this.productService.getDashboardData().subscribe(
+        res=>{
+          if(res['success']){
+            this.dashData = res['body'];
+          }else{
+            this.notifierService.notify('error','Something went wrong. Please try again!');
+          }
+        },error => {
+          this.notifierService.notify('error','Something went wrong. Please try again!');
+        }
+    )
   }
 
 }

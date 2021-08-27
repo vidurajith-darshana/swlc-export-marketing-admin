@@ -31,13 +31,17 @@
                 <tr>
                     <th scope="col">OrderId</th>
                     <th scope="col">Message</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Status</th>
                     <th scope="col">Total</th>
+                    <th scope="col">View Order Detail</th>
+                    <th scope="col">Update Order Status</th>
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let order of orders" >
+                <tr *ngFor="let order of orders">
                     <th scope="row">
                         {{order['id']}}
                     </th>
@@ -45,11 +49,33 @@
                     <td>
                         {{order['message'] != null ? order['message'] : "No Message" }}
                     </td>
+
+                    <td>
+                        <div *ngIf="order['fkUser']!= null">{{order['fkUser']['firstName'] + ' ' + order['fkUser']['lastName']}}</div>
+
+                    </td>
+                    <td>
+                        <div *ngIf="order['fkUser']!=null"> {{order['fkUser']['email']}}</div>
+                    </td>
+
                     <td>
                         {{order['status']}}
                     </td>
                     <td>
                         {{order['total'] | currency:'LKR'}}
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-default" (click)="open(content,order['fkOrder'])">
+                            View Order Details
+                        </button>
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary"
+                                (click)="openChangeOrderStatusModel(updateOrderStatusModel,order)">
+                            Update Order Status
+                        </button>
                     </td>
 
                     <td>
@@ -73,14 +99,17 @@
                             </div>
                             <div class="modal-body">
                                 <form role="form">
-                                   <div class="form-group">
+                                    <div class="form-group">
                                         <label class="control-label">Order Date</label>
                                         <div class="input-group input-group-alternative">
                                             <div class="input-group-prepend">
-                                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-calendar-grid-58"></i></span>
                                             </div>
-                                            <input class="form-control datepicker" placeholder="Select date" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
-                                          </div>
+                                            <input class="form-control datepicker" placeholder="Select date" name="dp"
+                                                   [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                                                   (click)="d.toggle()" type="text"/>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Bill To Name</label>
@@ -146,14 +175,16 @@
             </div>
             <div class="modal-body">
                 <form role="form">
-                   <div class="form-group">
+                    <div class="form-group">
                         <label class="control-label">Order Date</label>
                         <div class="input-group input-group-alternative">
                             <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                             </div>
-                            <input class="form-control datepicker" placeholder="Select date" name="dpdd" [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
-                          </div>
+                            <input class="form-control datepicker" placeholder="Select date" name="dpdd"
+                                   [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()"
+                                   type="text"/>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Bill To Name</label>
@@ -185,6 +216,110 @@
         </div>
     </div>
 </div>
-                  
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Order details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Product Id</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Product Thumbnail</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">QTY</th>
+                                <th scope="col">Sub Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let orderDetail of orderDetails">
+                                <th scope="row">
+                                    {{orderDetail['product']['id']}}
+                                </th>
+
+                                <th scope="row">
+                                    {{orderDetail['product']['name']}}
+                                </th>
+
+                                <th scope="row">
+                                    <img class="product-image" [src]="orderDetail['product']['thumbnail']" alt="">
+                                </th>
+
+                                <td>
+                                    {{orderDetail['price']}}
+                                </td>
+                                <td>
+                                    {{orderDetail['qty']}}
+                                </td>
+                                <td>
+                                    {{orderDetail['subTotal'] | currency:'LKR'}}
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer py-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>
+
+
+<ng-template #updateOrderStatusModel let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title1">Update Order Status</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col">
+
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-outline-default" id="yearSelect"
+                            ngbDropdownToggle>{{selectedOrderStatus}}
+                        <i style="vertical-align: middle;" class="ni ni-bold-down"></i>
+                    </button>
+                    <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="yearSelect">
+                        <button class="dropdown-item" ngbDropdownItem *ngFor="let orderST of orderStatus"
+                                (click)="changeOrderStatus(orderST)">{{orderST}}</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-icon btn-3 btn-default" type="button" (click)="updateOrderStatus()">
+                    <span class="btn-inner--text">Update</span>
+                </button>
+
+            </div>
+            <div class="card-footer py-4">
+
+            </div>
+
+        </div>
+    </div>
+
+</ng-template>
+
+
+
+
+
+
     
 

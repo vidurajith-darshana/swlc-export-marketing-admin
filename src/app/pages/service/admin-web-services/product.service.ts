@@ -85,4 +85,14 @@ export class ProductService {
         return this.httpClient.get<any>(constants.base_url + 'api/v1/admin/order/products/top?yr=' + year + '&mnth=' + month, {headers: headers});
 
     }
+
+    public getDashboardData():Observable<any>{
+        let token = localStorage.getItem('access_token');
+        const headers =
+            new HttpHeaders({
+                'Authorization': 'Bearer ' + token
+            });
+
+        return this.httpClient.get<any>(constants.base_url + 'api/v1/admin/dashboard', {headers: headers});
+    }
 }

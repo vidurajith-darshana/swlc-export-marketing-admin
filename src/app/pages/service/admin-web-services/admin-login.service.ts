@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {constants} from '../../../constants/constants';
+import {SharedService} from './shared-service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AdminLoginService {
 
   constructor(
       private httpClient : HttpClient,
-      private router : Router
+      private router : Router,
+      private sharedService:SharedService
   ) { }
 
   public _adminLogin(userName,userPassword){
@@ -60,6 +62,10 @@ export class AdminLoginService {
     this.httpClient.get(url).subscribe((data: []) => {
       localStorage.setItem('adminPanelUserId', data['body'].id);
       localStorage.setItem('adminPanelUserType' , data['body'].role)
+      localStorage.setItem(constants.user_role_key , data['body'].role)
+
+      this.sharedService.roleStateEvent.emit(data['body'].role);
+
     }, error => {
 
     });

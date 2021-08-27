@@ -72,4 +72,5 @@ export class PromotionService {
 
     return this.httpClient.put(url,'',{headers});
   }
+
 }
