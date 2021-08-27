@@ -14,7 +14,7 @@ export class Top10OrdersComponent implements OnInit {
     orders: Array<any> = [];
     orderDetails: Array<any> = [];
 
-    years: string[] = ['2015', '2016', '2017', '2018', '2019', '2020', '2021'];
+    years: string[] = ['2015', '2016', '2017', '2018', '2019', '2020', '2021','2022'];
     months: any[] = [{name: 'January', id: 1}, {name: 'February', id: 2}, {name: 'March', id: 3}, {name: 'April', id: 4}, {
         name: 'May',
         id: 5
@@ -25,18 +25,24 @@ export class Top10OrdersComponent implements OnInit {
 
     selectedYear: string = 'Select Year..';
     selectedMonth: string = 'Select Month..';
-    selectedMonthId: string;
+    selectedMonthId: number;
 
 
     constructor(private orderService: OrderService, private modalService: NgbModal, private notifierService: NotifierService) {
+        let now = new Date();
+        this.selectedYear = now.getFullYear().toString();
+        this.selectedMonthId = now.getMonth();
+
+        this.selectedMonth = this.months.find(month => month.id == this.selectedMonthId).name;
+
     }
 
     ngOnInit() {
+        this.getTop10Products();
     }
 
 
     getTop10Products() {
-
         if (this.selectedYear == 'Select Year..') {
             this.notifierService.notify('error', 'Please select the year are you interested in viewing the report.');
         } else if (this.selectedMonthId == null) {

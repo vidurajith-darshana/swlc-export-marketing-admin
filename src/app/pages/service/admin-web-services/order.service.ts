@@ -21,7 +21,7 @@ export class OrderService {
         return this.http.get(constants.base_url + 'api/order/getAll', {headers: headers});
     }
 
-    public getTop10Orders(year: string, month: string): Observable<any> {
+    public getTop10Orders(year: string, month: number): Observable<any> {
         let token = localStorage.getItem('access_token');
         const headers =
             new HttpHeaders({
