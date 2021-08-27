@@ -30,6 +30,7 @@ import {Top10ProductsComponent} from './pages/top-10-products/top-10-products.co
 import {NgProgressHttpModule} from 'ngx-progressbar/http';
 import {NgProgressModule} from 'ngx-progressbar';
 import {Top10OrdersComponent} from './pages/top-10-orders/top-10-orders.component';
+import {AlertModule} from "./pages/_alert";
 
 
 @NgModule({
@@ -43,12 +44,12 @@ import {Top10OrdersComponent} from './pages/top-10-orders/top-10-orders.componen
         AppRoutingModule,
         JwPaginationModule,
         NgxPaginationModule,
+        AlertModule,
         NotifierModule,
         NgProgressModule.withConfig({
             color: "black"
         }),
-        NgProgressHttpModule,
-
+        NgProgressHttpModule
     ],
     declarations: [
         AppComponent,
