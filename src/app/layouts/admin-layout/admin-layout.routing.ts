@@ -19,22 +19,24 @@ import {TestimonialComponent} from 'src/app/pages/testimonial/testimonial.compon
 import {PromotionsComponent} from 'src/app/pages/promotions/promotions.component';
 import {Top10ProductsComponent} from '../../pages/top-10-products/top-10-products.component';
 import {Top10OrdersComponent} from '../../pages/top-10-orders/top-10-orders.component';
+import {AuthGuard} from '../../guards/auth.guard';
+
 
 export const AdminLayoutRoutes: Routes = [
-    {path: 'manage-category', component: ManageCategoriesComponent},
-    {path: 'manage-orders', component: ManageOrdersComponent},
-    {path: 'manage-products', component: ManageProductsComponent},
-    {path: 'category', component: CreateCategoryComponent},
-    {path: 'products', component: CreateProductComponent},
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'user-profile', component: UserProfileComponent},
-    {path: 'tables', component: TablesComponent},
-    {path: 'icons', component: IconsComponent},
-    {path: 'maps', component: MapsComponent},
-    {path: 'registration_DEO', component: RegistrationDEOComponent},
-    {path: 'reviews', component: CustomerReviewReportComponent},
-    {path: 'testimonial', component: TestimonialComponent},
-    {path: 'promotions', component: PromotionsComponent},
-    {path: 'top-products', component: Top10ProductsComponent},
-    {path: 'top-orders', component: Top10OrdersComponent},
+    {path: 'manage-category', canActivate: [AuthGuard], component: ManageCategoriesComponent},
+    {path: 'manage-orders', canActivate: [AuthGuard], component: ManageOrdersComponent},
+    {path: 'manage-products', canActivate: [AuthGuard], component: ManageProductsComponent},
+    {path: 'category', canActivate: [AuthGuard], component: CreateCategoryComponent},
+    {path: 'products', canActivate: [AuthGuard], component: CreateProductComponent},
+    {path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
+    {path: 'user-profile', canActivate: [AuthGuard], component: UserProfileComponent},
+    {path: 'tables',  canActivate: [AuthGuard],component: TablesComponent},
+    {path: 'icons', canActivate: [AuthGuard], component: IconsComponent},
+    {path: 'maps', canActivate: [AuthGuard], component: MapsComponent},
+    {path: 'registration_DEO', canActivate: [AuthGuard], component: RegistrationDEOComponent},
+    {path: 'reviews', canActivate: [AuthGuard], component: CustomerReviewReportComponent},
+    {path: 'testimonial', canActivate: [AuthGuard], component: TestimonialComponent},
+    {path: 'promotions', canActivate: [AuthGuard], component: PromotionsComponent},
+    {path: 'top-products', canActivate: [AuthGuard], component: Top10ProductsComponent},
+    {path: 'top-orders', canActivate: [AuthGuard], component: Top10OrdersComponent},
 ];

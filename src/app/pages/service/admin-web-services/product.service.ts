@@ -74,7 +74,7 @@ export class ProductService {
     }
 
 
-    public getTop10Products(year: string, month: string): Observable<any> {
+    public getTop10Products(year: string, month: number): Observable<any> {
 
         let token = localStorage.getItem('access_token');
         const headers =
