@@ -18,12 +18,12 @@
     </div>
 
     <div class="col-6 add-button">
-        <!--        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#Modaladdorderform">-->
-        <!--            Add New Order-->
-        <!--        </button>-->
+<!--        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#Modaladdorderform">-->
+<!--            Add New Order-->
+<!--        </button>-->
     </div>
 </div>
-<div class="row" style="margin: 0;">
+<div class="row"  style="margin: 2%;">
     <div class="col-12 product-table" style="padding-left: 0;padding-right: 0;">
         <div class="table-responsive">
             <table class="table align-items-center table-flush">
@@ -93,20 +93,20 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title">Edit Order</h1>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
                             </div>
                             <div class="modal-body">
                                 <form role="form">
-                                    <div class="form-group">
+                                   <div class="form-group">
                                         <label class="control-label">Order Date</label>
                                         <div class="input-group input-group-alternative">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="ni ni-calendar-grid-58"></i></span>
+                                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                             </div>
-                                            <input class="form-control datepicker" placeholder="Select date" name="dp"
-                                                   [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
-                                                   (click)="d.toggle()" type="text"/>
-                                        </div>
+                                            <input class="form-control datepicker" placeholder="Select date" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
+                                          </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Bill To Name</label>
@@ -154,9 +154,9 @@
             </table>
         </div>
     </div>
-    <!--    <div class="card-footer pb-0 pt-3">-->
-    <!--<jw-pagination [items]="manageorder" (changePage)="onChangePage($event)"></jw-pagination>-->
-    <!--    </div>-->
+<!--    <div class="card-footer pb-0 pt-3">-->
+<!--<jw-pagination [items]="manageorder" (changePage)="onChangePage($event)"></jw-pagination>-->
+<!--    </div>-->
 </div>
 
 
@@ -166,19 +166,20 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Add Order</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
             </div>
             <div class="modal-body">
                 <form role="form">
-                    <div class="form-group">
+                   <div class="form-group">
                         <label class="control-label">Order Date</label>
                         <div class="input-group input-group-alternative">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                             </div>
-                            <input class="form-control datepicker" placeholder="Select date" name="dpdd"
-                                   [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()"
-                                   type="text"/>
-                        </div>
+                            <input class="form-control datepicker" placeholder="Select date" name="dpdd" [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
+                          </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Bill To Name</label>
@@ -314,6 +315,6 @@
 
 
 
-                  
+
     
 
