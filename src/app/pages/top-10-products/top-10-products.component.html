@@ -1,0 +1,108 @@
+<div class="header bg-gradient-lighter pb-8 pt-5 pt-md-8">
+
+    <div class="row" style="padding: 0 40px;!important;">
+        <div class="col">
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-default" id="yearSelect"  ngbDropdownToggle>{{selectedYear}}
+                    <i style="vertical-align: middle;" class="ni ni-bold-down"></i>
+                </button>
+                <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="yearSelect" >
+                    <button class="dropdown-item" ngbDropdownItem *ngFor="let year of years" (click)="changeYear(year)" >{{year}}</button>
+                </div>
+            </div>
+
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-default" id="monthSelect"  ngbDropdownToggle>{{selectedMonth}}
+                    <i style="vertical-align: middle;" class="ni ni-bold-down"></i
+                ></button>
+                <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="monthSelect" >
+                    <button class="dropdown-item" ngbDropdownItem *ngFor="let month of months" (click)="changeMonth(month)" >{{month.name}}</button>
+                </div>
+            </div>
+
+            <button class="btn btn-icon btn-3 btn-default" type="button" (click)="getTop10Products()">
+                <span class="btn-inner--icon"><i class="ni ni-zoom-split-in"></i></span>
+                <span class="btn-inner--text">Search</span>
+            </button>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Top 10 Selling Products</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Product Id</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Thumbnail</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Total QTY</th>
+                            <th scope="col">Current QTY</th>
+                            <th scope="col">Sold QTY</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let product of products">
+                            <th scope="row">
+                                {{product['product']['id']}}
+                            </th>
+
+                            <td>
+                                {{product['product']['code']}}
+                            </td>
+                            <td>
+                                {{product['product']['name']}}
+                            </td>
+                            <td>
+                                <img class="product-image" [src]="product['product']['thumbnail']" alt="">
+                            </td>
+                            <td>
+                                {{product['product']['price'] | currency:'LKR'}}
+                            </td>
+                            <td>
+                                {{product['product']['status']}}
+                            </td>
+                            <td>
+                                {{product['product']['totalQty']}}
+                            </td>
+                            <td>
+                                {{product['product']['currentQty']}}
+                            </td>
+                            <td>
+                                {{product['soldQty']}}
+                            </td>
+
+                        </tr>
+
+
+
+                        </tbody>
+
+
+
+                    </table>
+                </div>
+                <div class="card-footer py-4">
+                    <div style="text-align: center;" *ngIf="products.length==0">No data available in the table</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
