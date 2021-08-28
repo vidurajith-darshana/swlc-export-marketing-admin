@@ -72,6 +72,13 @@ export class RegistrationDEOComponent implements OnInit {
 
     private deleteDeo(id) {
         this.operatorService.deleteteDeo(id).subscribe((data) => {
+            if (data['success']) {
+                this.alertService.success('DEO deleted', this.options);
+            } else {
+                this.alertService.warn('Something went wrong', this.options)
+            }
+        },error => {
+            this.alertService.warn('Something went wrong', this.options)
         })
     }
 
@@ -91,7 +98,7 @@ export class RegistrationDEOComponent implements OnInit {
                     // success msg
                     console.log('aaaaa')
                     // console.log(data)
-                    this.alertService.success('promotion updated', this.options);
+                    this.alertService.success('DEO updated', this.options);
 
                 } else {
                     // error msg
@@ -151,12 +158,18 @@ export class RegistrationDEOComponent implements OnInit {
         this.operatorService.createOperator(operator).subscribe((data) => {
             if (data['success']) {
                 // success msg
+                this.alertService.success('DEO Added', this.options);
+
                 this._clearText();
             } else {
                 // error msg
+                this.alertService.warn('Something went wrong', this.options)
+
                 alert(data['message'])
             }
         }, error => {
+            this.alertService.warn('Something went wrong', this.options)
+
             // error msg
         })
     }
