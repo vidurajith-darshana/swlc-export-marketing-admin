@@ -1,29 +1,22 @@
 <div class="row class-body">
     <div class="col-6">
-        <form>
-            <div class="row">
-                <div class="col-md-12" style="text-align: center;padding-left: 0">
-                    <div class="form-group">
-                        <div class="input-group input-group-alternative mb-4">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                            </div>
-                            <input class="form-control form-control-alternative" placeholder="Search Order By Date"
-                                   type="text">
-                        </div>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;padding-left: 0">
+                <div class="input-group input-group-alternative mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                     </div>
+                    <input #searchElement [(ngModel)]="searchWord" class="form-control form-control-alternative"
+                           placeholder="Search any order"
+                           type="text">
                 </div>
             </div>
-        </form>
-    </div>
-
-    <div class="col-6 add-button">
-<!--        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#Modaladdorderform">-->
-<!--            Add New Order-->
-<!--        </button>-->
+        </div>
     </div>
 </div>
-<div class="row"  style="margin: 2%;">
+
+
+<div class="row" style="margin: 2%;">
     <div class="col-12 product-table" style="padding-left: 0;padding-right: 0;">
         <div class="table-responsive">
             <table class="table align-items-center table-flush">
@@ -37,7 +30,6 @@
                     <th scope="col">Total</th>
                     <th scope="col">View Order Detail</th>
                     <th scope="col">Update Order Status</th>
-                    <th scope="col">Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -51,7 +43,7 @@
                     </td>
 
                     <td>
-                        <div *ngIf="order['fkUser']!= null">{{order['fkUser']['firstName'] + ' ' + order['fkUser']['lastName']}}</div>
+                        <div *ngIf="order['fkUser']!= null">{{order['fkUser']['firstName'] != null ? order['fkUser']['firstName'] : '' + ' ' + order['fkUser']['lastName'] != null ? order['fkUser']['lastName'] : ''}}</div>
 
                     </td>
                     <td>
@@ -78,139 +70,15 @@
                         </button>
                     </td>
 
-                    <td>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                data-target="#ModalEditorder">Edit
-                        </button>
-                    </td>
+
                 </tr>
                 </tbody>
 
-
-                <!-- Modal HTML Markup  for edit category-->
-                <div id="ModalEditorder" class="modal fade">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title">Edit Order</h1>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                   <div class="form-group">
-                                        <label class="control-label">Order Date</label>
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                                            </div>
-                                            <input class="form-control datepicker" placeholder="Select date" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
-                                          </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Bill To Name</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="bill to name"
-                                                   value="">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label">Status</label>
-                                        <div>
-                                            <select class="browser-default custom-select">
-                                                <option selected>Open this select menu</option>
-                                                <option value="1">Active</option>
-                                                <option value="2">Inactive</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Message</label>
-                                        <div>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                      rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Grand Total</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="grand total"
-                                                   value="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="button-set">
-                                            <button type="button" class="btn btn-primary">Update</button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </table>
         </div>
     </div>
-<!--    <div class="card-footer pb-0 pt-3">-->
-<!--<jw-pagination [items]="manageorder" (changePage)="onChangePage($event)"></jw-pagination>-->
-<!--    </div>-->
 </div>
 
-
-<!-- Modal HTML Markup for add order -->
-<div id="Modaladdorderform" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title">Add Order</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-            </div>
-            <div class="modal-body">
-                <form role="form">
-                   <div class="form-group">
-                        <label class="control-label">Order Date</label>
-                        <div class="input-group input-group-alternative">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                            </div>
-                            <input class="form-control datepicker" placeholder="Select date" name="dpdd" [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
-                          </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Bill To Name</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="bill to name" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Message</label>
-                        <div>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Grand Total</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="grand total" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div>
-                            <button type="submit" class="btn btn-success">
-                                Add Order
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <ng-template #content let-modal>
     <div class="modal-header">

@@ -15,7 +15,11 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router,private sharedService:SharedService) {
+
+    public userFullName:string;
+
+
+    constructor(location: Location,  private element: ElementRef, private router: Router,private sharedService:SharedService) {
     this.location = location;
   }
 
@@ -30,6 +34,14 @@ export class NavbarComponent implements OnInit {
           this.changeListItem(res)
         }
     )
+
+      this.userFullName = localStorage.getItem(constants.user_full_name_key);
+
+      this.sharedService.userNameEvent.subscribe(
+          res=>{
+              this.userFullName = res;
+          }
+      )
 
 
   }
@@ -56,4 +68,9 @@ export class NavbarComponent implements OnInit {
     return 'Dashboard';
   }
 
+
+    onLogOut(){
+        this.router.navigate(['/login'])
+        localStorage.clear();
+    }
 }
