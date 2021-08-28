@@ -38,7 +38,7 @@ export class CategoryService {
     }
 
     public updateCategory(category){
-        let url = `${constants.base_url+'api/v1/admin/category'}`;
+        let url = `${constants.base_url+'api/v1/admin/category/update'}`;
         let token = localStorage.getItem('access_token');
 
         const headers =

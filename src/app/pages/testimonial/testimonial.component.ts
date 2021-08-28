@@ -4,6 +4,7 @@ import {CategoryService} from "../service/admin-web-services/category.service";
 import {TestimonialService} from '../service/admin-web-services/testimonial.service';
 import {Testimonial} from '../model/testimonial';
 import {AlertService} from '../_alert';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
     selector: 'app-testimonial',
@@ -24,7 +25,7 @@ export class TestimonialComponent implements OnInit {
 
     imageError: string;
     isImageSaved: boolean;
-    cardImageBase64: string;
+    cardImageBase64: string = '';
     private options = {
         autoClose: false,
         keepAfterRouteChange: false
@@ -32,7 +33,8 @@ export class TestimonialComponent implements OnInit {
     constructor(
         // private categoryService: CategoryService
         private testimonialService : TestimonialService,
-    protected alertService: AlertService
+    protected alertService: AlertService,
+        private notifierService: NotifierService,
     ) {
         // this.config = {
         //   itemsPerPage: 1,
@@ -127,6 +129,30 @@ export class TestimonialComponent implements OnInit {
             };
 
             reader.readAsDataURL(fileInput.target.files[0]);
+        }
+    }
+
+    checkTextFieldEmpty(){
+        if (this.addCustomerName !== undefined){
+            if (this.addYoutubeUrl !== undefined){
+                if (this.addCountry !== undefined){
+                    if (this.addComment !== undefined){
+                        if (this.cardImageBase64 !== ''){
+                            this._createTestimonials();
+                        }else{
+                            this.notifierService.notify('error', 'Please select the image');
+                        }
+                    }else{
+                        this.notifierService.notify('error', 'Please enter comment');
+                    }
+                }else {
+                    this.notifierService.notify('error', 'Please enter country');
+                }
+            }else {
+                this.notifierService.notify('error', 'Please enter youtube url');
+            }
+        }else{
+            this.notifierService.notify('error', 'Please enter customer name');
         }
     }
 
