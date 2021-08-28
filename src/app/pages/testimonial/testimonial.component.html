@@ -11,7 +11,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                             </div>
-                            <input class="form-control form-control-alternative" placeholder="Search Testimonial By Name"
+                            <input name="custom_search" [(ngModel)]="customSearchText" (ngModelChange)="testimonialsSearch()" class="form-control form-control-alternative" placeholder="Search Testimonial By Name"
                                    type="text">
                         </div>
                     </div>
@@ -77,6 +77,7 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-secondary" data-toggle="modal"
+                            (click)="loadUpdateDetails(testimonial.id,testimonial.customerName,testimonial.image,testimonial.youtubeUrl,testimonial.country,testimonial.comment)"
                                 [attr.data-target]="'#ModalEditProduct'+ testimonial.id" >Edit
                         </button>
                     </td>
@@ -96,14 +97,14 @@
                                         <label class="control-label">Customer Name</label>
                                         <div>
                                             <input type="text" class="form-control input-lg" name="product Name"
-                                                   value="{{testimonial.customerName}}">
+                                                   [(ngModel)]="updateCustomerName">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label">Image</label>
                                         <div>
-                                            <input type="file"   class="form-control-file">
+                                            <input type="file" (change)="updateFileChangeEvent($event)"  class="form-control-file">
 
                                         </div>
                                     </div>
@@ -111,21 +112,21 @@
                                         <label class="control-label">Youtube Url</label>
                                         <div>
                                             <input type="text" class="form-control input-lg" name="product Name"
-                                                   value="{{testimonial.youtubeUrl}}">
+                                                   [(ngModel)]="updateYoutubeUrl">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Country</label>
                                         <div>
                                             <input type="text" class="form-control input-lg" name="product Name"
-                                                   value="{{testimonial.country}}">
+                                                   [(ngModel)]="updateCountry">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Comment</label>
                                         <div>
                                             <textarea  class="form-control input-lg" name="product Name"
-                                                   value="{{testimonial.comment}}"></textarea>
+                                                   [(ngModel)]="updateComment"></textarea>
                                         </div>
                                     </div>
 

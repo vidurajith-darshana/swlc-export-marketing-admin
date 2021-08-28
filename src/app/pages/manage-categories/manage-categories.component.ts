@@ -27,6 +27,8 @@ export class ManageCategoriesComponent implements OnInit {
     updateCategoryName : string;
     updateCategoryStatus : string;
     updateCategoryId : string;
+
+    customSearchText : string = '';
     private options = {
         autoClose: false,
         keepAfterRouteChange: false
@@ -58,7 +60,7 @@ export class ManageCategoriesComponent implements OnInit {
     }
 
     private getAllCategoryList(pageno) {
-        this.categoryService.getAllCategory(pageno).subscribe(
+        this.categoryService.getAllCategory('',pageno).subscribe(
             (data: Object[]) => {
                 this.categoryList = data['body'].content;
                 // console.log(this.categoryList);
@@ -68,6 +70,23 @@ export class ManageCategoriesComponent implements OnInit {
             error => {
                 this.alertService.warn('Something went wrong', this.options)
             });
+    }
+
+    categoryCustomSearch(){
+        if (this.customSearchText !== ''){
+            this.categoryService.getAllCategory(this.customSearchText,0).subscribe(
+                (data: Object[]) => {
+                    this.categoryList = data['body'].content;
+                    // console.log(this.categoryList);
+                    this.config.itemsPerPage = data['body'].size;
+                    this.config.totalItems = data['body'].totalElements;
+                },
+                error => {
+                    this.alertService.warn('Something went wrong', this.options)
+                });
+        }else {
+            this.getAllCategoryList(0);
+        }
     }
 
     fileChangeEvent(fileInput: any) {

@@ -11,7 +11,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                             </div>
-                            <input class="form-control form-control-alternative" placeholder="Search Category By Name"
+                            <input name="category_search" [(ngModel)]="customSearchText" (ngModelChange)="categoryCustomSearch()" class="form-control form-control-alternative" placeholder="Search Category By Name"
                                    type="text">
                         </div>
                     </div>

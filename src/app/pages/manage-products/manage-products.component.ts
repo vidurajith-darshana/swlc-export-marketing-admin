@@ -47,6 +47,8 @@ export class ManageProductsComponent implements OnInit {
 
     updateCategoryList = new Array();
 
+    customSearchText : string = '';
+
     constructor(
         private productService : ProductService,
         private categoryService : CategoryService,
@@ -172,7 +174,7 @@ export class ManageProductsComponent implements OnInit {
     }
 
     _getAllProducts(pageNo){
-        this.productService.getProductList(pageNo).subscribe((data)=>{
+        this.productService.getProductList('',pageNo).subscribe((data)=>{
             if (data['success']){
                 this.productList = data['body'].content;
             }else {
@@ -183,8 +185,24 @@ export class ManageProductsComponent implements OnInit {
         })
     }
 
+    productCustomSearch(){
+        if (this.customSearchText !== ''){
+            this.productService.getProductList(this.customSearchText,0).subscribe((data)=>{
+                if (data['success']){
+                    this.productList = data['body'].content;
+                }else {
+
+                }
+            },error => {
+
+            })
+        }else {
+            this._getAllProducts(0);
+        }
+    }
+
     _getCategoryList(){
-        this.categoryService.getAllCategory(0).subscribe((data)=>{
+        this.categoryService.getAllCategory('',0).subscribe((data)=>{
             if (data['success']){
                 this.categoryList = data['body'].content;
                 this.categoryList2 = data['body'].content;
