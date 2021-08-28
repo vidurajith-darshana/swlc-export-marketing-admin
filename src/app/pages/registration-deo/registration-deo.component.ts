@@ -68,10 +68,10 @@ export class RegistrationDEOComponent implements OnInit {
     //     console.log(email)
     // }
 
-    private _updateDeo(id){
+    private _updateDeo(){
 
         let deoo = {
-            id : id,
+            id : this.updateid,
             email : this.updateemail,
             firstName : this.updatefirstName,
             lastName : this.updatelastName,
