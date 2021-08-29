@@ -53,6 +53,7 @@ export class RegistrationDEOComponent implements OnInit {
             totalItems: 0
         };
     }
+
     pageChanged(event) {
         this.config.currentPage = event;
         const pagno = this.config.currentPage - 1;
@@ -64,53 +65,70 @@ export class RegistrationDEOComponent implements OnInit {
         this.getAllCategoryList(0);
 
     }
+
     // private _updatePromotion(email) {
     //     console.log(email)
     // }
 
-    private _updateDeo(){
+    private deleteDeo(id) {
+        this.operatorService.deleteteDeo(id).subscribe((data) => {
+            if (data['success']) {
+                this.alertService.success('DEO deleted', this.options);
+            } else {
+                this.alertService.warn('Something went wrong', this.options)
+            }
+        },error => {
+            this.alertService.warn('Something went wrong', this.options)
+        })
+    }
+
+    private _updateDeo() {
 
         let deoo = {
-            id : this.updateid,
-            email : this.updateemail,
-            firstName : this.updatefirstName,
-            lastName : this.updatelastName,
+            id: this.updateid,
+            email: this.updateemail,
+            firstName: this.updatefirstName,
+            lastName: this.updatelastName,
             role: "OPERATOR",
-            password : this.updatepassword
+            password: this.updatepassword
         }
         console.log(deoo)
-        this.operatorService.updateDeo(deoo).subscribe((data)=>{
-            if (data['success']){
-                // success msg
-                console.log('aaaaa')
-                // console.log(data)
-                this.alertService.success('promotion updated', this.options);
+        this.operatorService.updateDeo(deoo).subscribe((data) => {
+                if (data['success']) {
+                    // success msg
+                    console.log('aaaaa')
+                    // console.log(data)
+                    this.alertService.success('DEO updated', this.options);
 
-            }else {
-                // error msg
-                console.log('bbbbbbbbbbbbbbb')
-                // console.log(data)
+                } else {
+                    // error msg
+                    console.log('bbbbbbbbbbbbbbb')
+                    // console.log(data)
+
+                    this.alertService.warn('Something went wrong', this.options)
+
+                }
+            }
+            ,error => {
+                console.log('ccccccccccccccccc')
 
                 this.alertService.warn('Something went wrong', this.options)
 
+                // error msg
             }
-        },error => {
-            console.log('ccccccccccccccccc')
-
-            this.alertService.warn('Something went wrong', this.options)
-
-            // error msg
-        })
+        )
     }
-    private _getDeoDetailsToUpdate(id,firstname,lastName,email,password){
-        console.log(id+' '+firstname+' '+lastName+' '+email+' '+password)
+
+    private _getDeoDetailsToUpdate(id, firstname, lastName, email, password) {
+        console.log(id + ' ' + firstname + ' ' + lastName + ' ' + email + ' ' + password)
         this.updateid = id;
         this.updatefirstName = firstname;
         this.updatelastName = lastName;
         this.updateemail = email;
         this.updatepassword = password;
-        console.log(this.updateid+' '+this.updatefirstName+' '+this.updatelastName+' '+this.updateemail+' '+this.updatepassword)
+        console.log(this.updateid + ' ' + this.updatefirstName + ' ' + this.updatelastName + ' ' + this.updateemail + ' ' + this.updatepassword)
     }
+
     private getAllCategoryList(pageno) {
         this.operatorService.getAllOparator(pageno).subscribe(
             (data: Object[]) => {
@@ -127,6 +145,7 @@ export class RegistrationDEOComponent implements OnInit {
                 this.alertService.warn('Something went wrong', this.options)
             });
     }
+
     _createOperator() {
         let operator = {
             firstName: this.firstName,
@@ -139,12 +158,18 @@ export class RegistrationDEOComponent implements OnInit {
         this.operatorService.createOperator(operator).subscribe((data) => {
             if (data['success']) {
                 // success msg
+                this.alertService.success('DEO Added', this.options);
+
                 this._clearText();
             } else {
                 // error msg
+                this.alertService.warn('Something went wrong', this.options)
+
                 alert(data['message'])
             }
         }, error => {
+            this.alertService.warn('Something went wrong', this.options)
+
             // error msg
         })
     }

@@ -17,8 +17,9 @@ export class OrderService {
             new HttpHeaders({
                 'Authorization': 'Bearer ' + token
             });
-
-        return this.http.get(constants.base_url + 'api/v1/admin/order/get-all', {headers: headers});
+        let empty= '';
+        let ulr = 'api/v1/admin/order/get-all?ref='+empty;
+        return this.http.get(constants.base_url + ulr, {headers: headers});
     }
 
     public getTop10Orders(year: string, month: number): Observable<any> {

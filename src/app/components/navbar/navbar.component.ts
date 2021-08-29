@@ -34,6 +34,11 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  logout() {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('token_type');
+      localStorage.removeItem('refresh_token');
+  }
   changeListItem(role){
     if (role == 'ROLE_ADMIN'){
       this.listTitles = ADMIN_ROUTES.filter(listTitle => listTitle);
