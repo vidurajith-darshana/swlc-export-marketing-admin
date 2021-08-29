@@ -54,7 +54,7 @@
                         {{order['status']}}
                     </td>
                     <td>
-                        {{order['total'] | currency:'LKR'}}
+                        {{order['total'] | currency}}
                     </td>
 
                     <td>
@@ -124,7 +124,7 @@
                                     {{orderDetail['qty']}}
                                 </td>
                                 <td>
-                                    {{orderDetail['subTotal'] | currency:'LKR'}}
+                                    {{orderDetail['subTotal'] | currency}}
                                 </td>
 
                             </tr>

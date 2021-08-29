@@ -83,7 +83,7 @@
                                 {{order['createDate'] | date}}
                             </td>
                             <td>
-                                {{order['total'] | currency:'LKR'}}
+                                {{order['total'] | currency}}
                             </td>
                             <td>
                                 <button type="button" class="btn btn-default" (click)="open(content,order['fkOrder'])">
@@ -149,7 +149,7 @@
                                     {{orderDetail['qty']}}
                                 </td>
                                 <td>
-                                    {{orderDetail['subTotal'] | currency:'LKR'}}
+                                    {{orderDetail['subTotal'] | currency}}
                                 </td>
 
                             </tr>
