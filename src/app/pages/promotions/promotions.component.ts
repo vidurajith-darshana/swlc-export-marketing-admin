@@ -287,6 +287,7 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.updatePromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
+        this._getPromotionList(0);
         this.alertService.success('promotion updated', this.options);
 
       }else {
@@ -306,6 +307,19 @@ export class PromotionsComponent implements OnInit {
     this.updatePromotionHeading = heading;
     this.updatePromotionStatus = status;
     this.updateCardImageBase64 = image;
+  }
+
+  _deletePromotion(id){
+    this.promotionService.deletePromotions(id).subscribe((data)=>{
+      if (data['success']){
+        this._getPromotionList(0);
+        this.alertService.success('Promotion deleted Successfully', this.options);
+      }else {
+        this.alertService.warn('Promotion delete failed!', this.options);
+      }
+    },error => {
+      this.alertService.warn('Promotion delete failed!', this.options);
+    })
   }
 
 }
