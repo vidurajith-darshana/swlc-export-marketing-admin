@@ -12,17 +12,17 @@ export class TestimonialService {
       private httpClient : HttpClient
   ) { }
 
-  public getAllTestimonials(){
+  public getAllTestimonials(text){
     let token = localStorage.getItem('access_token');
 
     const headers =
         new HttpHeaders({
-          // 'Authorization': 'Bearer '+token,
+          'Authorization': 'Bearer '+token,
           'Content-Type': 'application/json'
         });
 
-    const url = `${constants.base_url + 'api/v1/testimonial/getAll'}`;
-    return this.httpClient.get(url);
+    const url = `${constants.base_url + 'api/v1/testimonial/getAll?search='+text}`;
+    return this.httpClient.get(url,{headers});
   }
 
   public createTestimonials(testimonial){

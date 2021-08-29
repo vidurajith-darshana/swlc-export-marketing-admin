@@ -10,7 +10,7 @@ export class CategoryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllCategory(pageno) {
+  public getAllCategory(text,pageno) {
 
     let token = localStorage.getItem('access_token');
 
@@ -20,7 +20,7 @@ export class CategoryService {
           'Content-Type': 'application/json'
         });
 
-    const url = `${constants.base_url + 'api/v1/admin/category/all?page=' + pageno + '&size=10 '}`;
+    const url = `${constants.base_url + 'api/v1/admin/category/all?search='+text+'&page=' + pageno + '&size=10 '}`;
     return this.httpClient.get(url,{headers});
   }
 
@@ -38,7 +38,7 @@ export class CategoryService {
     }
 
     public updateCategory(category){
-        let url = `${constants.base_url+'api/v1/admin/category'}`;
+        let url = `${constants.base_url+'api/v1/admin/category/update'}`;
         let token = localStorage.getItem('access_token');
 
         const headers =
@@ -47,6 +47,6 @@ export class CategoryService {
                 'Content-Type': 'application/json'
             });
 
-        return this.httpClient.post(url,category,{headers});
+        return this.httpClient.put(url,category,{headers});
     }
 }

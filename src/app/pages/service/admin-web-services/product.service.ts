@@ -12,7 +12,7 @@ export class ProductService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public getProductList(pageNo) {
+    public getProductList(text,pageNo) {
         let token = localStorage.getItem('access_token');
 
         const headers =
@@ -21,7 +21,7 @@ export class ProductService {
                 'Content-Type': 'application/json'
             });
 
-        const url = `${constants.base_url + 'api/v1/admin/product/all?page=' + pageNo + '&size=10 '}`;
+        const url = `${constants.base_url + 'api/v1/admin/product/all?search='+text+'&page=' + pageNo + '&size=10 '}`;
         return this.httpClient.get(url, {headers});
     }
 
