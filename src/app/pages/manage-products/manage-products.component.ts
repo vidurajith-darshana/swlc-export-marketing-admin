@@ -14,25 +14,25 @@ export class ManageProductsComponent implements OnInit {
 
     imageError: string;
     isImageSaved: boolean;
-    cardImageBase64: string = '';
+    cardImageBase64: string;
 
     updateImageError: string;
     updateIsImageSaved: boolean;
     updateCardImageBase64: string;
 
-    addProductName : string = '';
-    addProductPrice : string = '';
-    addProductCode : string = '';
+    addProductName : string ;
+    addProductPrice : string ;
+    addProductCode : string ;
     addTotalQty : number = 0;
     addCurrentQty : number = 0;
 
     updateProductId : number;
-    updateProductName : string = '';
-    updateProductPrice : string = '';
-    updateProductCode : string = '';
-    updateTotalQty : number = 0;
-    updateCurrentQty : number = 0;
-    updateProductStatus : number = 0;
+    updateProductName : string;
+    updateProductPrice : string;
+    updateProductCode : string;
+    updateTotalQty : number ;
+    updateCurrentQty : number;
+    updateProductStatus : number;
 
 
 
@@ -215,7 +215,6 @@ export class ManageProductsComponent implements OnInit {
     }
 
     _addToTable(){
-        console.log(this.selectedCategory.name);
 
         let data = {
             id : this.selectedCategory.id,
@@ -227,12 +226,17 @@ export class ManageProductsComponent implements OnInit {
 
     _addToUpdateTable(){
 
-        let data = {
-            id : this.selectedUpdateCategory.id,
-            name : this.selectedUpdateCategory.name
-        }
+        let item = this.updateCategoryList.find(name => name.id === this.selectedUpdateCategory.id);
+        if (item === null){
+            let data = {
+                id : this.selectedUpdateCategory.id,
+                name : this.selectedUpdateCategory.name
+            }
 
-        this.updateCategoryList.push(data);
+            this.updateCategoryList.push(data);
+        }else{
+            this.notifierService.notify('error', 'Category is already exist!');
+        }
     }
 
     _removeCategory(id){
@@ -287,13 +291,13 @@ export class ManageProductsComponent implements OnInit {
     }
 
     checkValidation(){
-        if (this.addProductName !== ''){
-            if (this.addProductCode !== ''){
-                if (this.addProductPrice !== ''){
-                    if (this.addTotalQty !== 0){
+        if (this.addProductName !== undefined){
+            if (this.addProductCode !== undefined){
+                if (this.addProductPrice !== undefined){
+                    if (this.addTotalQty !== undefined){
                         if (this.addCurrentQty !== 0){
                             if (this.selectCategoryList.length > 0){
-                                if (this.cardImageBase64 !== ''){
+                                if (this.cardImageBase64 !== undefined){
                                     this._addProduct();
                                 }else {
                                     this.notifierService.notify('error', 'Please select the image');
@@ -364,12 +368,12 @@ export class ManageProductsComponent implements OnInit {
 
         let data = {
             id : this.updateProductId,
-            code : this.addProductCode,
-            name : this.addProductName,
-            thumbnail : this.cardImageBase64,
-            price : this.addProductPrice,
-            totalQty : this.addTotalQty,
-            currentQty : this.addCurrentQty,
+            code : this.updateProductCode,
+            name : this.updateProductName,
+            thumbnail : this.updateCardImageBase64,
+            price : this.updateProductPrice,
+            totalQty : this.updateTotalQty,
+            currentQty : this.updateCurrentQty,
             categories : categoryId
         }
 
@@ -385,5 +389,37 @@ export class ManageProductsComponent implements OnInit {
             this.notifierService.notify('error', 'Product update failed');
         });
 
+    }
+
+    checkUpdateValidation(){
+        if (this.updateProductName !== undefined){
+            if (this.updateProductCode !== undefined){
+                if (this.updateProductPrice !== undefined){
+                    if (this.updateTotalQty !== undefined){
+                        if (this.updateCurrentQty !== undefined){
+                            if (this.updateCategoryList.length > 0){
+                                if (this.updateCardImageBase64 !== undefined){
+                                    this._updateProduct();
+                                }else {
+                                    this.notifierService.notify('error', 'Please select the image');
+                                }
+                            }else {
+                                this.notifierService.notify('error', 'Please select the category');
+                            }
+                        }else{
+                            this.notifierService.notify('error', 'Please enter Product current quantity');
+                        }
+                    }else {
+                        this.notifierService.notify('error', 'Please enter Product total quantity');
+                    }
+                }else {
+                    this.notifierService.notify('error', 'Please enter Product price');
+                }
+            }else {
+                this.notifierService.notify('error', 'Please enter Product code');
+            }
+        }else{
+            this.notifierService.notify('error', 'Please enter Product name');
+        }
     }
 }

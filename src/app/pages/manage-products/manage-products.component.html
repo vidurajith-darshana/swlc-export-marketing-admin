@@ -129,7 +129,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Total Qty</label>
                                             <div>
-                                                <input type="text" class="form-control input-lg" name="total qty" [(ngModel)]="updateTotalQty">
+                                                <input type="text" class="form-control input-lg" name="total_qty" [(ngModel)]="updateTotalQty">
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Current Qty</label>
                                         <div>
-                                            <input type="text" class="form-control input-lg" name="currunt qty" [(ngModel)]="updateCurrentQty">
+                                            <input type="text" class="form-control input-lg" name="currunt_qty" [(ngModel)]="updateCurrentQty">
                                         </div>
                                     </div>
                                     </div>
@@ -191,7 +191,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="button-set">
-                                        <button type="button" (click)="_updateProduct()" class="btn btn-primary">Update</button>
+                                        <button type="button" (click)="checkUpdateValidation()" class="btn btn-primary">Update</button>
                                         <button type="button" class="btn btn-danger">Delete</button>
                                     </div>
                                 </div>
@@ -229,7 +229,7 @@
                         <div class="form-group">
                             <label class="control-label">Product Name</label>
                             <div>
-                                <input type="text" [(ngModel)]="addProductName" class="form-control input-lg" name="product Name" value="">
+                                <input type="text" [(ngModel)]="addProductName" class="form-control input-lg" name="product Name">
                             </div>
                         </div>
                     </div>
@@ -237,7 +237,7 @@
                         <div class="form-group">
                             <label class="control-label">Price</label>
                             <div>
-                                <input type="text" [(ngModel)]="addProductPrice" class="form-control input-lg" name="price" value="">
+                                <input type="text" [(ngModel)]="addProductPrice" class="form-control input-lg" name="price">
                             </div>
                         </div>
                     </div>
@@ -256,7 +256,7 @@
                         <div class="form-group">
                             <label class="control-label">Code</label>
                             <div>
-                                <input type="text" [(ngModel)]="addProductCode" class="form-control input-lg" name="code" value="">
+                                <input type="text" [(ngModel)]="addProductCode" class="form-control input-lg" name="code">
                             </div>
                         </div>
                     </div>
@@ -267,7 +267,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Total Qty</label>
                                     <div>
-                                        <input type="text" [(ngModel)]="addTotalQty" class="form-control input-lg" name="total qty" value="">
+                                        <input type="text" [(ngModel)]="addTotalQty" class="form-control input-lg" name="total qty">
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +275,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Current Qty</label>
                                     <div>
-                                        <input type="text" [(ngModel)]="addCurrentQty" class="form-control input-lg" name="currunt qty" value="">
+                                        <input type="text" [(ngModel)]="addCurrentQty" class="form-control input-lg" name="currunt qty">
                                     </div>
                                 </div>
                             </div>
