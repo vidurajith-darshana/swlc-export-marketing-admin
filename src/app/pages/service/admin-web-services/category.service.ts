@@ -49,4 +49,16 @@ export class CategoryService {
 
         return this.httpClient.put(url,category,{headers});
     }
+    public updateCategorystatus(status, catidd){
+        let url = `${constants.base_url+'api/v1/user/category/status/update/'+catidd+'/'+status}`;
+        let token = localStorage.getItem('access_token');
+
+        const headers =
+            new HttpHeaders({
+                'Authorization': 'Bearer '+token,
+                'Content-Type': 'application/json'
+            });
+        console.log(url)
+        return this.httpClient.put(url,{headers});
+    }
 }

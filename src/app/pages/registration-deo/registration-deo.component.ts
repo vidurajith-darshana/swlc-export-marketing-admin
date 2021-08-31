@@ -1,4 +1,4 @@
-import {Component, OnInit, VERSION} from '@angular/core';
+import {Component, OnInit, VERSION, ViewChild} from '@angular/core';
 import {OperatorService} from '../service/admin-web-services/operator.service';
 import {Category} from "../model/category";
 // import {CategoryService} from "../service/admin-web-services/category.service";
@@ -11,6 +11,7 @@ import {Deo} from "../model/deo";
     styleUrls: ['./registration-deo.component.css']
 })
 export class RegistrationDEOComponent implements OnInit {
+    @ViewChild('closebutton') closebutton;
 
     categoryName = 'Angular ' + VERSION.major;
     private categoryList: Deo[];
@@ -73,7 +74,11 @@ export class RegistrationDEOComponent implements OnInit {
     private deleteDeo(id) {
         this.operatorService.deleteteDeo(id).subscribe((data) => {
             if (data['success']) {
+                this.removebackdrop();
+
                 this.alertService.success('DEO deleted', this.options);
+                this.getAllCategoryList(0);
+
             } else {
                 this.alertService.warn('Something went wrong', this.options)
             }
@@ -96,9 +101,11 @@ export class RegistrationDEOComponent implements OnInit {
         this.operatorService.updateDeo(deoo).subscribe((data) => {
                 if (data['success']) {
                     // success msg
-                    console.log('aaaaa')
+                    this.removebackdrop();
+
                     // console.log(data)
                     this.alertService.success('DEO updated', this.options);
+                    this.getAllCategoryList(0);
 
                 } else {
                     // error msg
@@ -158,9 +165,12 @@ export class RegistrationDEOComponent implements OnInit {
         this.operatorService.createOperator(operator).subscribe((data) => {
             if (data['success']) {
                 // success msg
+                this.removebackdrop();
                 this.alertService.success('DEO Added', this.options);
 
                 this._clearText();
+                this.getAllCategoryList(0);
+
             } else {
                 // error msg
                 this.alertService.warn('Something went wrong', this.options)
@@ -180,5 +190,7 @@ export class RegistrationDEOComponent implements OnInit {
         this.email = "";
         this.password = "";
     }
-
+    removebackdrop() {
+        this.closebutton.nativeElement.click();
+    }
 }

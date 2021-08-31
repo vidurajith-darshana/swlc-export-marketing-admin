@@ -1,3 +1,143 @@
+<div id="ModalEditProductpid" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Edit promotion</h1>
+                <button type="button" class="close" #closebutton data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <div>
+                                            <textarea [(ngModel)]="updatePromotionDescription"
+                                                      class="form-control input-lg" name="Description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Image</label>
+                        <div>
+                            <input type="file" (change)="updateFileChangeEvent($event)"
+                                   class="form-control-file">
+
+                        </div>
+                        {{updateImageError}}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Status</label>
+                        <div>
+                            <select [(ngModel)]="updatePromotionStatus" name="promotion_status"
+                                    class="browser-default custom-select">
+                                <option selected>Open this select menu</option>
+                                <option value="ACTIVE">Active</option>
+                                <option value="INACTIVE">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">heading</label>
+                        <div>
+                            <input type="text" [(ngModel)]="updatePromotionHeading"
+                                   class="form-control input-lg" name="product_Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group input-group-alternative">
+                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-calendar-grid-58"></i></span>
+                            </div>
+                            <input class="form-control datepicker" placeholder="Created Date" disabled="disabled"
+                                   value="{{updatePromotioncdate}}" name="dp" ngbDatepicker
+                                   #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="button-set">
+                            <button type="button" (click)="_updatePromotion(updatePromotionid)"
+                                    class="btn btn-primary">Update
+                            </button>
+                            <button type="button" (click)="_deletePromotion(updatePromotionid)" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal HTML Markup -->
+<div id="ModalpromotionForm" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Add promotion</h1>
+                <button type="button" class="close" #closebutton data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <div>
+                            <textarea [(ngModel)]="addPromotionDescription" class="form-control input-lg"
+                                      name="Description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Image</label>
+                        <div>
+                            <input type="file" (change)="fileChangeEvent($event)" class="form-control-file">
+
+                        </div>
+                        {{imageError}}
+                    </div>
+                    <!--                    <div class="form-group">-->
+                    <!--                        <label class="control-label">Status</label>-->
+                    <!--                        <div>-->
+                    <!--                            <select class="browser-default custom-select" >-->
+                    <!--                                <option selected>Open this select menu</option>-->
+                    <!--                                <option value="ACTIVE">Active</option>-->
+                    <!--                                <option value="INACTIVE">Inactive</option>-->
+                    <!--                            </select>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="form-group">
+                        <label class="control-label">Heading</label>
+                        <div>
+                            <input type="text" [(ngModel)]="addPromotionHeading" class="form-control input-lg"
+                                   name="product_Name"
+                            >
+                        </div>
+                    </div>
+                    <!--                    <div class="form-group">-->
+                    <!--                        <div class="input-group input-group-alternative">-->
+                    <!--                            <div class="input-group-prepend">-->
+                    <!--                                                <span class="input-group-text"><i-->
+                    <!--                                                        class="ni ni-calendar-grid-58"></i></span>-->
+                    <!--                            </div>-->
+                    <!--                            <input class="form-control datepicker" placeholder="Created Date"-->
+                    <!--                                   name="dp" ngbDatepicker-->
+                    <!--                                   #d="ngbDatepicker" (click)="d.toggle()" type="text"/>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="form-group">
+                        <div class="button-set">
+                            <button type="button" (click)="_createPromotion()" class="btn btn-success">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
 <div class="row class-body" style="margin-left: 0;margin-right: 0;">
     <div class="col-12" style="margin-bottom: 10px">
         <alert></alert>
@@ -76,82 +216,12 @@
                         </div>
                     </td>
                     <td>
-                        <button (click)="_getPromotionDetailsToUpdate(promotion.description,promotion.heading,promotion.status,promotion.image)"
+                        <button (click)="_getPromotionDetailsToUpdate(promotion.description,promotion.heading,promotion.status,promotion.image,promotion.id,promotion.createDate)"
                                 type="button" class="btn btn-secondary" data-toggle="modal"
-                                [attr.data-target]="'#ModalEditProduct'+ promotion.id">Edit
+                                [attr.data-target]="'#ModalEditProductpid'">Edit
                         </button>
                     </td>
                 </tr>
-                <div id="ModalEditProduct{{promotion.id}}" class="modal fade">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title">Edit promotion</h1>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <label class="control-label">Description</label>
-                                        <div>
-                                            <textarea [(ngModel)]="updatePromotionDescription"
-                                                      class="form-control input-lg" name="Description"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label">Image</label>
-                                        <div>
-                                            <input type="file" (change)="updateFileChangeEvent($event)"
-                                                   class="form-control-file">
-
-                                        </div>
-                                        {{updateImageError}}
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Status</label>
-                                        <div>
-                                            <select [(ngModel)]="updatePromotionStatus" name="promotion_status"
-                                                    class="browser-default custom-select">
-                                                <option selected>Open this select menu</option>
-                                                <option value="ACTIVE">Active</option>
-                                                <option value="INACTIVE">Inactive</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">heading</label>
-                                        <div>
-                                            <input type="text" [(ngModel)]="updatePromotionHeading"
-                                                   class="form-control input-lg" name="product_Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="ni ni-calendar-grid-58"></i></span>
-                                            </div>
-                                            <input class="form-control datepicker" placeholder="Created Date"
-                                                   value="{{promotion.createDate}}" name="dp" ngbDatepicker
-                                                   #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="button-set">
-                                            <button type="button" (click)="_updatePromotion(promotion.id)"
-                                                    class="btn btn-primary">Update
-                                            </button>
-                                            <button type="button" (click)="_deletePromotion(promotion.id)" class="btn btn-danger">Delete</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 </tbody>
                 <div class="products-pagination">
@@ -170,74 +240,5 @@
 </div>
 
 
-<!-- Modal HTML Markup -->
-<div id="ModalpromotionForm" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title">Add promotion</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form role="form">
-                    <div class="form-group">
-                        <label class="control-label">Description</label>
-                        <div>
-                            <textarea [(ngModel)]="addPromotionDescription" class="form-control input-lg"
-                                      name="Description"></textarea>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label">Image</label>
-                        <div>
-                            <input type="file" (change)="fileChangeEvent($event)" class="form-control-file">
-
-                        </div>
-                        {{imageError}}
-                    </div>
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label class="control-label">Status</label>-->
-                    <!--                        <div>-->
-                    <!--                            <select class="browser-default custom-select" >-->
-                    <!--                                <option selected>Open this select menu</option>-->
-                    <!--                                <option value="ACTIVE">Active</option>-->
-                    <!--                                <option value="INACTIVE">Inactive</option>-->
-                    <!--                            </select>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <div class="form-group">
-                        <label class="control-label">Heading</label>
-                        <div>
-                            <input type="text" [(ngModel)]="addPromotionHeading" class="form-control input-lg"
-                                   name="product_Name"
-                            >
-                        </div>
-                    </div>
-                    <!--                    <div class="form-group">-->
-                    <!--                        <div class="input-group input-group-alternative">-->
-                    <!--                            <div class="input-group-prepend">-->
-                    <!--                                                <span class="input-group-text"><i-->
-                    <!--                                                        class="ni ni-calendar-grid-58"></i></span>-->
-                    <!--                            </div>-->
-                    <!--                            <input class="form-control datepicker" placeholder="Created Date"-->
-                    <!--                                   name="dp" ngbDatepicker-->
-                    <!--                                   #d="ngbDatepicker" (click)="d.toggle()" type="text"/>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <div class="form-group">
-                        <div class="button-set">
-                            <button type="button" (click)="_createPromotion()" class="btn btn-success">
-                                Add
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
-</div>
 
