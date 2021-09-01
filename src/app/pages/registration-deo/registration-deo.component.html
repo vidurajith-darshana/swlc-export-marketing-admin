@@ -1,3 +1,128 @@
+<div id="ModalEditProducter" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="min-width: 47vw;">
+            <div class="modal-header">
+                <h1 class="modal-title">Edit DEO</h1>
+                <button type="button" class="close" data-dismiss="modal" #closebutton aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <form role="form">
+                    <div hidden class="form-group">
+                        <label class="control-label"></label>
+                        <div>
+                            <input hidden type="text" class="form-control input-lg" name="deo_id"
+                                   [(ngModel)]="updateid">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">First Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="update_first_name"
+                                   [(ngModel)]="updatefirstName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Last Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="update_last_name"
+                                   [(ngModel)]="updatelastName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <div>
+                            <input disabled type="text" class="form-control input-lg"
+                                   name="update_email"
+                                   [(ngModel)]="updateemail">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="update_password"
+                                   [(ngModel)]="updatepassword">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="button-set">
+                            <button (click)="_updateDeo()" type="button" class="btn btn-primary">
+                                Update
+                            </button>
+                            <button (click)="deleteDeo(updateid)" type="button" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal HTML Markup -->
+<div id="ModalLoginForm" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="min-width: 47vw;">
+            <div class="modal-header">
+                <h1 class="modal-title">Add Deo</h1>
+                <button type="button" class="close" data-dismiss="modal" #closebutton aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label">First Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" [(ngModel)]="firstName" name="category_ame"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Last Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" [(ngModel)]="lastName" name="category_ame"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" [(ngModel)]="email" name="category_ame"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <div>
+                            <input type="password" class="form-control input-lg" [(ngModel)]="password"
+                                   name="category_ame" value="">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div>
+                            <button type="button" (click)="_createOperator()" class="btn btn-success">
+                                Add Deo
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row class-body">
     <div class="col-12" style="margin-bottom: 10px">
         <alert></alert>
@@ -73,77 +198,10 @@
                     <td>
                         <button (click)="_getDeoDetailsToUpdate(categories.id,categories.firstName,categories.lastName,categories.email,categories.password)"
                                 type="button" class="btn btn-secondary" data-toggle="modal"
-                                [attr.data-target]="'#ModalEditProduct'+ categories.firstName">Edit
+                                [attr.data-target]="'#ModalEditProducter'">Edit
                         </button>
                     </td>
                 </tr>
-                <div id="ModalEditProduct{{categories.firstName}}" class="modal fade">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content" style="min-width: 47vw;">
-                            <div class="modal-header">
-                                <h1 class="modal-title">Edit DEO</h1>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-
-                                <form role="form">
-                                    <div hidden class="form-group">
-                                        <label class="control-label"></label>
-                                        <div>
-                                            <input hidden type="text" class="form-control input-lg" name="deo_id"
-                                                   [(ngModel)]="updateid">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">First Name</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="update_first_name"
-                                                   [(ngModel)]="updatefirstName">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Last Name</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="update_last_name"
-                                                   [(ngModel)]="updatelastName">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Email</label>
-                                        <div>
-                                            <input disabled type="text" class="form-control input-lg"
-                                                   name="update_email"
-                                                   [(ngModel)]="updateemail">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label">Password</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="update_password"
-                                                   [(ngModel)]="updatepassword">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <div class="button-set">
-                                            <button (click)="_updateDeo()" type="button" class="btn btn-primary">
-                                                Update
-                                            </button>
-                                            <button (click)="deleteDeo(updateid)" type="button" class="btn btn-danger">
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 </tbody>
                 <!--                <div class="products-pagination">-->
@@ -162,64 +220,7 @@
 </div>
 
 
-<!-- Modal HTML Markup -->
-<div id="ModalLoginForm" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="min-width: 47vw;">
-            <div class="modal-header">
-                <h1 class="modal-title">Add Deo</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
 
-
-                <form role="form">
-                    <div class="form-group">
-                        <label class="control-label">First Name</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" [(ngModel)]="firstName" name="category_ame"
-                                   value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Last Name</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" [(ngModel)]="lastName" name="category_ame"
-                                   value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Email</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" [(ngModel)]="email" name="category_ame"
-                                   value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Password</label>
-                        <div>
-                            <input type="password" class="form-control input-lg" [(ngModel)]="password"
-                                   name="category_ame" value="">
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div>
-                            <button type="button" (click)="_createOperator()" class="btn btn-success">
-                                Add Deo
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!--<div class="header bg-color pb-8 pt-5 pt-md-8">-->

@@ -41,6 +41,7 @@ export class ProductService {
     public updateProduct(product) {
         let url = `${constants.base_url + 'api/v1/admin/product/update'}`;
         let token = localStorage.getItem('access_token');
+        console.log(product);
 
         const headers =
             new HttpHeaders({

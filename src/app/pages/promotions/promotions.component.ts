@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PromotionService} from '../service/admin-web-services/promotion.service';
 import {Promotion} from '../model/promotion';
 import {AlertService} from '../_alert';
@@ -10,6 +10,7 @@ import {AlertService} from '../_alert';
   styleUrls: ['./promotions.component.css']
 })
 export class PromotionsComponent implements OnInit {
+  @ViewChild('closebutton') closebutton;
 
   promotionList : Promotion[];
 
@@ -25,6 +26,8 @@ export class PromotionsComponent implements OnInit {
   addPromotionHeading : string;
 
   updatePromotionDescription : string;
+  updatePromotionid : string;
+  updatePromotioncdate : string;
   updatePromotionHeading: string;
   updatePromotionStatus : string;
 
@@ -245,6 +248,7 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.createPromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
+        this.removebackdrop();
         this.alertService.success('Promotion added', this.options);
       }else {
         // error msg
@@ -287,6 +291,9 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.updatePromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
+        this.removebackdrop();
+
+        this._getPromotionList(0);
         this.alertService.success('promotion updated', this.options);
 
       }else {
@@ -301,11 +308,32 @@ export class PromotionsComponent implements OnInit {
     })
   }
 
-  _getPromotionDetailsToUpdate(description,heading,status,image){
+  _getPromotionDetailsToUpdate(description,heading,status,image,id,cdate){
+
     this.updatePromotionDescription = description;
+    this.updatePromotionid = id;
+    this.updatePromotioncdate = cdate;
     this.updatePromotionHeading = heading;
     this.updatePromotionStatus = status;
     this.updateCardImageBase64 = image;
   }
 
+  _deletePromotion(id){
+    console.log(id)
+    this.promotionService.deletePromotions(id).subscribe((data)=>{
+      if (data['success']){
+        this.removebackdrop();
+
+        this._getPromotionList(0);
+        this.alertService.success('Promotion deleted Successfully', this.options);
+      }else {
+        this.alertService.warn('Promotion delete failed!', this.options);
+      }
+    },error => {
+      this.alertService.warn('Promotion delete failed!', this.options);
+    })
+  }
+  removebackdrop() {
+    this.closebutton.nativeElement.click();
+  }
 }

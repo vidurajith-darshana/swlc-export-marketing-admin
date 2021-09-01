@@ -54,8 +54,7 @@ export class PromotionService {
 
     const headers =
         new HttpHeaders({
-          'Authorization': 'Bearer '+token,
-          'Content-Type': 'application/json'
+          'Authorization': 'Bearer '+token
         });
 
     const url = `${constants.base_url + 'api/v1/admin/promotion/delete/'+promotionId}`;

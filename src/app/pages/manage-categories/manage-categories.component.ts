@@ -1,4 +1,4 @@
-import {Component, OnInit, VERSION} from '@angular/core';
+import {Component, OnInit, VERSION, ViewChild} from '@angular/core';
 // import {Category} from '../model/category';
 import {CategoryService} from '../service/admin-web-services/category.service';
 import {Category} from '../model/category';
@@ -11,6 +11,7 @@ import {NotifierService} from 'angular-notifier';
     styleUrls: ['./manage-categories.component.css']
 })
 export class ManageCategoriesComponent implements OnInit {
+    @ViewChild('closebutton') closebutton;
     categoryName = 'Angular ' + VERSION.major;
     private categoryList: Category[];
     // private categoryList: Category[];
@@ -23,16 +24,17 @@ export class ManageCategoriesComponent implements OnInit {
     updateIsImageSaved: boolean;
     updateCardImageBase64: string = '';
 
-    addCategoryName : string;
-    updateCategoryName : string;
-    updateCategoryStatus : string;
-    updateCategoryId : string;
+    addCategoryName: string;
+    updateCategoryName: string;
+    updateCategoryStatus: string;
+    updateCategoryId: string;
 
-    customSearchText : string = '';
+    customSearchText: string = '';
     private options = {
         autoClose: false,
         keepAfterRouteChange: false
     };
+
     constructor(
         private categoryService: CategoryService,
         protected alertService: AlertService,
@@ -54,13 +56,12 @@ export class ManageCategoriesComponent implements OnInit {
         this.getAllCategoryList(pagno);
     }
 
-    ngOnInit(): void
-     {
+    ngOnInit(): void {
         this.getAllCategoryList(0);
     }
 
     private getAllCategoryList(pageno) {
-        this.categoryService.getAllCategory('',pageno).subscribe(
+        this.categoryService.getAllCategory('', pageno).subscribe(
             (data: Object[]) => {
                 this.categoryList = data['body'].content;
                 // console.log(this.categoryList);
@@ -72,9 +73,9 @@ export class ManageCategoriesComponent implements OnInit {
             });
     }
 
-    categoryCustomSearch(){
-        if (this.customSearchText !== ''){
-            this.categoryService.getAllCategory(this.customSearchText,0).subscribe(
+    categoryCustomSearch() {
+        if (this.customSearchText !== '') {
+            this.categoryService.getAllCategory(this.customSearchText, 0).subscribe(
                 (data: Object[]) => {
                     this.categoryList = data['body'].content;
                     // console.log(this.categoryList);
@@ -84,7 +85,7 @@ export class ManageCategoriesComponent implements OnInit {
                 error => {
                     this.alertService.warn('Something went wrong', this.options)
                 });
-        }else {
+        } else {
             this.getAllCategoryList(0);
         }
     }
@@ -193,66 +194,115 @@ export class ManageCategoriesComponent implements OnInit {
         }
     }
 
-    _createCategory(){
-        if (this.addCategoryName !== ''){
-            if (this.cardImageBase64 !== ''){
+    _createCategory() {
+        if (this.addCategoryName !== '') {
+            if (this.cardImageBase64 !== '') {
                 let category = {
                     name : this.addCategoryName,
                     thumbnail : this.cardImageBase64.split(',')[1]
                 }
 
-                this.categoryService.createCategory(category).subscribe((data)=>{
-                    if (data['success']){
+                this.categoryService.createCategory(category).subscribe((data) => {
+                    if (data['success']) {
                         // success alert
+                        this.removebackdrop();
                         this.getAllCategoryList(0);
                         this.alertService.success('Category added success', this.options);
-                    }else{
+                    } else {
                         // alert(data['message']); error message
+                        // this.removebackdrop();
                         this.alertService.warn('Something went wrong', this.options)
+
                     }
-                },error => {
+                }, error => {
                     // error message
+                    // this.removebackdrop();
                     this.alertService.warn('Something went wrong', this.options)
+
                 })
-            }else {
+            } else {
+                // this.removebackdrop();
                 this.notifierService.notify('error', 'Please select the image');
+
             }
-        }else{
+        } else {
+            // this.removebackdrop();
             this.notifierService.notify('error', 'Please enter category name');
+
         }
+        // this.removebackdrop();
+
     }
 
-    _updateCategory(){
-        if (this.updateCategoryName !== ''){
-            if (this.updateCardImageBase64 !== ''){
+    _updateCategory() {
+        if (this.updateCategoryName !== '') {
+            if (this.updateCardImageBase64 !== '') {
                 let category = {
                     id : this.updateCategoryId,
                     name : this.updateCategoryName,
                     thumbnail : this.updateCardImageBase64.split(',')[1]
                 }
+                let status = 0;
+                let catidd = this.updateCategoryId;
+                if (this.updateCategoryStatus == 'ACTIVE') {
+                    status = 1;
+                }
+                console.log(catidd)
+                console.log(status)
 
-                this.categoryService.updateCategory(category).subscribe((data)=>{
-                    if (data['success']){
+                this.categoryService.updateCategory(category).subscribe((data) => {
+                    if (data['success']) {
                         // success alert
+                        // this.removebackdrop();
                         this.getAllCategoryList(0);
                         this.alertService.success('Category Update sucess', this.options);
-                    }else{
+                    } else {
                         // alert(data['message']); error message
+                        // this.removebackdrop();
+                        this.alertService.warn('Something went wrong', this.options)
+
+                    }
+                }, error => {
+                    // error message
+                    // this.removebackdrop();
+                    this.alertService.warn('Something went wrong', this.options)
+
+                });
+                this.categoryService.updateCategorystatus(status, catidd).subscribe((data) => {
+                    if (data['success']) {
+                        this.removebackdrop();
+                        this.getAllCategoryList(0);
+                        this.alertService.success('Category Update sucess', this.options);
+                    } else {
+                        // alert(data['message']); error message
+                        // this.removebackdrop();
                         this.alertService.warn('Something went wrong', this.options)
                     }
-                },error => {
+                }, error => {
                     // error message
+                    // this.removebackdrop();
                     this.alertService.warn('Something went wrong', this.options)
-                })
-            }else {
+
+                });
+            } else {
+                // this.removebackdrop();
                 this.notifierService.notify('error', 'Please select the image');
+
             }
-        }else{
+        } else {
+            // this.removebackdrop();
             this.notifierService.notify('error', 'Please enter category name');
         }
+
     }
 
-    loadUpdateDetails(id,name,image,status){
+    removebackdrop() {
+        console.log('wwwwwwwwwwwwwww')
+        this.closebutton.nativeElement.click();
+        console.log('qqqqqqqqqqqqqqqqqq')
+    }
+
+    loadUpdateDetails(id, name, image, status) {
         this.updateCategoryId = id;
         this.updateCategoryName = name;
         this.updateCardImageBase64 = image;
