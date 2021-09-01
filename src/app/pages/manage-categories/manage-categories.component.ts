@@ -207,7 +207,7 @@ export class ManageCategoriesComponent implements OnInit {
                         // success alert
                         this.removebackdrop();
                         this.getAllCategoryList(0);
-                        this.alertService.success('Category added success', this.options);
+                        this.alertService.success('Category added successfully', this.options);
                     } else {
                         // alert(data['message']); error message
                         // this.removebackdrop();
