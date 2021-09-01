@@ -382,7 +382,8 @@ export class ManageProductsComponent implements OnInit {
             price : this.updateProductPrice,
             totalQty : this.updateTotalQty,
             currentQty : this.updateCurrentQty,
-            categories : categoryId
+            categories : categoryId,
+            status : this.updateProductStatus
         }
 
         this.productService.updateProduct(data).subscribe((data)=>{
