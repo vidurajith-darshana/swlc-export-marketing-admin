@@ -1,3 +1,63 @@
+
+<div id="ModalEditProducttes" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Edit Testimonial</h1>
+                <button type="button" class="close" #closebutton data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label">Customer Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="product Name"
+                                   [(ngModel)]="updateCustomerName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Image</label>
+                        <div>
+                            <input type="file" (change)="updateFileChangeEvent($event)"  class="form-control-file">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Youtube Url</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="product Name"
+                                   [(ngModel)]="updateYoutubeUrl">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Country</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="product Name"
+                                   [(ngModel)]="updateCountry">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Comment</label>
+                        <div>
+                                            <textarea  class="form-control input-lg" name="product Name"
+                                                       [(ngModel)]="updateComment"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="button-set">
+                            <button type="button" class="btn btn-primary">Update</button>
+                            <button (click)="_deleteTestimonials(this.updateTestimonialId)" type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row class-body" style="margin-left: 0;margin-right: 0;">
     <div class="col-12" style="margin-bottom: 10px">
         <alert></alert>
@@ -78,69 +138,10 @@
                     <td>
                         <button type="button" class="btn btn-secondary" data-toggle="modal"
                             (click)="loadUpdateDetails(testimonial.id,testimonial.customerName,testimonial.image,testimonial.youtubeUrl,testimonial.country,testimonial.comment)"
-                                [attr.data-target]="'#ModalEditProduct'+ testimonial.id" >Edit
+                                [attr.data-target]="'#ModalEditProducttes'" >Edit
                         </button>
                     </td>
                 </tr>
-                <div id="ModalEditProduct{{testimonial.id}}" class="modal fade">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title">Edit Testimonial</h1>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <label class="control-label">Customer Name</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="product Name"
-                                                   [(ngModel)]="updateCustomerName">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label">Image</label>
-                                        <div>
-                                            <input type="file" (change)="updateFileChangeEvent($event)"  class="form-control-file">
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Youtube Url</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="product Name"
-                                                   [(ngModel)]="updateYoutubeUrl">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Country</label>
-                                        <div>
-                                            <input type="text" class="form-control input-lg" name="product Name"
-                                                   [(ngModel)]="updateCountry">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Comment</label>
-                                        <div>
-                                            <textarea  class="form-control input-lg" name="product Name"
-                                                   [(ngModel)]="updateComment"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="button-set">
-                                            <button type="button" class="btn btn-primary">Update</button>
-                                            <button (click)="_deleteTestimonials(testimonial.id)" type="button" class="btn btn-danger">Delete</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 </tbody>
                 <div class="products-pagination">

@@ -1,245 +1,152 @@
-<div class="row class-body ">
-    <div class="col-6">
-        <form>
-            <div class="row">
-                <div class="col-md-12" style="text-align: center;padding-left: 0  ">
-                    <div class="form-group">
-                        <div class="input-group input-group-alternative mb-4">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                            </div>
-                            <input name="custom_search" [(ngModel)]="customSearchText"
-                                   (ngModelChange)="productCustomSearch()" class="form-control form-control-alternative"
-                                   placeholder="Search Product By Name" type="text">
-                        </div>
-                    </div>
-                </div>
+<div id="ModalEditProducttt" class="modal fade" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Edit Products</h1>
+                <button type="button" class="close" id="closebutton" #closebutton data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </form>
-    </div>
-    <div class="col-6 add-button">
-        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#ModalLoginForm">Add
-            New Product
-        </button>
-    </div>
-</div>
-<div class="row" style="margin: 2%;">
-    <div class="col-12 product-table" style="padding-left: 0;padding-right: 0;">
-        <div class="table-responsive">
-            <table class="table align-items-center table-flush">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Thumbnail</th>
-                    <th scope="col">Code</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Total Qty</th>
-                    <th scope="col">Currunt Qty</th>
-                    <th scope="col">Edit</th>
-                </tr>
-                </thead>
-                <tbody *ngFor="let products of productList">
-                <tr>
-                    <td>
-                        <div class="media-body">
-                            <span class="mb-0 text-sm">{{products.name}}</span>
-                        </div>
-                    </td>
-                    <td>
-            <span class="badge badge-dot mr-4">
-                <a href="#" class="avatar rounded-circle mr-3">
-                    <img alt="Image placeholder" src="{{products.thumbnail}}">
-                  </a>
-            </span>
-                    </td>
-                    <th>
-                        {{products.code}}
-                    </th>
-                    <td>
-                        {{products.price}}
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            {{products.status}}
-                            <div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Product Name</label>
+                                <div>
+                                    <input type="text" [(ngModel)]="updateProductName"
+                                           class="form-control input-lg" name="productName">
+                                </div>
                             </div>
                         </div>
-                    </td>
-                    <td>
-                        {{products.totalQty}}
-                    </td>
-                    <td>
-                        {{products.currentQty}}
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" (click)="_loadDetailsToUpdate(products.id,products.name,products.code,products.price,
-            products.thumbnail,products.totalQty,products.currentQty,products.status,products.categories)"
-                                [attr.data-target]="'#ModalEditProduct'+ products.id">Edit
-                        </button>
-                    </td>
-                    <!-- Modal HTML Markup  for edit products-->
-                    <div id="ModalEditProduct{{products.id}}" class="modal fade">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title">Edit Products</h1>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form role="form">
-                                        <div class="row">
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Product Name</label>
-                                                    <div>
-                                                        <input type="text" [(ngModel)]="updateProductName"
-                                                               class="form-control input-lg" name="productName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Price</label>
-                                                    <div>
-                                                        <input type="text" class="form-control input-lg" name="price"
-                                                               [(ngModel)]="updateProductPrice">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Thumbnail</label>
-                                                    <div>
-                                                        <input type="file" (change)="updateFileChangeEvent($event)"
-                                                               class="form-control-file">
-                                                    </div>
-                                                    {{updateImageError}}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Code</label>
-                                                    <div>
-                                                        <input type="text" class="form-control input-lg" name="code"
-                                                               [(ngModel)]="updateProductCode">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Total Qty</label>
-                                                    <div>
-                                                        <input type="text" class="form-control input-lg"
-                                                               name="total qty" [(ngModel)]="updateTotalQty">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Current Qty</label>
-                                                    <div>
-                                                        <input type="text" class="form-control input-lg"
-                                                               name="currunt qty" [(ngModel)]="updateCurrentQty">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Status</label>
-                                                    <div>
-                                                        <select class="browser-default custom-select"
-                                                                name="status-select" [(ngModel)]="updateProductStatus">
-                                                            <option selected>Open this select menu</option>
-                                                            <option value="ACTIVE">ACTIVE</option>
-                                                            <option value="INACTIVE">INACTIVE</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <label class="control-label">Select Category</label>
-                                                    <div>
-                                                        <select class="form-control"
-                                                                [(ngModel)]="selectedUpdateCategory" name="categories"
-                                                                id="select_category">
-                                                            <option *ngFor="let category of categoryList2"
-                                                                    [ngValue]="category">{{category.name}}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <button style="margin-top: 27px" (click)="_addToUpdateTable()"
-                                                        class="btn btn-primary" type="button">Add To
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                    <th>Category</th>
-                                                    <th>Action</th>
-                                                    </thead>
-                                                    <tbody *ngFor="let a of updateCategoryList">
-                                                    <tr>
-                                                        <td>{{a.name}}</td>
-                                                        <td>
-                                                            <button type="button" (click)="_removeUpdateCategory(a.id)"
-                                                                    class="btn btn-danger">Remove
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="button-set">
-                                                <button type="button" (click)="_updateProduct()"
-                                                        class="btn btn-primary">Update
-                                                </button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Price</label>
+                                <div>
+                                    <input type="text" class="form-control input-lg" name="price"
+                                           [(ngModel)]="updateProductPrice">
                                 </div>
                             </div>
                         </div>
                     </div>
-                </tr>
-                </tbody>
-            </table>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Thumbnail</label>
+                                <div>
+                                    <input type="file" (change)="updateFileChangeEvent($event)"
+                                           class="form-control-file">
+                                </div>
+                                {{updateImageError}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Code</label>
+                                <div>
+                                    <input type="text" class="form-control input-lg" name="code"
+                                           [(ngModel)]="updateProductCode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Total Qty</label>
+                                <div>
+                                    <input type="text" class="form-control input-lg"
+                                           name="total qty" [(ngModel)]="updateTotalQty">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Current Qty</label>
+                                <div>
+                                    <input type="text" class="form-control input-lg"
+                                           name="currunt qty" [(ngModel)]="updateCurrentQty">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Status</label>
+                                <div>
+                                    <select class="browser-default custom-select"
+                                            name="status-select" [(ngModel)]="updateProductStatus">
+                                        <option selected>Open this select menu</option>
+                                        <option value="ACTIVE">ACTIVE</option>
+                                        <option value="INACTIVE">INACTIVE</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="control-label">Select Category</label>
+                                <div>
+                                    <select class="form-control"
+                                            [(ngModel)]="selectedUpdateCategory" name="categories"
+                                            id="select_category">
+                                        <option *ngFor="let category of categoryList2"
+                                                [ngValue]="category">{{category.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button style="margin-top: 27px" (click)="_addToUpdateTable()"
+                                    class="btn btn-primary" type="button">Add To
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <th>Category</th>
+                                <th>Action</th>
+                                </thead>
+                                <tbody *ngFor="let a of updateCategoryList">
+                                <tr>
+                                    <td>{{a.name}}</td>
+                                    <td>
+                                        <button type="button" (click)="_removeUpdateCategory(a.id)"
+                                                class="btn btn-danger">Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="button-set">
+                            <button type="button" (click)="_updateProduct()"
+                                    class="btn btn-primary">Update
+                            </button>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="card-footer pb-0 pt-3">
-        <jw-pagination [items]="productList" (changePage)="onChangePage($event)"></jw-pagination>
-
-    </div>
 </div>
-
-
 <!-- Modal HTML Markup -->
-<div id="ModalLoginForm" class="modal fade">
+<div id="ModalAddProduct" class="modal fade" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Add Products</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" #closeAddProductbutton data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -348,7 +255,7 @@
 
                     <div class="form-group">
                         <div>
-                            <button type="button" (click)="checkValidation()" class="btn btn-success">
+                            <button type="button" (click)="checkValidation();" class="btn btn-success">
                                 Add Product
                             </button>
                         </div>
@@ -358,4 +265,97 @@
         </div>
     </div>
 </div>
+
+<div class="row class-body ">
+    <div class="col-6">
+        <form>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;padding-left: 0  ">
+                    <div class="form-group">
+                        <div class="input-group input-group-alternative mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            </div>
+                            <input name="custom_search" [(ngModel)]="customSearchText"
+                                   (ngModelChange)="productCustomSearch()" class="form-control form-control-alternative"
+                                   placeholder="Search Product By Name" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-6 add-button">
+        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#ModalAddProduct">Add
+            New Product
+        </button>
+    </div>
+</div>
+<div class="row" style="margin: 2%;">
+    <div class="col-12 product-table" style="padding-left: 0;padding-right: 0;">
+        <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Thumbnail</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Total Qty</th>
+                    <th scope="col">Currunt Qty</th>
+                    <th scope="col">Edit</th>
+                </tr>
+                </thead>
+                <tbody *ngFor="let products of productList">
+                <tr>
+                    <td>
+                        <div class="media-body">
+                            <span class="mb-0 text-sm">{{products.name}}</span>
+                        </div>
+                    </td>
+                    <td>
+            <span class="badge badge-dot mr-4">
+                <a href="#" class="avatar rounded-circle mr-3">
+                    <img alt="Image placeholder" src="{{products.thumbnail}}">
+                  </a>
+            </span>
+                    </td>
+                    <th>
+                        {{products.code}}
+                    </th>
+                    <td>
+                        {{products.price}}
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            {{products.status}}
+                            <div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        {{products.totalQty}}
+                    </td>
+                    <td>
+                        {{products.currentQty}}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" (click)="_loadDetailsToUpdate(products.id,products.name,products.code,products.price,
+            products.thumbnail,products.totalQty,products.currentQty,products.status,products.categories)"
+                                [attr.data-target]="'#ModalEditProducttt'">Edit
+                        </button>
+                    </td>
+                    <!-- Modal HTML Markup  for edit products-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer pb-0 pt-3">
+        <jw-pagination [items]="productList" (changePage)="onChangePage($event)"></jw-pagination>
+
+    </div>
+</div>
+
 

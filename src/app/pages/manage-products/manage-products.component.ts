@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../service/admin-web-services/product.service';
 import {Product} from '../model/product';
 import {CategoryService} from '../service/admin-web-services/category.service';
@@ -11,6 +11,8 @@ import {NotifierService} from 'angular-notifier';
     styleUrls: ['./manage-products.component.css']
 })
 export class ManageProductsComponent implements OnInit {
+    @ViewChild('closebutton') closebutton;
+    @ViewChild('closeAddProductbutton') closeAddProductbutton;
 
     imageError: string;
     isImageSaved: boolean;
@@ -48,6 +50,9 @@ export class ManageProductsComponent implements OnInit {
     updateCategoryList = new Array();
 
     customSearchText : string = '';
+
+    public visible = false
+    public visibleAnimate = false
 
     constructor(
         private productService : ProductService,
@@ -281,6 +286,8 @@ export class ManageProductsComponent implements OnInit {
                 this.notifierService.notify('success', 'Product add success');
                 this._clearText();
                 this._getAllProducts(0);
+                this.removebackdropAddProduct();
+
             }else{
                 this.notifierService.notify('error', 'Product add failed');
             }
@@ -320,6 +327,7 @@ export class ManageProductsComponent implements OnInit {
         }else{
             this.notifierService.notify('error', 'Please enter Product name');
         }
+      this.hideAddProduct()
     }
 
     _clearText(){
@@ -382,10 +390,15 @@ export class ManageProductsComponent implements OnInit {
                 this.notifierService.notify('success', 'Product update success');
                 this._clearText();
                 this._getAllProducts(0);
-            }else{
+                this.removebackdrop();
+                }else{
+                // this.removebackdrop();
+
                 this.notifierService.notify('error', 'Product update failed');
             }
         },error => {
+            // this.removebackdrop();
+
             this.notifierService.notify('error', 'Product update failed');
         });
 
@@ -421,5 +434,22 @@ export class ManageProductsComponent implements OnInit {
         }else{
             this.notifierService.notify('error', 'Please enter Product name');
         }
+    }
+    removebackdrop() {
+        this.closebutton.nativeElement.click();
+    }
+
+    hide() {
+        this.visibleAnimate = false
+        setTimeout(() => (this.visible = false), 300)
+    }
+
+    hideAddProduct() {
+        this.visibleAnimate = false
+        setTimeout(() => (this.visible = false), 300)
+    }
+
+    private removebackdropAddProduct() {
+        this.closeAddProductbutton.nativeElement.click();
     }
 }
