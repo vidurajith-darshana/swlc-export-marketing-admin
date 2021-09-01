@@ -22,7 +22,7 @@
             <table class="table align-items-center table-flush">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">OrderId</th>
+                    <th scope="col">Order REF</th>
                     <th scope="col">Message</th>
                     <th scope="col">User Name</th>
                     <th scope="col">Email</th>
@@ -35,7 +35,7 @@
                 <tbody>
                 <tr *ngFor="let order of orders">
                     <th scope="row">
-                        {{order['id']}}
+                        {{order['orderRef']}}
                     </th>
 
                     <td>

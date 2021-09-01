@@ -20,44 +20,44 @@ export class ManageProductsComponent implements OnInit {
     updateIsImageSaved: boolean;
     updateCardImageBase64: string;
 
-    addProductName : string = '';
-    addProductPrice : string = '';
-    addProductCode : string = '';
-    addTotalQty : number = 0;
-    addCurrentQty : number = 0;
+    addProductName: string = '';
+    addProductPrice: string = '';
+    addProductCode: string = '';
+    addTotalQty: number = 0;
+    addCurrentQty: number = 0;
 
-    updateProductId : number;
-    updateProductName : string = '';
-    updateProductPrice : string = '';
-    updateProductCode : string = '';
-    updateTotalQty : number = 0;
-    updateCurrentQty : number = 0;
-    updateProductStatus : number = 0;
+    updateProductId: number;
+    updateProductName: string = '';
+    updateProductPrice: string = '';
+    updateProductCode: string = '';
+    updateTotalQty: number = 0;
+    updateCurrentQty: number = 0;
+    updateProductStatus: number = 0;
 
 
+    productList: Product[];
+    categoryList: Category[];
+    categoryList2: Category[];
 
-    productList : Product[];
-    categoryList : Category[];
-    categoryList2 : Category[];
-
-    selectedCategory : Category;
-    selectedUpdateCategory : Category;
+    selectedCategory: Category;
+    selectedUpdateCategory: Category;
 
     selectCategoryList = new Array();
 
     updateCategoryList = new Array();
 
-    customSearchText : string = '';
+    customSearchText: string = '';
 
     constructor(
-        private productService : ProductService,
-        private categoryService : CategoryService,
+        private productService: ProductService,
+        private categoryService: CategoryService,
         private notifierService: NotifierService,
     ) {
 
     }
 
     pageOfItems: Array<any>;
+
     ngOnInit(): void {
         this._getAllProducts(0);
         this._getCategoryList();
@@ -173,152 +173,152 @@ export class ManageProductsComponent implements OnInit {
         }
     }
 
-    _getAllProducts(pageNo){
-        this.productService.getProductList('',pageNo).subscribe((data)=>{
-            if (data['success']){
+    _getAllProducts(pageNo) {
+        this.productService.getProductList('', pageNo).subscribe((data) => {
+            if (data['success']) {
                 this.productList = data['body'].content;
-            }else {
+            } else {
 
             }
-        },error => {
+        }, error => {
 
-        })
+        });
     }
 
-    productCustomSearch(){
-        if (this.customSearchText !== ''){
-            this.productService.getProductList(this.customSearchText,0).subscribe((data)=>{
-                if (data['success']){
+    productCustomSearch() {
+        if (this.customSearchText !== '') {
+            this.productService.getProductList(this.customSearchText, 0).subscribe((data) => {
+                if (data['success']) {
                     this.productList = data['body'].content;
-                }else {
+                } else {
 
                 }
-            },error => {
+            }, error => {
 
-            })
-        }else {
+            });
+        } else {
             this._getAllProducts(0);
         }
     }
 
-    _getCategoryList(){
-        this.categoryService.getAllCategory('',0).subscribe((data)=>{
-            if (data['success']){
+    _getCategoryList() {
+        this.categoryService.getAllCategory('', 0).subscribe((data) => {
+            if (data['success']) {
                 this.categoryList = data['body'].content;
                 this.categoryList2 = data['body'].content;
-            }else{
+            } else {
                 this.notifierService.notify('error', data['message']);
             }
-        },error => {
+        }, error => {
             this.notifierService.notify('error', 'Category not found');
-        })
+        });
     }
 
-    _addToTable(){
+    _addToTable() {
         console.log(this.selectedCategory.name);
 
         let data = {
-            id : this.selectedCategory.id,
-            name : this.selectedCategory.name
-        }
+            id: this.selectedCategory.id,
+            name: this.selectedCategory.name
+        };
 
         this.selectCategoryList.push(data);
     }
 
-    _addToUpdateTable(){
+    _addToUpdateTable() {
 
         let data = {
-            id : this.selectedUpdateCategory.id,
-            name : this.selectedUpdateCategory.name
-        }
+            id: this.selectedUpdateCategory.id,
+            name: this.selectedUpdateCategory.name
+        };
 
         this.updateCategoryList.push(data);
     }
 
-    _removeCategory(id){
+    _removeCategory(id) {
         let item = this.selectCategoryList.find(name => name.id === id);
-        if (item !== null){
-            this.selectCategoryList.splice(this.productList.indexOf(item),1);
+        if (item !== null) {
+            this.selectCategoryList.splice(this.productList.indexOf(item), 1);
         }
     }
 
-    _removeUpdateCategory(id){
+    _removeUpdateCategory(id) {
         let item = this.updateCategoryList.find(name => name.id === id);
-        if (item !== null){
-            this.updateCategoryList.splice(this.productList.indexOf(item),1);
+        if (item !== null) {
+            this.updateCategoryList.splice(this.productList.indexOf(item), 1);
         }
     }
 
-    _addProduct(){
+    _addProduct() {
 
         let categoryId = new Array();
 
-        for (let i in this.selectCategoryList){
+        for (let i in this.selectCategoryList) {
 
             let object = {
-                id : this.selectCategoryList[i].id
-            }
+                id: this.selectCategoryList[i].id
+            };
 
             categoryId.push(object);
         }
 
         let data = {
-            code : this.addProductCode,
-            name : this.addProductName,
-            thumbnail : this.cardImageBase64,
-            price : this.addProductPrice,
-            totalQty : this.addTotalQty,
-            currentQty : this.addCurrentQty,
-            categories : categoryId
-        }
+            code: this.addProductCode,
+            name: this.addProductName,
+            thumbnail: this.cardImageBase64,
+            price: this.addProductPrice,
+            totalQty: this.addTotalQty,
+            currentQty: this.addCurrentQty,
+            categories: categoryId
+        };
 
-        this.productService.createProduct(data).subscribe((data)=>{
-            if (data['success']){
+        this.productService.createProduct(data).subscribe((data) => {
+            if (data['success']) {
                 this.notifierService.notify('success', 'Product add success');
                 this._clearText();
                 this._getAllProducts(0);
-            }else{
+            } else {
                 this.notifierService.notify('error', 'Product add failed');
             }
-        },error => {
+        }, error => {
             this.notifierService.notify('error', 'Product add failed');
         });
 
     }
 
-    checkValidation(){
-        if (this.addProductName !== ''){
-            if (this.addProductCode !== ''){
-                if (this.addProductPrice !== ''){
-                    if (this.addTotalQty !== 0){
-                        if (this.addCurrentQty !== 0){
-                            if (this.selectCategoryList.length > 0){
-                                if (this.cardImageBase64 !== ''){
+    checkValidation() {
+        if (this.addProductName !== '') {
+            if (this.addProductCode !== '') {
+                if (this.addProductPrice !== '') {
+                    if (this.addTotalQty !== 0) {
+                        if (this.addCurrentQty !== 0) {
+                            if (this.selectCategoryList.length > 0) {
+                                if (this.cardImageBase64 !== '') {
                                     this._addProduct();
-                                }else {
+                                } else {
                                     this.notifierService.notify('error', 'Please select the image');
                                 }
-                            }else {
+                            } else {
                                 this.notifierService.notify('error', 'Please select the category');
                             }
-                        }else{
+                        } else {
                             this.notifierService.notify('error', 'Please enter Product current quantity');
                         }
-                    }else {
+                    } else {
                         this.notifierService.notify('error', 'Please enter Product total quantity');
                     }
-                }else {
+                } else {
                     this.notifierService.notify('error', 'Please enter Product price');
                 }
-            }else {
+            } else {
                 this.notifierService.notify('error', 'Please enter Product code');
             }
-        }else{
+        } else {
             this.notifierService.notify('error', 'Please enter Product name');
         }
     }
 
-    _clearText(){
+    _clearText() {
         this.addProductName = '';
         this.addProductCode = '';
         this.addProductPrice = '';
@@ -329,7 +329,7 @@ export class ManageProductsComponent implements OnInit {
         this._getCategoryList();
     }
 
-    _loadDetailsToUpdate(id,name,code,price,image,totalQty,currentQty,status,categoryList){
+    _loadDetailsToUpdate(id, name, code, price, image, totalQty, currentQty, status, categoryList) {
         this.updateProductId = id;
         this.updateProductName = name;
         this.updateProductCode = code;
@@ -339,49 +339,51 @@ export class ManageProductsComponent implements OnInit {
         this.updateCurrentQty = currentQty;
         this.updateProductStatus = status;
 
-        for (let i in categoryList){
+        this.updateCategoryList = [];
+
+        for (let i in categoryList) {
             let object = {
-                id : categoryList[i].id,
-                name : categoryList[i].name
+                id: categoryList[i].id,
+                name: categoryList[i].name
             };
 
             this.updateCategoryList.push(object);
         }
     }
 
-    _updateProduct(){
+    _updateProduct() {
 
         let categoryId = new Array();
 
-        for (let i in this.updateCategoryList){
+        for (let i in this.updateCategoryList) {
 
             let object = {
-                id : this.updateCategoryList[i].id
-            }
+                id: this.updateCategoryList[i].id
+            };
 
             categoryId.push(object);
         }
 
         let data = {
-            id : this.updateProductId,
-            code : this.addProductCode,
-            name : this.addProductName,
-            thumbnail : this.cardImageBase64,
-            price : this.addProductPrice,
-            totalQty : this.addTotalQty,
-            currentQty : this.addCurrentQty,
-            categories : categoryId
-        }
+            id: this.updateProductId,
+            code: this.addProductCode,
+            name: this.addProductName,
+            thumbnail: this.cardImageBase64,
+            price: this.addProductPrice,
+            totalQty: this.addTotalQty,
+            currentQty: this.addCurrentQty,
+            categories: categoryId
+        };
 
-        this.productService.updateProduct(data).subscribe((data)=>{
-            if (data['success']){
+        this.productService.updateProduct(data).subscribe((data) => {
+            if (data['success']) {
                 this.notifierService.notify('success', 'Product update success');
                 this._clearText();
                 this._getAllProducts(0);
-            }else{
+            } else {
                 this.notifierService.notify('error', 'Product update failed');
             }
-        },error => {
+        }, error => {
             this.notifierService.notify('error', 'Product update failed');
         });
 

@@ -75,6 +75,7 @@ export class ManageOrdersComponent implements OnInit,AfterViewInit {
                 res => {
                     this.model.close();
                     if (res['success']) {
+                        this.getAllOrders();
                         this.notifierService.notify('success', 'Order status has been successfully updated!');
                     } else {
                         this.notifierService.notify('error', 'Sorry, Failed to update order status!');
