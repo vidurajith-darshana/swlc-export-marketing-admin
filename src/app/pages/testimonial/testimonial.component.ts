@@ -282,6 +282,26 @@ export class TestimonialComponent implements OnInit {
         })
     }
 
+    updateTextFields(){
+        if (this.updateCustomerName !== ''){
+            if (this.updateComment !== ''){
+                if (this.updateYoutubeUrl !== ''){
+                    if (this.updateCountry !== ''){
+                        this._updateTestimonials();
+                    }else {
+                        this.alertService.warn('Country is required!', this.options);
+                    }
+                }else {
+                    this.alertService.warn('Youtube url is required!', this.options);
+                }
+            }else {
+                this.alertService.warn('Comment is required!', this.options);
+            }
+        }else {
+            this.alertService.warn('Customer name is required!', this.options);
+        }
+    }
+
     _clearText(){
         this.cardImageBase64 = '';
         this.addYoutubeUrl= '';
@@ -293,11 +313,11 @@ export class TestimonialComponent implements OnInit {
     _updateTestimonials(){
         let testimonials = {
             id : this.updateTestimonialId,
-            image : this.cardImageBase64,
-            youtubeUrl : this.addYoutubeUrl,
-            customerName : this.addCustomerName,
-            country : this.addCountry,
-            comment : this.addComment,
+            image : this.updateCardImageBase64,
+            youtubeUrl : this.updateYoutubeUrl,
+            customerName : this.updateCustomerName,
+            country : this.updateCountry,
+            comment : this.updateComment,
         }
 
         this.testimonialService.createTestimonials(testimonials).subscribe((data)=>{
@@ -307,6 +327,7 @@ export class TestimonialComponent implements OnInit {
 
                 this._clearText();
                 this._getAllTestimonials();
+                this.removebackdrop();
             }else {
                 this.alertService.warn('Something went wrong', this.options)
                 // error msg

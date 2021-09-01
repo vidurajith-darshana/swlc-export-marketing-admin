@@ -11,6 +11,7 @@ import {AlertService} from '../_alert';
 })
 export class PromotionsComponent implements OnInit {
   @ViewChild('closebutton') closebutton;
+  @ViewChild('closebutton1') closebutton1;
 
   promotionList : Promotion[];
 
@@ -161,7 +162,9 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.createPromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
-        this.removebackdrop();
+        this._getPromotionList(0);
+        this.removeAddBackDrop();
+        this.clearPromotionAddText();
         this.alertService.success('Promotion added', this.options);
       }else {
         // error msg
@@ -249,6 +252,10 @@ export class PromotionsComponent implements OnInit {
     this.closebutton.nativeElement.click();
   }
 
+  removeAddBackDrop(){
+    this.closebutton1.native.click();
+  }
+
   _promotionCustomSearch(){
     if (this.customSearchText !== '' || this.customSearchText !== undefined){
       this.promotionService.getAllPromotions(this.customSearchText,0).subscribe((data)=>{
@@ -267,6 +274,12 @@ export class PromotionsComponent implements OnInit {
     }else {
       this._getPromotionList(0);
     }
+  }
+
+  clearPromotionAddText(){
+    this.addPromotionDescription = '';
+    this.addPromotionHeading = '';
+    this.cardImageBase64 = '';
   }
 
 }

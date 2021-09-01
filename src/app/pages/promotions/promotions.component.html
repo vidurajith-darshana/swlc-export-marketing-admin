@@ -50,8 +50,8 @@
                                                 <span class="input-group-text"><i
                                                         class="ni ni-calendar-grid-58"></i></span>
                             </div>
-                            <input class="form-control datepicker" placeholder="Created Date" disabled="disabled"
-                                   value="{{updatePromotioncdate}}" name="dp" ngbDatepicker
+                            <input hidden class="form-control datepicker" placeholder="Created Date" disabled="disabled"
+                                   [(ngModel)]="updatePromotioncdate" name="dp" ngbDatepicker
                                    #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Add promotion</h1>
-                <button type="button" class="close" #closebutton data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" #closebutton1 data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
