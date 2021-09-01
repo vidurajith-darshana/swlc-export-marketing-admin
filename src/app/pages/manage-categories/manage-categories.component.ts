@@ -268,6 +268,7 @@ export class ManageCategoriesComponent implements OnInit {
                     this.alertService.warn('Something went wrong', this.options)
 
                 });
+
                 this.categoryService.updateCategorystatus(status, catidd).subscribe((data) => {
                     if (data['success']) {
                         this.removebackdrop();

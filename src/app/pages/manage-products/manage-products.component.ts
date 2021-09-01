@@ -274,7 +274,7 @@ export class ManageProductsComponent implements OnInit {
         let data = {
             code: this.addProductCode,
             name: this.addProductName,
-            thumbnail: this.cardImageBase64,
+            thumbnail: this.cardImageBase64.split(',')[1],
             price: this.addProductPrice,
             totalQty: this.addTotalQty,
             currentQty: this.addCurrentQty,
@@ -380,7 +380,7 @@ export class ManageProductsComponent implements OnInit {
             id : this.updateProductId,
             code : this.updateProductCode,
             name : this.updateProductName,
-            thumbnail : this.updateCardImageBase64,
+            thumbnail : this.updateCardImageBase64.split(',')[1],
             price : this.updateProductPrice,
             totalQty : this.updateTotalQty,
             currentQty : this.updateCurrentQty,

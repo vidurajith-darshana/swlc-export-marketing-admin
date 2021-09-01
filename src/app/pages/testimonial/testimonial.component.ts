@@ -239,7 +239,7 @@ export class TestimonialComponent implements OnInit {
 
     _createTestimonials(){
         let testimonials = {
-            image : this.cardImageBase64,
+            image : this.cardImageBase64.split(',')[1],
             youtubeUrl : this.addYoutubeUrl,
             customerName : this.addCustomerName,
             country : this.addCountry,
@@ -290,7 +290,7 @@ export class TestimonialComponent implements OnInit {
     _updateTestimonials(){
         let testimonials = {
             id : this.updateTestimonialId,
-            image : this.cardImageBase64,
+            image : this.cardImageBase64.split(',')[1],
             youtubeUrl : this.addYoutubeUrl,
             customerName : this.addCustomerName,
             country : this.addCountry,
