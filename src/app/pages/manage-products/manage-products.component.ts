@@ -50,6 +50,9 @@ export class ManageProductsComponent implements OnInit {
 
     customSearchText : string = '';
 
+    public visible = false
+    public visibleAnimate = false
+
     constructor(
         private productService : ProductService,
         private categoryService : CategoryService,
@@ -432,5 +435,10 @@ export class ManageProductsComponent implements OnInit {
     }
     removebackdrop() {
         this.closebutton.nativeElement.click();
+    }
+
+    hide() {
+        this.visibleAnimate = false
+        setTimeout(() => (this.visible = false), 300)
     }
 }

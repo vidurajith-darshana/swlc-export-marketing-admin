@@ -1,9 +1,10 @@
-<div id="ModalEditProducttt" class="modal fade">
+<div id="ModalEditProducttt" class="modal fade" [ngClass]="{'show': visibleAnimate}"
+     [ngStyle]="{'display': visible ? 'block' : 'none'}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Edit Products</h1>
-                <button type="button" class="close" id="closebutton" #closebutton data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" id="closebutton" #closebutton data-dismiss="modal" (click)="hide()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
