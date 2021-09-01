@@ -1,10 +1,9 @@
-<div id="ModalEditProducttt" class="modal fade" [ngClass]="{'show': visibleAnimate}"
-     [ngStyle]="{'display': visible ? 'block' : 'none'}">
+<div id="ModalEditProducttt" class="modal fade" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Edit Products</h1>
-                <button type="button" class="close" id="closebutton" #closebutton data-dismiss="modal" (click)="hide()" aria-label="Close">
+                <button type="button" class="close" id="closebutton" #closebutton data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -142,12 +141,12 @@
     </div>
 </div>
 <!-- Modal HTML Markup -->
-<div id="ModalLoginForm" class="modal fade">
+<div id="ModalAddProduct" class="modal fade" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Add Products</h1>
-                <button type="button" class="close" #closebutton data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" #closeApbutton data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -256,7 +255,7 @@
 
                     <div class="form-group">
                         <div>
-                            <button type="button" (click)="checkValidation()" class="btn btn-success">
+                            <button type="button" (click)="checkValidation();" class="btn btn-success">
                                 Add Product
                             </button>
                         </div>
@@ -287,7 +286,7 @@
         </form>
     </div>
     <div class="col-6 add-button">
-        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#ModalLoginForm">Add
+        <button type="button" class="btn btn-primary align-button" data-toggle="modal" data-target="#ModalAddProduct">Add
             New Product
         </button>
     </div>

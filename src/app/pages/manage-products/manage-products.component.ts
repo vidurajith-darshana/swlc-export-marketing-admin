@@ -12,6 +12,7 @@ import {NotifierService} from 'angular-notifier';
 })
 export class ManageProductsComponent implements OnInit {
     @ViewChild('closebutton') closebutton;
+    @ViewChild('closeApbutton') closeApbutton;
 
     imageError: string;
     isImageSaved: boolean;
@@ -283,9 +284,9 @@ export class ManageProductsComponent implements OnInit {
         this.productService.createProduct(data).subscribe((data)=>{
             if (data['success']){
                 this.notifierService.notify('success', 'Product add success');
-                this.removebackdrop();
                 this._clearText();
                 this._getAllProducts(0);
+                this.removebackdropAp();
 
             }else{
                 this.notifierService.notify('error', 'Product add failed');
@@ -326,6 +327,7 @@ export class ManageProductsComponent implements OnInit {
         }else{
             this.notifierService.notify('error', 'Please enter Product name');
         }
+      this.hideAddProduct()
     }
 
     _clearText(){
@@ -440,5 +442,14 @@ export class ManageProductsComponent implements OnInit {
     hide() {
         this.visibleAnimate = false
         setTimeout(() => (this.visible = false), 300)
+    }
+
+    hideAddProduct() {
+        this.visibleAnimate = false
+        setTimeout(() => (this.visible = false), 300)
+    }
+
+    private removebackdropAp() {
+        this.closeApbutton.nativeElement.click();
     }
 }
