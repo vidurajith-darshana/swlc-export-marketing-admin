@@ -1,4 +1,4 @@
-import {Component, OnInit, VERSION} from '@angular/core';
+import {Component, OnInit, VERSION, ViewChild} from '@angular/core';
 import {Category} from "../model/category";
 import {CategoryService} from "../service/admin-web-services/category.service";
 import {TestimonialService} from '../service/admin-web-services/testimonial.service';
@@ -12,6 +12,7 @@ import {NotifierService} from 'angular-notifier';
     styleUrls: ['./testimonial.component.css']
 })
 export class TestimonialComponent implements OnInit {
+    @ViewChild('closebutton') closebutton;
     // categoryName = 'Angular ' + VERSION.major;
     // private categoryList: Category[];
     // private categoryList: Category[];
@@ -267,6 +268,8 @@ export class TestimonialComponent implements OnInit {
         this.testimonialService.deleteTestimonials(testimonialId).subscribe((data)=>{
             if (data['success']){
                 //success message
+                this.removebackdrop();
+
                 this.alertService.success('testimonials deleted', this.options);
                 this._getAllTestimonials();
             }else {
@@ -321,5 +324,8 @@ export class TestimonialComponent implements OnInit {
         this.updateYoutubeUrl = url;
         this.updateCountry = country;
         this.updateComment = comment;
+    }
+    removebackdrop() {
+        this.closebutton.nativeElement.click();
     }
 }
