@@ -27,7 +27,7 @@ export class RegistrationDEOComponent implements OnInit {
         keepAfterRouteChange: false
     };
 
-
+    clicked: any
     config: any;
     items = [];
 
@@ -152,7 +152,10 @@ export class RegistrationDEOComponent implements OnInit {
                 this.alertService.warn('Something went wrong', this.options)
             });
     }
-
+    // validateEmail(email) {
+    //     const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //     return regularExpression.test(String(email).toLowerCase());
+    // }
     _createOperator() {
         let operator = {
             firstName: this.firstName,
@@ -161,27 +164,28 @@ export class RegistrationDEOComponent implements OnInit {
             password: this.password,
             role: "ROLE_OPERATOR"
         }
+        // if (this.validateEmail(this.email)) {
+            this.operatorService.createOperator(operator).subscribe((data) => {
+                if (data['success']) {
+                    // success msg
+                    this.removebackdrop();
+                    this.alertService.success('DEO Added', this.options);
 
-        this.operatorService.createOperator(operator).subscribe((data) => {
-            if (data['success']) {
-                // success msg
-                this.removebackdrop();
-                this.alertService.success('DEO Added', this.options);
+                    this._clearText();
+                    this.getAllCategoryList(0);
 
-                this._clearText();
-                this.getAllCategoryList(0);
+                } else {
+                    // error msg
+                    this.alertService.warn('Something went wrong', this.options)
 
-            } else {
-                // error msg
+                    alert(data['message'])
+                }
+            }, error => {
                 this.alertService.warn('Something went wrong', this.options)
 
-                alert(data['message'])
-            }
-        }, error => {
-            this.alertService.warn('Something went wrong', this.options)
-
-            // error msg
-        })
+                // error msg
+            })
+        // }
     }
 
     _clearText() {
