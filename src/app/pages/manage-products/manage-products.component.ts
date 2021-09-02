@@ -11,6 +11,7 @@ import {NotifierService} from 'angular-notifier';
     styleUrls: ['./manage-products.component.css']
 })
 export class ManageProductsComponent implements OnInit {
+
     @ViewChild('closebutton') closebutton;
     @ViewChild('closeAddProductbutton') closeAddProductbutton;
 
@@ -22,19 +23,19 @@ export class ManageProductsComponent implements OnInit {
     updateIsImageSaved: boolean;
     updateCardImageBase64: string;
 
-    addProductName : string ;
-    addProductPrice : string ;
-    addProductCode : string ;
-    addTotalQty : number = 0;
-    addCurrentQty : number = 0;
+    addProductName: string;
+    addProductPrice: string;
+    addProductCode: string;
+    addTotalQty: number = 0;
+    addCurrentQty: number = 0;
 
-    updateProductId : number;
-    updateProductName : string;
-    updateProductPrice : string;
-    updateProductCode : string;
-    updateTotalQty : number ;
-    updateCurrentQty : number;
-    updateProductStatus : number;
+    updateProductId: number;
+    updateProductName: string;
+    updateProductPrice: string;
+    updateProductCode: string;
+    updateTotalQty: number;
+    updateCurrentQty: number;
+    updateProductStatus: number;
 
 
     productList: Product[];
@@ -64,13 +65,16 @@ export class ManageProductsComponent implements OnInit {
             totalItems: 0
         };
     }
+
     config: any;
     items = [];
+
     pageChanged(event) {
         this.config.currentPage = event;
         const pagno = this.config.currentPage - 1;
         this._getAllProducts(pagno);
     }
+
     pageOfItems: Array<any>;
 
     ngOnInit(): void {
@@ -194,7 +198,7 @@ export class ManageProductsComponent implements OnInit {
                 this.productList = data['body'].content;
                 this.config.itemsPerPage = data['body'].size;
                 this.config.totalItems = data['body'].totalElements;
-            }else {
+            } else {
 
             }
         }, error => {
@@ -231,7 +235,7 @@ export class ManageProductsComponent implements OnInit {
         });
     }
 
-    _addToTable(){
+    _addToTable() {
 
         let data = {
             id: this.selectedCategory.id,
@@ -244,14 +248,14 @@ export class ManageProductsComponent implements OnInit {
     _addToUpdateTable() {
 
         let item = this.updateCategoryList.find(name => name.id === this.selectedUpdateCategory.id);
-        if (item === null){
+        if (item === null) {
             let data = {
-                id : this.selectedUpdateCategory.id,
-                name : this.selectedUpdateCategory.name
+                id: this.selectedUpdateCategory.id,
+                name: this.selectedUpdateCategory.name
             }
 
             this.updateCategoryList.push(data);
-        }else{
+        } else {
             this.notifierService.notify('error', 'Category is already exist!');
         }
     }
@@ -300,7 +304,7 @@ export class ManageProductsComponent implements OnInit {
                 this._getAllProducts(0);
                 this.removebackdropAddProduct();
 
-            }else{
+            } else {
                 this.notifierService.notify('error', 'Product add failed');
             }
         }, error => {
@@ -309,14 +313,14 @@ export class ManageProductsComponent implements OnInit {
 
     }
 
-    checkValidation(){
-        if (this.addProductName !== undefined){
-            if (this.addProductCode !== undefined){
-                if (this.addProductPrice !== undefined){
-                    if (this.addTotalQty !== undefined){
-                        if (this.addCurrentQty !== 0){
-                            if (this.selectCategoryList.length > 0){
-                                if (this.cardImageBase64 !== undefined){
+    checkValidation() {
+        if (this.addProductName !== undefined) {
+            if (this.addProductCode !== undefined) {
+                if (this.addProductPrice !== undefined) {
+                    if (this.addTotalQty !== undefined) {
+                        if (this.addCurrentQty !== 0) {
+                            if (this.selectCategoryList.length > 0) {
+                                if (this.cardImageBase64 !== undefined) {
                                     this._addProduct();
                                 } else {
                                     this.notifierService.notify('error', 'Please select the image');
@@ -339,7 +343,7 @@ export class ManageProductsComponent implements OnInit {
         } else {
             this.notifierService.notify('error', 'Please enter Product name');
         }
-      this.hideAddProduct()
+        this.hideAddProduct()
     }
 
     _clearText() {
@@ -389,15 +393,15 @@ export class ManageProductsComponent implements OnInit {
         }
 
         let data = {
-            id : this.updateProductId,
-            code : this.updateProductCode,
-            name : this.updateProductName,
-            thumbnail : this.updateCardImageBase64.split(',')[1],
-            price : this.updateProductPrice,
-            totalQty : this.updateTotalQty,
-            currentQty : this.updateCurrentQty,
-            categories : categoryId,
-            status : this.updateProductStatus
+            id: this.updateProductId,
+            code: this.updateProductCode,
+            name: this.updateProductName,
+            thumbnail: this.updateCardImageBase64.split(',')[1],
+            price: this.updateProductPrice,
+            totalQty: this.updateTotalQty,
+            currentQty: this.updateCurrentQty,
+            categories: categoryId,
+            status: this.updateProductStatus
         }
 
         this.productService.updateProduct(data).subscribe((data) => {
@@ -406,12 +410,12 @@ export class ManageProductsComponent implements OnInit {
                 this._clearText();
                 this._getAllProducts(0);
                 this.removebackdrop();
-                }else{
+            } else {
                 // this.removebackdrop();
 
                 this.notifierService.notify('error', 'Product update failed');
             }
-        },error => {
+        }, error => {
             // this.removebackdrop();
 
             this.notifierService.notify('error', 'Product update failed');
@@ -419,37 +423,39 @@ export class ManageProductsComponent implements OnInit {
 
     }
 
-    checkUpdateValidation(){
-        if (this.updateProductName !== undefined){
-            if (this.updateProductCode !== undefined){
-                if (this.updateProductPrice !== undefined){
-                    if (this.updateTotalQty !== undefined){
-                        if (this.updateCurrentQty !== undefined){
-                            if (this.updateCategoryList.length > 0){
-                                if (this.updateCardImageBase64 !== undefined){
+    checkUpdateValidation() {
+        if (this.updateProductName !== undefined) {
+            if (this.updateProductCode !== undefined) {
+                if (this.updateProductPrice !== undefined) {
+                    if (this.updateTotalQty !== undefined) {
+                        if (this.updateCurrentQty !== undefined) {
+                            if (this.updateCategoryList.length > 0) {
+                                if (this.updateCardImageBase64 !== undefined) {
                                     this._updateProduct();
-                                }else {
+                                } else {
                                     this.notifierService.notify('error', 'Please select the image');
                                 }
-                            }else {
+                            } else {
                                 this.notifierService.notify('error', 'Please select the category');
                             }
-                        }else{
+                        } else {
                             this.notifierService.notify('error', 'Please enter Product current quantity');
                         }
-                    }else {
+                    } else {
                         this.notifierService.notify('error', 'Please enter Product total quantity');
                     }
-                }else {
+                } else {
                     this.notifierService.notify('error', 'Please enter Product price');
                 }
-            }else {
+            } else {
                 this.notifierService.notify('error', 'Please enter Product code');
             }
-        }else{
+        } else {
             this.notifierService.notify('error', 'Please enter Product name');
         }
     }
+
+
     removebackdrop() {
         this.closebutton.nativeElement.click();
     }
