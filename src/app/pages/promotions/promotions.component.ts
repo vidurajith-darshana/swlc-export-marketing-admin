@@ -11,8 +11,11 @@ import {AlertService} from '../_alert';
 })
 export class PromotionsComponent implements OnInit {
   @ViewChild('closebutton') closebutton;
+  @ViewChild('closebutton1') closebutton1;
 
   promotionList : Promotion[];
+
+  customSearchText : string;
 
   imageError: string;
   isImageSaved: boolean;
@@ -31,96 +34,7 @@ export class PromotionsComponent implements OnInit {
   updatePromotionHeading: string;
   updatePromotionStatus : string;
 
-  promotions = [
-    {
-      id: 1,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's not a really good product",
-      heading: "Heading",
-      created_date: '2021-07-26'
-    },
-    {
-      id: 2,
-      status: 'INACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-29'
-    },
-    {
-      id: 3,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-20'
-    },
-    {
-      id: 4,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-28'
-    },
-    {
-      id: 5,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-28'
-    },
-    {
-      id: 6,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-28'
-    },
-    {
-      id: 7,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-28'
-    },
-    {
-      id: 8,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-28'
-    },
-    {
-      id: 9,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-28'
-    },
-    {
-      id: 10,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-28'
-    },
-    {
-      id: 11,
-      status: 'ACTIVE',
-      image: "https://thumbs.nosto.com/quick/magento-f5b2bba1/8/1383/e7789469178cc18cf93ad058141fbce6adcdd7a6093ea9f12fda5c52c990b9b2a/A",
-      description: "Hi it's a really good product",
-      heading: "Heading",
-      created_date: '2021-07-28'
-    },
-  ]
+
   private options = {
     autoClose: false,
     keepAfterRouteChange: false
@@ -248,7 +162,9 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.createPromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
-        this.removebackdrop();
+        this._getPromotionList(0);
+        this.removeAddBackDrop();
+        this.clearPromotionAddText();
         this.alertService.success('Promotion added', this.options);
       }else {
         // error msg
@@ -263,7 +179,7 @@ export class PromotionsComponent implements OnInit {
   }
 
   _getPromotionList(pageNo){
-    this.promotionService.getAllPromotions(pageNo).subscribe((data)=>{
+    this.promotionService.getAllPromotions('',pageNo).subscribe((data)=>{
       if (data['success']){
         this.promotionList = data['body'].content;
       }else{
@@ -319,7 +235,6 @@ export class PromotionsComponent implements OnInit {
   }
 
   _deletePromotion(id){
-    console.log(id)
     this.promotionService.deletePromotions(id).subscribe((data)=>{
       if (data['success']){
         this.removebackdrop();
@@ -336,4 +251,35 @@ export class PromotionsComponent implements OnInit {
   removebackdrop() {
     this.closebutton.nativeElement.click();
   }
+
+  removeAddBackDrop(){
+    this.closebutton1.native.click();
+  }
+
+  _promotionCustomSearch(){
+    if (this.customSearchText !== '' || this.customSearchText !== undefined){
+      this.promotionService.getAllPromotions(this.customSearchText,0).subscribe((data)=>{
+        if (data['success']){
+          this.promotionList = data['body'].content;
+        }else{
+          // error
+          this.alertService.warn('Something went wrong', this.options)
+
+        }
+      },error => {
+        this.alertService.warn('Something went wrong', this.options)
+
+        // error msg
+      })
+    }else {
+      this._getPromotionList(0);
+    }
+  }
+
+  clearPromotionAddText(){
+    this.addPromotionDescription = '';
+    this.addPromotionHeading = '';
+    this.cardImageBase64 = '';
+  }
+
 }

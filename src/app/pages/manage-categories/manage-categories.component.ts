@@ -207,11 +207,11 @@ export class ManageCategoriesComponent implements OnInit {
                         // success alert
                         this.removebackdrop();
                         this.getAllCategoryList(0);
-                        this.alertService.success('Category added success', this.options);
+                        this.alertService.success('Category added successfully', this.options);
                     } else {
                         // alert(data['message']); error message
                         // this.removebackdrop();
-                        this.alertService.warn('Something went wrong', this.options)
+                        this.alertService.warn(data['message'], this.options)
 
                     }
                 }, error => {
@@ -242,42 +242,18 @@ export class ManageCategoriesComponent implements OnInit {
                     name : this.updateCategoryName,
                     thumbnail : this.updateCardImageBase64.split(',')[1]
                 }
-                let status = 0;
-                let catidd = this.updateCategoryId;
-                if (this.updateCategoryStatus == 'ACTIVE') {
-                    status = 1;
-                }
-                console.log(catidd)
-                console.log(status)
 
                 this.categoryService.updateCategory(category).subscribe((data) => {
                     if (data['success']) {
                         // success alert
                         // this.removebackdrop();
                         this.getAllCategoryList(0);
-                        this.alertService.success('Category Update sucess', this.options);
+                        this.alertService.success('Category Update successfully', this.options);
                     } else {
                         // alert(data['message']); error message
                         // this.removebackdrop();
-                        this.alertService.warn('Something went wrong', this.options)
+                        this.alertService.warn(data['message'], this.options)
 
-                    }
-                }, error => {
-                    // error message
-                    // this.removebackdrop();
-                    this.alertService.warn('Something went wrong', this.options)
-
-                });
-
-                this.categoryService.updateCategorystatus(status, catidd).subscribe((data) => {
-                    if (data['success']) {
-                        this.removebackdrop();
-                        this.getAllCategoryList(0);
-                        this.alertService.success('Category Update sucess', this.options);
-                    } else {
-                        // alert(data['message']); error message
-                        // this.removebackdrop();
-                        this.alertService.warn('Something went wrong', this.options)
                     }
                 }, error => {
                     // error message

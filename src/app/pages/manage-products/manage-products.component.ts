@@ -58,9 +58,19 @@ export class ManageProductsComponent implements OnInit {
         private categoryService: CategoryService,
         private notifierService: NotifierService,
     ) {
-
+        this.config = {
+            itemsPerPage: 1,
+            currentPage: 1,
+            totalItems: 0
+        };
     }
-
+    config: any;
+    items = [];
+    pageChanged(event) {
+        this.config.currentPage = event;
+        const pagno = this.config.currentPage - 1;
+        this._getAllProducts(pagno);
+    }
     pageOfItems: Array<any>;
 
     ngOnInit(): void {
@@ -182,7 +192,9 @@ export class ManageProductsComponent implements OnInit {
         this.productService.getProductList('', pageNo).subscribe((data) => {
             if (data['success']) {
                 this.productList = data['body'].content;
-            } else {
+                this.config.itemsPerPage = data['body'].size;
+                this.config.totalItems = data['body'].totalElements;
+            }else {
 
             }
         }, error => {
@@ -384,7 +396,8 @@ export class ManageProductsComponent implements OnInit {
             price : this.updateProductPrice,
             totalQty : this.updateTotalQty,
             currentQty : this.updateCurrentQty,
-            categories : categoryId
+            categories : categoryId,
+            status : this.updateProductStatus
         }
 
         this.productService.updateProduct(data).subscribe((data) => {
