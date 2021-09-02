@@ -59,9 +59,19 @@ export class ManageProductsComponent implements OnInit {
         private categoryService : CategoryService,
         private notifierService: NotifierService,
     ) {
-
+        this.config = {
+            itemsPerPage: 1,
+            currentPage: 1,
+            totalItems: 0
+        };
     }
-
+    config: any;
+    items = [];
+    pageChanged(event) {
+        this.config.currentPage = event;
+        const pagno = this.config.currentPage - 1;
+        this._getAllProducts(pagno);
+    }
     pageOfItems: Array<any>;
     ngOnInit(): void {
         this._getAllProducts(0);
@@ -182,6 +192,8 @@ export class ManageProductsComponent implements OnInit {
         this.productService.getProductList('',pageNo).subscribe((data)=>{
             if (data['success']){
                 this.productList = data['body'].content;
+                this.config.itemsPerPage = data['body'].size;
+                this.config.totalItems = data['body'].totalElements;
             }else {
 
             }

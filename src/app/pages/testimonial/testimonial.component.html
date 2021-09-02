@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label class="control-label">Customer Name</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="product Name"
+                            <input type="text" class="form-control input-lg" name="custname"
                                    [(ngModel)]="updateCustomerName">
                         </div>
                     </div>
@@ -21,36 +21,36 @@
                     <div class="form-group">
                         <label class="control-label">Image</label>
                         <div>
-                            <input type="file" (change)="updateFileChangeEvent($event)"  class="form-control-file">
+                            <input type="file" (change)="updateFileChangeEvent($event)" name="image" class="form-control-file">
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Youtube Url</label>
+                        <label class="control-label">Youtube URL</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="product Name"
+                            <input type="text" class="form-control input-lg" name="productyu"
                                    [(ngModel)]="updateYoutubeUrl">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Country</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="product Name"
+                            <input type="text" class="form-control input-lg" name="country"
                                    [(ngModel)]="updateCountry">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Comment</label>
                         <div>
-                                            <textarea  class="form-control input-lg" name="product Name"
+                                            <textarea  class="form-control input-lg" name="comment"
                                                        [(ngModel)]="updateComment"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="button-set">
-                            <button type="button" (click)="updateTextFields()" class="btn btn-primary">Update</button>
-                            <button (click)="_deleteTestimonials(this.updateTestimonialId)" type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" (click)="updateTextFields()" name="update" class="btn btn-primary">Update</button>
+                            <button (click)="_deleteTestimonials(this.updateTestimonialId)" name="delete" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                 </form>
@@ -101,7 +101,9 @@
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let testimonial of testimonialList ">
+                <!--                 add for pagination 1line-->
+<!--                <tbody *ngFor="let testimonial of testimonialList  | paginate: config">-->
+                <tbody *ngFor="let testimonial of testimonialList">
                 <tr>
                     <td>
                         <div class="media-body">
@@ -144,10 +146,10 @@
                 </tr>
 
                 </tbody>
-                <div class="products-pagination">
-                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-                    <!--                    <pagination-controls (pageChange)="this.config.currentPage = $event"></pagination-controls>-->
-                </div>
+<!--                 add for pagination 3line-->
+<!--                <div class="products-pagination">-->
+<!--                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>-->
+<!--                </div>-->
 
                 <!-- Modal HTML Markup  for edit category-->
             </table>
@@ -188,7 +190,7 @@
                         {{imageError}}
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Youtube Url</label>
+                        <label class="control-label">Youtube URL</label>
                         <div>
                             <input type="text" [(ngModel)]="addYoutubeUrl" class="form-control input-lg" name="youtube_url">
                         </div>
