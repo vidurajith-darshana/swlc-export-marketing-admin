@@ -1,18 +1,22 @@
-import {Component, OnInit, VERSION, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, VERSION, ViewChild} from '@angular/core';
 import {Category} from "../model/category";
 import {CategoryService} from "../service/admin-web-services/category.service";
 import {TestimonialService} from '../service/admin-web-services/testimonial.service';
 import {Testimonial} from '../model/testimonial';
 import {AlertService} from '../_alert';
 import {NotifierService} from 'angular-notifier';
+import {fromEvent} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 
 @Component({
     selector: 'app-testimonial',
     templateUrl: './testimonial.component.html',
     styleUrls: ['./testimonial.component.css']
 })
-export class TestimonialComponent implements OnInit {
+export class TestimonialComponent implements OnInit,AfterViewInit  {
     @ViewChild('closebutton') closebutton;
+    @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
+
     // categoryName = 'Angular ' + VERSION.major;
     // private categoryList: Category[];
     // private categoryList: Category[];
@@ -87,9 +91,9 @@ export class TestimonialComponent implements OnInit {
             this.alertService.warn('Something went wrong', this.options)
         })
     }
-    testimonialsSearch() {
-        setTimeout(() => this.search(), 500);
-    }
+    // testimonialsSearch() {
+    //     setTimeout(() => this.search(), 500);
+    // }
     search(){
         if (this.customSearchText !== ''){
             this.testimonialService.getAllTestimonials(this.customSearchText).subscribe((data)=>{
@@ -345,4 +349,28 @@ export class TestimonialComponent implements OnInit {
     removebackdrop() {
         this.closebutton.nativeElement.click();
     }
+    ngAfterViewInit(): void {
+
+        fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
+            // get value
+            map((event: any) => {
+
+                if (event.target.value.length == 0) {
+                    this.search();
+                }
+                return event.target.value;
+            })
+
+            , filter(res => res.length > 1)
+
+            , debounceTime(1000)
+
+            , distinctUntilChanged()
+
+        ).subscribe((text: string) => {
+            this.search();
+        });
+
+    }
+
 }
