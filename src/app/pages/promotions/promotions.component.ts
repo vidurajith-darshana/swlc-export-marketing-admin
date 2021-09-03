@@ -154,7 +154,7 @@ export class PromotionsComponent implements OnInit {
 
   _createPromotion(){
     let promotion = {
-      image : this.cardImageBase64,
+      image : this.cardImageBase64.split(',')[1],
       description : this.addPromotionDescription,
       heading : this.addPromotionHeading
     }

@@ -50,42 +50,36 @@ export class TestimonialComponent implements OnInit {
     protected alertService: AlertService,
         private notifierService: NotifierService,
     ) {
+        // add for pagination 5line
         // this.config = {
-        //   itemsPerPage: 1,
-        //   currentPage: 1,
-        //   totalItems: 0
+        //     itemsPerPage: 1,
+        //     currentPage: 1,
+        //     totalItems: 0
         // };
+
     }
+    // add for pagination 7line
 
     // config: any;
     // items = [];
-
     // pageChanged(event) {
-    //   this.config.currentPage = event;
-    //   const pagno = this.config.currentPage - 1;
-    //   this.getAllCategoryList(pagno);
+    //     this.config.currentPage = event;
+    //     const pagno = this.config.currentPage - 1;
+    //     // this._getAllTestimonials(pagno);
     // }
+
 
     ngOnInit(): void {
         this._getAllTestimonials();
     }
 
-    // private getAllCategoryList(pageno) {
-    //   this.categoryService.getAllCategory(pageno).subscribe(
-    //       (data: Object[]) => {
-    //         this.categoryList = data['body'].content;
-    //         // console.log(this.categoryList);
-    //         this.config.itemsPerPage = data['body'].size;
-    //         this.config.totalItems = data['body'].totalElements;
-    //       },
-    //       error => {
-    //       });
-    // }
-
     _getAllTestimonials(){
         this.testimonialService.getAllTestimonials('').subscribe((data)=>{
             if (data['success']){
                 this.testimonialList = data['body'];
+                // add for pagination
+                // this.config.itemsPerPage = data['body'].size;
+                // this.config.totalItems = data['body'].totalElements;
             }else {
                 alert(data['message'])
             }
@@ -93,8 +87,10 @@ export class TestimonialComponent implements OnInit {
             this.alertService.warn('Something went wrong', this.options)
         })
     }
-
-    testimonialsSearch(){
+    testimonialsSearch() {
+        setTimeout(() => this.search(), 500);
+    }
+    search(){
         if (this.customSearchText !== ''){
             this.testimonialService.getAllTestimonials(this.customSearchText).subscribe((data)=>{
                 if (data['success']){
@@ -240,7 +236,7 @@ export class TestimonialComponent implements OnInit {
 
     _createTestimonials(){
         let testimonials = {
-            image : this.cardImageBase64,
+            image : this.cardImageBase64.split(',')[1],
             youtubeUrl : this.addYoutubeUrl,
             customerName : this.addCustomerName,
             country : this.addCountry,
@@ -250,7 +246,7 @@ export class TestimonialComponent implements OnInit {
         this.testimonialService.createTestimonials(testimonials).subscribe((data)=>{
             if (data['success']){
                 // success msg
-                this.alertService.success('testimonials added', this.options);
+                this.alertService.success('Added successfully', this.options);
 
                 this._clearText();
                 this._getAllTestimonials();
@@ -313,7 +309,7 @@ export class TestimonialComponent implements OnInit {
     _updateTestimonials(){
         let testimonials = {
             id : this.updateTestimonialId,
-            image : this.updateCardImageBase64,
+            image : this.cardImageBase64.split(',')[1],
             youtubeUrl : this.updateYoutubeUrl,
             customerName : this.updateCustomerName,
             country : this.updateCountry,
@@ -323,7 +319,7 @@ export class TestimonialComponent implements OnInit {
         this.testimonialService.createTestimonials(testimonials).subscribe((data)=>{
             if (data['success']){
                 // success msg
-                this.alertService.success('testimonials added', this.options);
+                this.alertService.success('Added successfully', this.options);
 
                 this._clearText();
                 this._getAllTestimonials();

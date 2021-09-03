@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <label class="control-label">Password</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="update_password"
+                            <input type="password" class="form-control input-lg" name="update_password"
                                    [(ngModel)]="updatepassword">
                         </div>
                     </div>
@@ -66,12 +66,13 @@
     </div>
 </div>
 <!-- Modal HTML Markup -->
-<div id="ModalLoginForm" class="modal fade">
+<div id="ModalAddDeo" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="min-width: 47vw;">
             <div class="modal-header">
                 <h1 class="modal-title">Add Deo</h1>
-                <button type="button" class="close" data-dismiss="modal" #closebutton aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" #closeAddDeoButton aria-label="Close">
+                <h1 class="modal-title">Add DEO</h1>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -96,8 +97,21 @@
                     <div class="form-group">
                         <label class="control-label">Email</label>
                         <div>
-                            <input type="text" class="form-control input-lg" [(ngModel)]="email" name="category_ame"
-                                   value="">
+                            <input type="email" class="form-control tf-background" id="e3xampleFormControlInput1"
+                                   placeholder="name@example.com"
+                                   #emailaddress="ngModel"
+                                   pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
+                                   [(ngModel)]="email"
+                                   [ngModelOptions]="{standalone: true}"/>
+                            <div *ngIf="emailaddress.errors && (emailaddress.dirty || emailaddress.touched || clicked)"
+                                 class="notification-validation-error-label">
+                                <div [hidden]="!emailaddress.errors.pattern">
+                                    Invalid Email Address
+                                </div>
+                            </div>
+
+                            <!--                            <input type="text" class="form-control input-lg" [(ngModel)]="email" name="category_ame"-->
+                            <!--                                   value="">-->
                         </div>
                     </div>
                     <div class="form-group">
@@ -112,7 +126,7 @@
                     <div class="form-group">
                         <div>
                             <button type="button" (click)="_createOperator()" class="btn btn-success">
-                                Add Deo
+                                Add DEO
                             </button>
                         </div>
                     </div>
@@ -133,11 +147,11 @@
                 <div class="col-md-12" style="text-align: center;padding-left: 0;">
                     <div class="form-group">
                         <div class="input-group input-group-alternative mb-4">
-<!--                            <div class="input-group-prepend">-->
-<!--                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>-->
-<!--                            </div>-->
-<!--                            <input hidden class="form-control form-control-alternative" placeholder="Search Category By Name"-->
-<!--                                   type="text">-->
+                            <!--                            <div class="input-group-prepend">-->
+                            <!--                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>-->
+                            <!--                            </div>-->
+                            <!--                            <input hidden class="form-control form-control-alternative" placeholder="Search Category By Name"-->
+                            <!--                                   type="text">-->
                         </div>
                     </div>
                 </div>

@@ -14,3 +14,15 @@
 .product-table{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.product-image{
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border-radius: 0.65rem;
+}
+
+
+.modal-content{
+    min-width: 15vw!important;
+}

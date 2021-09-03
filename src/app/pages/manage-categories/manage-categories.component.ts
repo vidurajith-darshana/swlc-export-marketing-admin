@@ -198,8 +198,8 @@ export class ManageCategoriesComponent implements OnInit {
         if (this.addCategoryName !== '') {
             if (this.cardImageBase64 !== '') {
                 let category = {
-                    name: this.addCategoryName,
-                    thumbnail: this.cardImageBase64
+                    name : this.addCategoryName,
+                    thumbnail : this.cardImageBase64.split(',')[1]
                 }
 
                 this.categoryService.createCategory(category).subscribe((data) => {
@@ -238,10 +238,9 @@ export class ManageCategoriesComponent implements OnInit {
         if (this.updateCategoryName !== '') {
             if (this.updateCardImageBase64 !== '') {
                 let category = {
-                    id: this.updateCategoryId,
-                    name: this.updateCategoryName,
-                    thumbnail: this.updateCardImageBase64,
-                    status : this.updateCategoryStatus
+                    id : this.updateCategoryId,
+                    name : this.updateCategoryName,
+                    thumbnail : this.updateCardImageBase64.split(',')[1]
                 }
 
                 this.categoryService.updateCategory(category).subscribe((data) => {

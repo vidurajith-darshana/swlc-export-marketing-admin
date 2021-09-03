@@ -7,5 +7,6 @@ import {Injectable,EventEmitter} from '@angular/core';
 
 export class SharedService {
     roleStateEvent = new EventEmitter<any>();
+    userNameEvent = new EventEmitter<any>();
 
 }

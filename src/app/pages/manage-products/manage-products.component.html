@@ -132,7 +132,7 @@
                             <button type="button" (click)="_updateProduct()"
                                     class="btn btn-primary">Update
                             </button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+<!--                            <button type="button" class="btn btn-danger">Delete</button>-->
                         </div>
                     </div>
                 </form>
@@ -166,8 +166,13 @@
                             <div class="form-group">
                                 <label class="control-label">Price</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addProductPrice" class="form-control input-lg"
-                                           name="price" value="">
+                                    <input type="number"
+                                           [(ngModel)]="addProductPrice"
+                                           class="form-control input-lg"
+                                           pattern="[0-9]*"
+                                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                           name="price"
+                                           value="" >
                                 </div>
                             </div>
                         </div>
@@ -198,7 +203,11 @@
                             <div class="form-group">
                                 <label class="control-label">Total Qty</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addTotalQty" class="form-control input-lg"
+                                    <input type="number"
+                                           [(ngModel)]="addTotalQty"
+                                           class="form-control input-lg"
+                                           pattern="[0-9]*"
+                                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                                            name="total qty" value="">
                                 </div>
                             </div>
@@ -207,8 +216,14 @@
                             <div class="form-group">
                                 <label class="control-label">Current Qty</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addCurrentQty" class="form-control input-lg"
-                                           name="currunt qty" value="">
+                                    <input type="number"
+                                           [(ngModel)]="addCurrentQty"
+                                           class="form-control input-lg"
+                                           pattern="[0-9]*"
+                                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                           name="currunt qty"
+                                           value="">
+
                                 </div>
                             </div>
                         </div>
@@ -307,7 +322,7 @@
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let products of productList">
+                <tbody *ngFor="let products of productList | paginate: config">
                 <tr>
                     <td>
                         <div class="media-body">
@@ -316,7 +331,7 @@
                     </td>
                     <td>
             <span class="badge badge-dot mr-4">
-                <a href="#" class="avatar rounded-circle mr-3">
+                <a class="avatar rounded-circle mr-3">
                     <img alt="Image placeholder" src="{{products.thumbnail}}">
                   </a>
             </span>
@@ -349,11 +364,15 @@
                     <!-- Modal HTML Markup  for edit products-->
                 </tr>
                 </tbody>
+                <div class="products-pagination">
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                    <!--                    <pagination-controls (pageChange)="this.config.currentPage = $event"></pagination-controls>-->
+                </div>
             </table>
         </div>
     </div>
     <div class="card-footer pb-0 pt-3">
-        <jw-pagination [items]="productList" (changePage)="onChangePage($event)"></jw-pagination>
+<!--        <jw-pagination [items]="productList" (changePage)="onChangePage($event)"></jw-pagination>-->
 
     </div>
 </div>
