@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {constants} from '../../../constants/constants';
 import {SharedService} from './shared-service';
+import {NotifierService} from 'angular-notifier';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class AdminLoginService {
       private sharedService:SharedService
   ) { }
 
-  public _adminLogin(userName,userPassword){
+  public _adminLogin(userName,userPassword) :Observable<any>{
     const params = new URLSearchParams();
     params.append('username', userName);
     params.append('password', userPassword);
@@ -30,14 +32,7 @@ export class AdminLoginService {
 
     const url = `${constants.base_url+ 'api/v1/authorize'}`;
 
-    this.httpClient.post(url, params.toString(), {headers: headers}).subscribe((data) => {
-          this.saveToken(data);
-          this._getUserDetails(userName);
-          this.router.navigate(['/dashboard']);
-        }
-        ,
-        err => {}
-    );
+    return  this.httpClient.post(url, params.toString(), {headers: headers});
   }
 
   public saveToken(data) {
@@ -64,7 +59,22 @@ export class AdminLoginService {
       localStorage.setItem('adminPanelUserType' , data['body'].role)
       localStorage.setItem(constants.user_role_key , data['body'].role)
 
+
+      let fullName= "";
+
+      if (data['body']['firstName'] != null){
+        fullName = data['body']['firstName'];
+      }
+
+      if (data['body']['lastName'] != null){
+        fullName += " "+data['body']['lastName'];
+      }
+
+      localStorage.setItem(constants.user_full_name_key, fullName);
+
       this.sharedService.roleStateEvent.emit(data['body'].role);
+
+      this.sharedService.userNameEvent.emit(fullName);
 
     }, error => {
 

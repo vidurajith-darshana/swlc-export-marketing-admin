@@ -15,7 +15,11 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router,private sharedService:SharedService) {
+
+    public userFullName:string;
+
+
+    constructor(location: Location,  private element: ElementRef, private router: Router,private sharedService:SharedService) {
     this.location = location;
   }
 
@@ -31,14 +35,17 @@ export class NavbarComponent implements OnInit {
         }
     )
 
+      this.userFullName = localStorage.getItem(constants.user_full_name_key);
+
+      this.sharedService.userNameEvent.subscribe(
+          res=>{
+              this.userFullName = res;
+          }
+      )
+
 
   }
 
-  logout() {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('token_type');
-      localStorage.removeItem('refresh_token');
-  }
   changeListItem(role){
     if (role == 'ROLE_ADMIN'){
       this.listTitles = ADMIN_ROUTES.filter(listTitle => listTitle);
@@ -61,4 +68,9 @@ export class NavbarComponent implements OnInit {
     return 'Dashboard';
   }
 
+
+    onLogOut(){
+        this.router.navigate(['/login'])
+        localStorage.clear();
+    }
 }

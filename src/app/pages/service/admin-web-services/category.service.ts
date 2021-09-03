@@ -59,6 +59,6 @@ export class CategoryService {
                 'Content-Type': 'application/json'
             });
         console.log(url)
-        return this.httpClient.put(url,{headers});
+        return this.httpClient.put(url,'',{headers});
     }
 }

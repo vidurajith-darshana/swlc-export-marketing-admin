@@ -10,7 +10,7 @@ export class PromotionService {
 
   constructor(private httpClient : HttpClient) { }
 
-  public getAllPromotions(pageNo){
+  public getAllPromotions(text,pageNo){
     let token = localStorage.getItem('access_token');
 
     const headers =
@@ -19,7 +19,7 @@ export class PromotionService {
           'Content-Type': 'application/json'
         });
 
-    const url = `${constants.base_url + 'api/v1/admin/promotion/all?page=' + pageNo + '&size=10'}`;
+    const url = `${constants.base_url + 'api/v1/admin/promotion/all?search='+text+'&page=' + pageNo + '&size=10'}`;
     return this.httpClient.get(url,{headers});
   }
 

@@ -1,17 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {OrderService} from '../service/admin-web-services/order.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NotifierService} from 'angular-notifier';
+import {fromEvent} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-manage-orders',
     templateUrl: './manage-orders.component.html',
     styleUrls: ['./manage-orders.component.css']
 })
-export class ManageOrdersComponent implements OnInit {
+export class ManageOrdersComponent implements OnInit,AfterViewInit {
 
     constructor(private orderService: OrderService, private modalService: NgbModal, private notifierService: NotifierService) {
     }
+
+    @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
 
     orders: Array<any> = [];
     orderDetails: Array<any> = [];
@@ -26,6 +30,8 @@ export class ManageOrdersComponent implements OnInit {
 
     model : any;
 
+    searchWord:string = "";
+
     ngOnInit(): void {
         this.getAllOrders();
         // this.getOrderStatus();
@@ -33,7 +39,8 @@ export class ManageOrdersComponent implements OnInit {
 
 
     getAllOrders() {
-        this.orderService.getAllOrders().subscribe(
+
+        this.orderService.getAllOrders(this.searchWord).subscribe(
             res => {
                 if (res['success']) {
                     this.orders = res['body'];
@@ -68,6 +75,7 @@ export class ManageOrdersComponent implements OnInit {
                 res => {
                     this.model.close();
                     if (res['success']) {
+                        this.getAllOrders();
                         this.notifierService.notify('success', 'Order status has been successfully updated!');
                     } else {
                         this.notifierService.notify('error', 'Sorry, Failed to update order status!');
@@ -98,5 +106,29 @@ export class ManageOrdersComponent implements OnInit {
 
     changeOrderStatus(orderStatus) {
         this.selectedOrderStatus = orderStatus;
+    }
+
+    ngAfterViewInit(): void {
+
+        fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
+            // get value
+            map((event: any) => {
+
+                if (event.target.value.length == 0) {
+                    this.getAllOrders();
+                }
+                return event.target.value;
+            })
+
+            , filter(res => res.length > 1)
+
+            , debounceTime(1000)
+
+            , distinctUntilChanged()
+
+        ).subscribe((text: string) => {
+            this.getAllOrders();
+        });
+
     }
 }
