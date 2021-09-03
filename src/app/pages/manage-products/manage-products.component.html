@@ -166,8 +166,13 @@
                             <div class="form-group">
                                 <label class="control-label">Price</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addProductPrice" class="form-control input-lg"
-                                           name="price" value="">
+                                    <input type="number"
+                                           [(ngModel)]="addProductPrice"
+                                           class="form-control input-lg"
+                                           pattern="[0-9]*"
+                                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                           name="price"
+                                           value="" >
                                 </div>
                             </div>
                         </div>
@@ -198,7 +203,11 @@
                             <div class="form-group">
                                 <label class="control-label">Total Qty</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addTotalQty" class="form-control input-lg"
+                                    <input type="number"
+                                           [(ngModel)]="addTotalQty"
+                                           class="form-control input-lg"
+                                           pattern="[0-9]*"
+                                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                                            name="total qty" value="">
                                 </div>
                             </div>
@@ -207,8 +216,13 @@
                             <div class="form-group">
                                 <label class="control-label">Current Qty</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addCurrentQty" class="form-control input-lg"
-                                           name="currunt qty" value="">
+                                    <input type="number"
+                                           [(ngModel)]="addCurrentQty"
+                                           class="form-control input-lg"
+                                           pattern="[0-9]*"
+                                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                           name="currunt qty"
+                                           value="">
                                 </div>
                             </div>
                         </div>
