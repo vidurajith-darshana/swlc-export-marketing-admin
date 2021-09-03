@@ -353,8 +353,13 @@ export class ManageProductsComponent implements OnInit {
         this.addTotalQty = 0;
         this.addCurrentQty = 0;
         this.selectCategoryList = new Array();
-        this.cardImageBase64 = '';
         this._getCategoryList();
+        this.removeImage();
+    }
+
+    removeImage() {
+        this.cardImageBase64 = null;
+        this.isImageSaved = false;
     }
 
     _loadDetailsToUpdate(id, name, code, price, image, totalQty, currentQty, status, categoryList) {

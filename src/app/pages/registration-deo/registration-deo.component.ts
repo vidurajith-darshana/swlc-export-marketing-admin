@@ -12,6 +12,7 @@ import {Deo} from "../model/deo";
 })
 export class RegistrationDEOComponent implements OnInit {
     @ViewChild('closebutton') closebutton;
+    @ViewChild('closeAddDeoButton') closeAddDeoButton;
 
     categoryName = 'Angular ' + VERSION.major;
     private categoryList: Deo[];
@@ -174,8 +175,8 @@ export class RegistrationDEOComponent implements OnInit {
             this.operatorService.createOperator(operator).subscribe((data) => {
                 if (data['success']) {
                     // success msg
-                    this.removebackdrop();
                     this.alertService.success('DEO Added', this.options);
+                    this.removebackdropAddDeo();
 
                     this._clearText();
                     this.getAllCategoryList(0);
@@ -207,5 +208,9 @@ export class RegistrationDEOComponent implements OnInit {
     }
     removebackdrop() {
         this.closebutton.nativeElement.click();
+    }
+
+    removebackdropAddDeo() {
+        this.closeAddDeoButton.nativeElement.click();
     }
 }
