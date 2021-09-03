@@ -207,6 +207,9 @@ export class ManageCategoriesComponent implements OnInit {
                         // success alert
                         this.removebackdrop();
                         this.getAllCategoryList(0);
+                        this.cardImageBase64 = null;
+                        this.isImageSaved = false;
+                        this.addCategoryName = '';
                         this.alertService.success('Category added successfully', this.options);
                     } else {
                         // alert(data['message']); error message
@@ -240,7 +243,8 @@ export class ManageCategoriesComponent implements OnInit {
                 let category = {
                     id : this.updateCategoryId,
                     name : this.updateCategoryName,
-                    thumbnail : this.updateCardImageBase64.split(',')[1]
+                    thumbnail : this.updateCardImageBase64.split(',')[1],
+                    categoryStatus : this.updateCategoryStatus
                 }
 
                 this.categoryService.updateCategory(category).subscribe((data) => {
@@ -249,6 +253,8 @@ export class ManageCategoriesComponent implements OnInit {
                         // this.removebackdrop();
                         this.getAllCategoryList(0);
                         this.alertService.success('Category Update successfully', this.options);
+                        this.updateCardImageBase64 = null;
+                        this.updateIsImageSaved = false;
                     } else {
                         // alert(data['message']); error message
                         // this.removebackdrop();
