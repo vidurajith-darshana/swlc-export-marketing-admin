@@ -1,7 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PromotionService} from '../service/admin-web-services/promotion.service';
 import {Promotion} from '../model/promotion';
 import {AlertService} from '../_alert';
+import {fromEvent} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 
 
 @Component({
@@ -9,9 +11,12 @@ import {AlertService} from '../_alert';
   templateUrl: './promotions.component.html',
   styleUrls: ['./promotions.component.css']
 })
-export class PromotionsComponent implements OnInit {
+export class PromotionsComponent implements OnInit,AfterViewInit  {
   @ViewChild('closebutton') closebutton;
   @ViewChild('closebutton1') closebutton1;
+  @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
+  @ViewChild('takeInput', {static: false}) InputVar: ElementRef;
+  @ViewChild('takeInputa', {static: false}) InputVara: ElementRef;
 
   promotionList : Promotion[];
 
@@ -163,8 +168,9 @@ export class PromotionsComponent implements OnInit {
       if (data['success']){
         // success msg
         this._getPromotionList(0);
-        this.removeAddBackDrop();
+        this.removebackdrop();
         this.clearPromotionAddText();
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         this.alertService.success('Promotion added', this.options);
       }else {
         // error msg
@@ -209,6 +215,8 @@ export class PromotionsComponent implements OnInit {
         // success msg
         this.removebackdrop();
 
+        this.InputVar.nativeElement.value = "";
+        this.InputVara.nativeElement.value = "";
         this._getPromotionList(0);
         this.alertService.success('promotion updated', this.options);
 
@@ -252,9 +260,9 @@ export class PromotionsComponent implements OnInit {
     this.closebutton.nativeElement.click();
   }
 
-  removeAddBackDrop(){
-    this.closebutton1.native.click();
-  }
+  // removeAddBackDrop(){
+  //   this.closebutton1.native.click();
+  // }
 
   _promotionCustomSearch(){
     if (this.customSearchText !== '' || this.customSearchText !== undefined){
@@ -280,6 +288,31 @@ export class PromotionsComponent implements OnInit {
     this.addPromotionDescription = '';
     this.addPromotionHeading = '';
     this.cardImageBase64 = '';
+    this.InputVar.nativeElement.value = "";
+    this.InputVara.nativeElement.value = "";
+  }
+  ngAfterViewInit(): void {
+
+    fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
+        // get value
+        map((event: any) => {
+
+          if (event.target.value.length == 0) {
+            this._promotionCustomSearch();
+          }
+          return event.target.value;
+        })
+
+        , filter(res => res.length > 1)
+
+        , debounceTime(1000)
+
+        , distinctUntilChanged()
+
+    ).subscribe((text: string) => {
+      this._promotionCustomSearch();
+    });
+
   }
 
 }

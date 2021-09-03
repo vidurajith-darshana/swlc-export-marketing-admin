@@ -19,3 +19,9 @@
         margin-left: 0%;
     }
 }
+.squere {
+    background: transparent !important;
+}
+.squere img{
+    border-radius: 5px;
+}

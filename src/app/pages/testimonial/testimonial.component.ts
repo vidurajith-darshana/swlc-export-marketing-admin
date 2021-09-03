@@ -16,7 +16,8 @@ import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 export class TestimonialComponent implements OnInit,AfterViewInit  {
     @ViewChild('closebutton') closebutton;
     @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
-
+    @ViewChild('takeInput', {static: false}) InputVar: ElementRef;
+    @ViewChild('takeInputa', {static: false}) InputVara: ElementRef;
     // categoryName = 'Angular ' + VERSION.major;
     // private categoryList: Category[];
     // private categoryList: Category[];
@@ -153,6 +154,7 @@ export class TestimonialComponent implements OnInit,AfterViewInit  {
                         const imgBase64Path = e.target.result;
                         this.cardImageBase64 = imgBase64Path;
                         this.isImageSaved = true;
+                        console.log(this.cardImageBase64)
                         // this.previewImagePath = imgBase64Path;
                     }
                 };
@@ -250,7 +252,7 @@ export class TestimonialComponent implements OnInit,AfterViewInit  {
         this.testimonialService.createTestimonials(testimonials).subscribe((data)=>{
             if (data['success']){
                 // success msg
-                this.alertService.success('Added successfully', this.options);
+                this.alertService.success('Testimonial Added successfully!', this.options);
 
                 this._clearText();
                 this._getAllTestimonials();
@@ -308,6 +310,8 @@ export class TestimonialComponent implements OnInit,AfterViewInit  {
         this.addCustomerName = '';
         this.addCountry = '';
         this.addComment = '';
+        this.InputVar.nativeElement.value = "";
+        this.InputVara.nativeElement.value = "";
     }
 
     _updateTestimonials(){
@@ -323,7 +327,8 @@ export class TestimonialComponent implements OnInit,AfterViewInit  {
         this.testimonialService.createTestimonials(testimonials).subscribe((data)=>{
             if (data['success']){
                 // success msg
-                this.alertService.success('Added successfully', this.options);
+                console.log(data);
+                this.alertService.success('Testimonial updated successfully!', this.options);
 
                 this._clearText();
                 this._getAllTestimonials();
