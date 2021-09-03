@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <label class="control-label">Price</label>
                                 <div>
-                                    <input type="text" class="form-control input-lg" name="price"
+                                    <input type="number" class="form-control input-lg" name="price"
                                            [(ngModel)]="updateProductPrice">
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label class="control-label">Code</label>
                                 <div>
-                                    <input type="text" class="form-control input-lg" name="code"
+                                    <input type="text" [disabled]="true" class="form-control input-lg" name="code"
                                            [(ngModel)]="updateProductCode">
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                             <div class="form-group">
                                 <label class="control-label">Total Qty</label>
                                 <div>
-                                    <input type="text" class="form-control input-lg"
+                                    <input type="number" class="form-control input-lg"
                                            name="total qty" [(ngModel)]="updateTotalQty">
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                             <div class="form-group">
                                 <label class="control-label">Current Qty</label>
                                 <div>
-                                    <input type="text" class="form-control input-lg"
+                                    <input type="number" class="form-control input-lg"
                                            name="currunt qty" [(ngModel)]="updateCurrentQty">
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                             <div class="form-group">
                                 <label class="control-label">Price</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addProductPrice" class="form-control input-lg"
+                                    <input type="number" [(ngModel)]="addProductPrice" class="form-control input-lg"
                                            name="price" value="">
                                 </div>
                             </div>
@@ -198,7 +198,7 @@
                             <div class="form-group">
                                 <label class="control-label">Total Qty</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addTotalQty" class="form-control input-lg"
+                                    <input type="number" [(ngModel)]="addTotalQty" class="form-control input-lg"
                                            name="total qty" value="">
                                 </div>
                             </div>
@@ -207,7 +207,7 @@
                             <div class="form-group">
                                 <label class="control-label">Current Qty</label>
                                 <div>
-                                    <input type="text" [(ngModel)]="addCurrentQty" class="form-control input-lg"
+                                    <input type="number" [(ngModel)]="addCurrentQty" class="form-control input-lg"
                                            name="currunt qty" value="">
                                 </div>
                             </div>
@@ -315,11 +315,7 @@
                         </div>
                     </td>
                     <td>
-            <span class="badge badge-dot mr-4">
-                <a class="avatar rounded-circle mr-3">
-                    <img alt="Image placeholder" src="{{products.thumbnail}}">
-                  </a>
-            </span>
+                        <img class="product-image" [src]="products['thumbnail']" alt="">
                     </td>
                     <th>
                         {{products.code}}
@@ -342,7 +338,7 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-secondary" data-toggle="modal" (click)="_loadDetailsToUpdate(products.id,products.name,products.code,products.price,
-            products.thumbnail,products.totalQty,products.currentQty,products.status,products.categories)"
+            null,products.totalQty,products.currentQty,products.status,products.categories)"
                                 [attr.data-target]="'#ModalEditProducttt'">Edit
                         </button>
                     </td>

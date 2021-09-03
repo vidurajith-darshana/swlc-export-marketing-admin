@@ -299,7 +299,7 @@ export class ManageProductsComponent implements OnInit {
 
         this.productService.createProduct(data).subscribe((data) => {
             if (data['success']) {
-                this.notifierService.notify('success', 'Product add success');
+                this.notifierService.notify('success', 'Product has been successfully added!');
                 this._clearText();
                 this._getAllProducts(0);
                 this.removebackdropAddProduct();
@@ -383,6 +383,8 @@ export class ManageProductsComponent implements OnInit {
 
         let categoryId = new Array();
 
+        let data:any;
+
         for (let i in this.updateCategoryList) {
 
             let object = {
@@ -392,17 +394,32 @@ export class ManageProductsComponent implements OnInit {
             categoryId.push(object);
         }
 
-        let data = {
-            id: this.updateProductId,
-            code: this.updateProductCode,
-            name: this.updateProductName,
-            thumbnail: this.updateCardImageBase64.split(',')[1],
-            price: this.updateProductPrice,
-            totalQty: this.updateTotalQty,
-            currentQty: this.updateCurrentQty,
-            categories: categoryId,
-            status: this.updateProductStatus
+        if (this.updateCardImageBase64==null){
+            data = {
+                id: this.updateProductId,
+                code: this.updateProductCode,
+                name: this.updateProductName,
+                thumbnail: null,
+                price: this.updateProductPrice,
+                totalQty: this.updateTotalQty,
+                currentQty: this.updateCurrentQty,
+                categories: categoryId,
+                status: this.updateProductStatus
+            }
+        } else{
+            data = {
+                id: this.updateProductId,
+                code: this.updateProductCode,
+                name: this.updateProductName,
+                thumbnail: this.updateCardImageBase64.split(',')[1],
+                price: this.updateProductPrice,
+                totalQty: this.updateTotalQty,
+                currentQty: this.updateCurrentQty,
+                categories: categoryId,
+                status: this.updateProductStatus
+            }
         }
+
 
         this.productService.updateProduct(data).subscribe((data) => {
             if (data['success']) {
@@ -474,3 +491,4 @@ export class ManageProductsComponent implements OnInit {
         this.closeAddProductbutton.nativeElement.click();
     }
 }
+ 
