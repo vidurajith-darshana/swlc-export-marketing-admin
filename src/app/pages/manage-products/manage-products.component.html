@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label class="control-label">Thumbnail</label>
                                 <div>
-                                    <input type="file" (change)="updateFileChangeEvent($event)"
+                                    <input type="file" #updateImageInput (change)="updateFileChangeEvent($event)"
                                            class="form-control-file">
                                 </div>
                                 {{updateImageError}}
@@ -182,7 +182,7 @@
                             <div class="form-group">
                                 <label class="control-label">Thumbnail</label>
                                 <div>
-                                    <input type="file" (change)="fileChangeEvent($event)" class="form-control-file">
+                                    <input type="file" #addImageInput (change)="fileChangeEvent($event)" class="form-control-file">
                                 </div>
                                 {{imageError}}
                             </div>

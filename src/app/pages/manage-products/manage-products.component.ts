@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../service/admin-web-services/product.service';
 import {Product} from '../model/product';
 import {CategoryService} from '../service/admin-web-services/category.service';
@@ -14,6 +14,9 @@ export class ManageProductsComponent implements OnInit {
 
     @ViewChild('closebutton') closebutton;
     @ViewChild('closeAddProductbutton') closeAddProductbutton;
+
+    @ViewChild('addImageInput', {static: false}) addImageInput :ElementRef;
+    @ViewChild('updateImageInput', {static: false}) updateImageInput :ElementRef;
 
     imageError: string;
     isImageSaved: boolean;
@@ -355,6 +358,8 @@ export class ManageProductsComponent implements OnInit {
         this.selectCategoryList = new Array();
         this._getCategoryList();
         this.removeImage();
+        this.addImageInput.nativeElement.value = "";
+        this.updateImageInput.nativeElement.value = "";
     }
 
     removeImage() {

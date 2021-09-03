@@ -15,7 +15,6 @@ export class AdminLoginService {
   constructor(
       private httpClient : HttpClient,
       private router : Router,
-      private sharedService:SharedService
   ) { }
 
   public _adminLogin(userName,userPassword) :Observable<any>{
@@ -52,33 +51,10 @@ export class AdminLoginService {
     window.location.reload();
   }
 
-  public _getUserDetails(customerEmail) {
+  public _getUserDetails(customerEmail):Observable<any> {
     const url = `${constants.base_url+ 'api/v1/user/getDetails/' + customerEmail}`;
-    this.httpClient.get(url).subscribe((data: []) => {
-      localStorage.setItem('adminPanelUserId', data['body'].id);
-      localStorage.setItem('adminPanelUserType' , data['body'].role)
-      localStorage.setItem(constants.user_role_key , data['body'].role)
+    return this.httpClient.get(url);
 
-
-      let fullName= "";
-
-      if (data['body']['firstName'] != null){
-        fullName = data['body']['firstName'];
-      }
-
-      if (data['body']['lastName'] != null){
-        fullName += " "+data['body']['lastName'];
-      }
-
-      localStorage.setItem(constants.user_full_name_key, fullName);
-
-      this.sharedService.roleStateEvent.emit(data['body'].role);
-
-      this.sharedService.userNameEvent.emit(fullName);
-
-    }, error => {
-
-    });
   }
 
   public loggedIn(){

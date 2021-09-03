@@ -88,7 +88,7 @@ export class TestimonialComponent implements OnInit {
         })
     }
     testimonialsSearch() {
-        setTimeout(() => this.search(), 500);
+        setTimeout(() => this.search(), 1000);
     }
     search(){
         if (this.customSearchText !== ''){
