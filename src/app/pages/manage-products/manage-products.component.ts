@@ -367,7 +367,7 @@ export class ManageProductsComponent implements OnInit {
         this.updateProductName = name;
         this.updateProductCode = code;
         this.updateProductPrice = price;
-        this.updateCardImageBase64 = image;
+        this.updateCardImageBase64 = null;
         this.updateTotalQty = totalQty;
         this.updateCurrentQty = currentQty;
         this.updateProductStatus = status;

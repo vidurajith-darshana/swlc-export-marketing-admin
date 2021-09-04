@@ -299,11 +299,12 @@ export class TestimonialComponent implements OnInit {
     }
 
     _clearText(){
-        this.cardImageBase64 = '';
+        this.cardImageBase64 = null;
         this.addYoutubeUrl= '';
         this.addCustomerName = '';
         this.addCountry = '';
         this.addComment = '';
+        this.isImageSaved = false;
     }
 
     _updateTestimonials(){
@@ -321,7 +322,8 @@ export class TestimonialComponent implements OnInit {
                 // success msg
                 this.alertService.success('Added successfully', this.options);
 
-                this._clearText();
+                this.updateCardImageBase64 = null;
+                this.updateIsImageSaved = false;
                 this._getAllTestimonials();
                 this.removebackdrop();
             }else {

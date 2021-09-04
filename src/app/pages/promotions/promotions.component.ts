@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PromotionService} from '../service/admin-web-services/promotion.service';
 import {Promotion} from '../model/promotion';
 import {AlertService} from '../_alert';
@@ -12,6 +12,9 @@ import {AlertService} from '../_alert';
 export class PromotionsComponent implements OnInit {
   @ViewChild('closebutton') closebutton;
   @ViewChild('closebutton1') closebutton1;
+
+  @ViewChild('myInput')
+  myInputVariable: ElementRef;
 
   promotionList : Promotion[];
 
@@ -162,9 +165,10 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.createPromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
-        this._getPromotionList(0);
-        this.removeAddBackDrop();
+        this.closebutton1.nativeElement.click();
         this.clearPromotionAddText();
+        this._getPromotionList(0);
+        this.myInputVariable.nativeElement.value = "";
         this.alertService.success('Promotion added', this.options);
       }else {
         // error msg
@@ -196,9 +200,15 @@ export class PromotionsComponent implements OnInit {
 
   _updatePromotion(promotionId){
 
+    let a = null;
+
+    if (this.updateCardImageBase64 !== undefined){
+      a = this.updateCardImageBase64.split(',')[1];
+    }
+
     let promotion = {
       id : promotionId,
-      image : this.updateCardImageBase64,
+      image : a,
       description : this.updatePromotionDescription,
       heading : this.updatePromotionHeading,
       status : this.updatePromotionStatus
@@ -252,10 +262,6 @@ export class PromotionsComponent implements OnInit {
     this.closebutton.nativeElement.click();
   }
 
-  removeAddBackDrop(){
-    this.closebutton1.native.click();
-  }
-
   _promotionCustomSearch(){
     if (this.customSearchText !== '' || this.customSearchText !== undefined){
       this.promotionService.getAllPromotions(this.customSearchText,0).subscribe((data)=>{
@@ -279,7 +285,8 @@ export class PromotionsComponent implements OnInit {
   clearPromotionAddText(){
     this.addPromotionDescription = '';
     this.addPromotionHeading = '';
-    this.cardImageBase64 = '';
+    this.cardImageBase64 = null;
+    this.isImageSaved = false;
   }
 
 }
