@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label class="control-label">Image</label>
                         <div>
-                            <input type="file" (change)="updateFileChangeEvent($event)" name="image" class="form-control-file">
+                            <input type="file" (change)="updateFileChangeEvent($event)" #takeInput name="image" class="form-control-file">
 
                         </div>
                     </div>
@@ -71,7 +71,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                             </div>
-                            <input name="custom_search" [(ngModel)]="customSearchText" (ngModelChange)="testimonialsSearch()" class="form-control form-control-alternative" placeholder="Search Testimonial By Name"
+<!--                            <input name="custom_search" [(ngModel)]="customSearchText" (ngModelChange)="testimonialsSearch()" class="form-control form-control-alternative" placeholder="Search Testimonial By Name"-->
+                            <input name="custom_search" [(ngModel)]="customSearchText" #searchElement class="form-control form-control-alternative" placeholder="Search Testimonial By Name"
+
                                    type="text">
                         </div>
                     </div>
@@ -112,7 +114,7 @@
                     </td>
                     <td>
                         <span class="badge badge-dot mr-4">
-                            <a href="#" class="avatar rounded-circle mr-3">
+                            <a href="#" class="avatar rounded-circle mr-3 squere">
                                 <img alt="Image placeholder" src="{{testimonial.image}}">
                               </a>
                         </span>
@@ -184,7 +186,7 @@
                     <div class="form-group">
                         <label class="control-label">Image</label>
                         <div>
-                            <input type="file" (change)="fileChangeEvent($event)"  class="form-control-file">
+                            <input type="file" (change)="fileChangeEvent($event)" #takeInputa class="form-control-file">
 
                         </div>
                         {{imageError}}

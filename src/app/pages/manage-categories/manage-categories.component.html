@@ -1,3 +1,51 @@
+<div id="ModalEditProductt" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Edit Category</h1>
+                <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label">Category Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="product Name"
+                                   [(ngModel)]="updateCategoryName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Thumbnail</label>
+                        <div>
+                            <input type="file" #takeInputa (change)="updateFileChangeEvent($event)"  class="form-control-file">
+                        </div>
+                        {{updateImageError}}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Status</label>
+                        <div>
+                            <select class="browser-default custom-select" [(ngModel)]="updateCategoryStatus" name="status_select">
+                                <option selected>Open this select menu</option>
+                                <option value="ACTIVE">Activate</option>
+                                <option value="INACTIVE">Inactivate</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="button-set">
+                            <button type="button" (click)="_updateCategory()" class="btn btn-primary">Update</button>
+                            <!--                            <button type="button" class="btn btn-danger">Delete</button>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Modal HTML Markup -->
 <div id="ModalLoginForm" class="modal fade">
     <div class="modal-dialog" role="document">
@@ -21,7 +69,7 @@
                     <div class="form-group">
                         <label class="control-label">Thumbnail</label>
                         <div>
-                            <input type="file" (change)="fileChangeEvent($event)" class="form-control-file">
+                            <input type="file" #takeInput (change)="fileChangeEvent($event)" class="form-control-file">
                         </div>
                         {{imageError}}
                     </div>
@@ -51,7 +99,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                             </div>
-                            <input name="category_search" [(ngModel)]="customSearchText" (ngModelChange)="categoryCustomSearch()" class="form-control form-control-alternative" placeholder="Search Category By Name"
+                            <input name="category_search" [(ngModel)]="customSearchText" #searchElement class="form-control form-control-alternative" placeholder="Search Category By Name"
                                    type="text">
                         </div>
                     </div>
@@ -117,54 +165,6 @@
 <!-- <jw-pagination [items]="category" (changePage)="onChangePage($event)"></jw-pagination>-->
 <!--    </div>-->
 
-</div>
-<div id="ModalEditProductt" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title">Edit Category</h1>
-                <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close" id="close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form role="form">
-                    <div class="form-group">
-                        <label class="control-label">Category Name</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="product Name"
-                                   [(ngModel)]="updateCategoryName">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Thumbnail</label>
-                        <div>
-                            <input type="file" (change)="updateFileChangeEvent($event)"  class="form-control-file">
-                        </div>
-                        {{updateImageError}}
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Status</label>
-                        <div>
-                            <select class="browser-default custom-select" [(ngModel)]="updateCategoryStatus" name="status_select">
-                                <option selected>Open this select menu</option>
-                                <option value="ACTIVE">Activate</option>
-                                <option value="INACTIVE">Inactivate</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="button-set">
-                            <button type="button" (click)="_updateCategory()" class="btn btn-primary">Update</button>
-<!--                            <button type="button" class="btn btn-danger">Delete</button>-->
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 
 
