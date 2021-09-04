@@ -1,20 +1,28 @@
 <div class="row class-body">
     <div class="col-6">
-        <form>
-            <div class="row">
-                <div class="col-md-12" style="text-align: center;padding-left: 0">
-                    <div class="form-group">
-                        <div class="input-group input-group-alternative mb-4">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                            </div>
-                            <input class="form-control form-control-alternative" placeholder="Search review By complain type"
-                                   type="text">
-                        </div>
-                    </div>
-                </div>
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-default" id="yearSelect" ngbDropdownToggle>{{selectedYear}}
+                <i style="vertical-align: middle;" class="ni ni-bold-down"></i>
+            </button>
+            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="yearSelect">
+                <button class="dropdown-item" ngbDropdownItem *ngFor="let year of years"
+                        (click)="changeYear(year)">{{year}}</button>
             </div>
-        </form>
+        </div>
+
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-default" id="monthSelect" ngbDropdownToggle>{{selectedMonth}}
+                <i style="vertical-align: middle;" class="ni ni-bold-down"></i
+                ></button>
+            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="monthSelect">
+                <button class="dropdown-item" ngbDropdownItem *ngFor="let month of months"
+                        (click)="changeMonth(month)">{{month.name}}</button>
+            </div>
+        </div>
+        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="search()">
+            <span class="btn-inner--icon"><i class="ni ni-zoom-split-in"></i></span>
+            <span class="btn-inner--text">Search</span>
+        </button>
     </div>
     </div>
 <div class="row"  style="margin: 2%;">
@@ -23,36 +31,38 @@
             <table class="table align-items-center table-flush">
                 <thead class="thead-dark">
                 <tr>
-                   <th scope="col">Customer</th>
+<!--                   <th scope="col">Customer</th>-->
                     <th scope="col">Complain Type</th>
                     <th scope="col">Message</th>
                     </tr>
                 </thead>
-                <tbody *ngFor = "let reports of viewreport">
+                <tbody *ngFor = "let reports of reviewList | paginate: config">
                 <tr>
+<!--                    <td>-->
+<!--                        <div class="media-body">-->
+<!--                            <span class="mb-0 text-sm">{{reports.customer}}</span>-->
+<!--                        </div>-->
+<!--                        </td>-->
                     <td>
                         <div class="media-body">
-                            <span class="mb-0 text-sm">{{reports.customer}}</span>
-                        </div>
-                        </td>
-                    <td>
-                        <div class="media-body">
-                            <span class="mb-0 text-sm">{{reports.customer}}</span>
+                            <span class="mb-0 text-sm">{{reports.customerReviewType}}</span>
                         </div>
                     </td>
                     <td>
                         <div class="media-body">
-                            <span class="mb-0 text-sm">{{reports.customer}}</span>
+                            <span class="mb-0 text-sm">{{reports.customerReviewComment}}</span>
                         </div>
                     </td>
                 </tr>
                 </tbody>
+                <div class="products-pagination">
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                    <!--                    <pagination-controls (pageChange)="this.config.currentPage = $event"></pagination-controls>-->
+                </div>
             </table>
         </div>
     </div>
-    <div class="card-footer pb-0 pt-3">
-<jw-pagination [items]="viewreport" (changePage)="onChangePage($event)"></jw-pagination>
-    </div>
+
 </div>
 
 
