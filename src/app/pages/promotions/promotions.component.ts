@@ -1,4 +1,3 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PromotionService} from '../service/admin-web-services/promotion.service';
 import {Promotion} from '../model/promotion';
@@ -19,6 +18,8 @@ export class PromotionsComponent implements OnInit,AfterViewInit  {
 
   @ViewChild('myInput')
   myInputVariable: ElementRef;
+  @ViewChild('myInput1')
+  myInputVariable1: ElementRef;
 
   promotionList : Promotion[];
 
@@ -222,7 +223,12 @@ export class PromotionsComponent implements OnInit,AfterViewInit  {
       if (data['success']){
         // success msg
         this.removebackdrop();
-
+        this.myInputVariable1.nativeElement.value = ''
+        this.updatePromotionDescription = '';
+        this.updatePromotionHeading = '';
+        this.updatePromotionStatus = '';
+        this.updateCardImageBase64 = null;
+        this.updateIsImageSaved = false;
         this._getPromotionList(0);
         this.alertService.success('promotion updated', this.options);
 

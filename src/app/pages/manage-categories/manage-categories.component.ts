@@ -1,4 +1,3 @@
-import {Component, ElementRef, OnInit, VERSION, ViewChild} from '@angular/core';
 import {AfterViewInit, Component, ElementRef, OnInit, VERSION, ViewChild} from '@angular/core';
 // import {Category} from '../model/category';
 import {CategoryService} from '../service/admin-web-services/category.service';
