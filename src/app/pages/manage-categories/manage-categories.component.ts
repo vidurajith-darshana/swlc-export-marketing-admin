@@ -1,20 +1,24 @@
 import {Component, ElementRef, OnInit, VERSION, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, VERSION, ViewChild} from '@angular/core';
 // import {Category} from '../model/category';
 import {CategoryService} from '../service/admin-web-services/category.service';
 import {Category} from '../model/category';
 import {AlertService} from '../_alert';
 import {NotifierService} from 'angular-notifier';
+import {fromEvent} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 
 @Component({
     selector: 'app-manage-categories',
     templateUrl: './manage-categories.component.html',
     styleUrls: ['./manage-categories.component.css']
 })
-export class ManageCategoriesComponent implements OnInit {
+export class ManageCategoriesComponent implements OnInit,AfterViewInit {
     @ViewChild('closebutton') closebutton;
     @ViewChild('closebutton1') closebutton1;
     categoryName = 'Angular ' + VERSION.major;
     private categoryList: Category[];
+    @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
     // private categoryList: Category[];
 
     @ViewChild('myInput')
@@ -302,6 +306,29 @@ export class ManageCategoriesComponent implements OnInit {
         this.updateCategoryName = name;
         this.updateCardImageBase64 = null;
         this.updateCategoryStatus = status;
+    }
+    ngAfterViewInit(): void {
+
+        fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
+            // get value
+            map((event: any) => {
+
+                if (event.target.value.length == 0) {
+                    this.categoryCustomSearch();
+                }
+                return event.target.value;
+            })
+
+            , filter(res => res.length > 1)
+
+            , debounceTime(1000)
+
+            , distinctUntilChanged()
+
+        ).subscribe((text: string) => {
+            this.categoryCustomSearch();
+        });
+
     }
 
 }

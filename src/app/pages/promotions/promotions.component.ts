@@ -1,7 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PromotionService} from '../service/admin-web-services/promotion.service';
 import {Promotion} from '../model/promotion';
 import {AlertService} from '../_alert';
+import {fromEvent} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 
 
 @Component({
@@ -9,9 +12,10 @@ import {AlertService} from '../_alert';
   templateUrl: './promotions.component.html',
   styleUrls: ['./promotions.component.css']
 })
-export class PromotionsComponent implements OnInit {
+export class PromotionsComponent implements OnInit,AfterViewInit  {
   @ViewChild('closebutton') closebutton;
   @ViewChild('closebutton1') closebutton1;
+  @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
 
   @ViewChild('myInput')
   myInputVariable: ElementRef;
@@ -287,6 +291,29 @@ export class PromotionsComponent implements OnInit {
     this.addPromotionHeading = '';
     this.cardImageBase64 = null;
     this.isImageSaved = false;
+  }
+  ngAfterViewInit(): void {
+
+    fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
+        // get value
+        map((event: any) => {
+
+          if (event.target.value.length == 0) {
+            this._promotionCustomSearch();
+          }
+          return event.target.value;
+        })
+
+        , filter(res => res.length > 1)
+
+        , debounceTime(1000)
+
+        , distinctUntilChanged()
+
+    ).subscribe((text: string) => {
+      this._promotionCustomSearch();
+    });
+
   }
 
 }
