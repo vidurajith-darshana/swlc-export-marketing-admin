@@ -1,19 +1,25 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component,AfterViewInit, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../service/admin-web-services/product.service';
 import {Product} from '../model/product';
 import {CategoryService} from '../service/admin-web-services/category.service';
 import {Category} from '../model/category';
 import {NotifierService} from 'angular-notifier';
+import {fromEvent} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 
 @Component({
     selector: 'app-manage-products',
     templateUrl: './manage-products.component.html',
     styleUrls: ['./manage-products.component.css']
 })
-export class ManageProductsComponent implements OnInit {
+export class ManageProductsComponent implements OnInit,AfterViewInit {
 
     @ViewChild('closebutton') closebutton;
     @ViewChild('closeAddProductbutton') closeAddProductbutton;
+
+    @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
+    @ViewChild('takeInput', {static: false}) InputVar: ElementRef;
+    @ViewChild('takeInputa', {static: false}) InputVara: ElementRef;
 
     @ViewChild('addImageInput', {static: false}) addImageInput :ElementRef;
     @ViewChild('updateImageInput', {static: false}) updateImageInput :ElementRef;
@@ -353,6 +359,8 @@ export class ManageProductsComponent implements OnInit {
         this.addProductName = '';
         this.addProductCode = '';
         this.addProductPrice = '';
+        this.InputVar.nativeElement.value = "";
+        this.InputVara.nativeElement.value = "";
         this.addTotalQty = 0;
         this.addCurrentQty = 0;
         this.selectCategoryList = new Array();
@@ -372,7 +380,7 @@ export class ManageProductsComponent implements OnInit {
         this.updateProductName = name;
         this.updateProductCode = code;
         this.updateProductPrice = price;
-        this.updateCardImageBase64 = image;
+        this.updateCardImageBase64 = null;
         this.updateTotalQty = totalQty;
         this.updateCurrentQty = currentQty;
         this.updateProductStatus = status;
@@ -500,5 +508,28 @@ export class ManageProductsComponent implements OnInit {
     private removebackdropAddProduct() {
         this.closeAddProductbutton.nativeElement.click();
     }
+    ngAfterViewInit(): void {
+
+        fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
+            // get value
+            map((event: any) => {
+
+                if (event.target.value.length == 0) {
+                    this.productCustomSearch();
+                }
+                return event.target.value;
+            })
+
+            , filter(res => res.length > 1)
+
+            , debounceTime(1000)
+
+            , distinctUntilChanged()
+
+        ).subscribe((text: string) => {
+            this.productCustomSearch();
+        });
+
+    }
+
 }
- 

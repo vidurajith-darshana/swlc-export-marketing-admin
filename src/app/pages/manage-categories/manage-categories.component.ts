@@ -1,20 +1,29 @@
-import {Component, OnInit, VERSION, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, VERSION, ViewChild} from '@angular/core';
 // import {Category} from '../model/category';
 import {CategoryService} from '../service/admin-web-services/category.service';
 import {Category} from '../model/category';
 import {AlertService} from '../_alert';
 import {NotifierService} from 'angular-notifier';
+import {fromEvent} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 
 @Component({
     selector: 'app-manage-categories',
     templateUrl: './manage-categories.component.html',
     styleUrls: ['./manage-categories.component.css']
 })
-export class ManageCategoriesComponent implements OnInit {
+export class ManageCategoriesComponent implements OnInit,AfterViewInit {
     @ViewChild('closebutton') closebutton;
+    @ViewChild('closebutton1') closebutton1;
     categoryName = 'Angular ' + VERSION.major;
     private categoryList: Category[];
+    @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
     // private categoryList: Category[];
+
+    @ViewChild('myInput')
+    myInputVariable: ElementRef;
+    @ViewChild('myInput2')
+    myInputVariable2: ElementRef;
 
     imageError: string;
     isImageSaved: boolean;
@@ -210,6 +219,7 @@ export class ManageCategoriesComponent implements OnInit {
                         this.cardImageBase64 = null;
                         this.isImageSaved = false;
                         this.addCategoryName = '';
+                        this.myInputVariable.nativeElement.value = "";
                         this.alertService.success('Category added successfully', this.options);
                     } else {
                         // alert(data['message']); error message
@@ -240,10 +250,15 @@ export class ManageCategoriesComponent implements OnInit {
     _updateCategory() {
         if (this.updateCategoryName !== '') {
             if (this.updateCardImageBase64 !== '') {
+
+                let a = null;
+                if (this.updateCardImageBase64 !== null){
+                    a = this.updateCardImageBase64.split(',')[1];
+                }
                 let category = {
                     id : this.updateCategoryId,
                     name : this.updateCategoryName,
-                    thumbnail : this.updateCardImageBase64.split(',')[1],
+                    thumbnail : a,
                     categoryStatus : this.updateCategoryStatus
                 }
 
@@ -251,10 +266,12 @@ export class ManageCategoriesComponent implements OnInit {
                     if (data['success']) {
                         // success alert
                         // this.removebackdrop();
+                        this.closebutton1.nativeElement.click();
                         this.getAllCategoryList(0);
                         this.alertService.success('Category Update successfully', this.options);
                         this.updateCardImageBase64 = null;
                         this.updateIsImageSaved = false;
+                        this.myInputVariable2.nativeElement.value = "";
                     } else {
                         // alert(data['message']); error message
                         // this.removebackdrop();
@@ -280,16 +297,37 @@ export class ManageCategoriesComponent implements OnInit {
     }
 
     removebackdrop() {
-        console.log('wwwwwwwwwwwwwww')
         this.closebutton.nativeElement.click();
-        console.log('qqqqqqqqqqqqqqqqqq')
     }
 
     loadUpdateDetails(id, name, image, status) {
         this.updateCategoryId = id;
         this.updateCategoryName = name;
-        this.updateCardImageBase64 = image;
+        this.updateCardImageBase64 = null;
         this.updateCategoryStatus = status;
+    }
+    ngAfterViewInit(): void {
+
+        fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
+            // get value
+            map((event: any) => {
+
+                if (event.target.value.length == 0) {
+                    this.categoryCustomSearch();
+                }
+                return event.target.value;
+            })
+
+            , filter(res => res.length > 1)
+
+            , debounceTime(1000)
+
+            , distinctUntilChanged()
+
+        ).subscribe((text: string) => {
+            this.categoryCustomSearch();
+        });
+
     }
 
 }

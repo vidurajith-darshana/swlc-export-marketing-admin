@@ -1,7 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PromotionService} from '../service/admin-web-services/promotion.service';
 import {Promotion} from '../model/promotion';
 import {AlertService} from '../_alert';
+import {fromEvent} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 
 
 @Component({
@@ -9,9 +11,15 @@ import {AlertService} from '../_alert';
   templateUrl: './promotions.component.html',
   styleUrls: ['./promotions.component.css']
 })
-export class PromotionsComponent implements OnInit {
+export class PromotionsComponent implements OnInit,AfterViewInit  {
   @ViewChild('closebutton') closebutton;
   @ViewChild('closebutton1') closebutton1;
+  @ViewChild('searchElement', {static: true}) searchElement: ElementRef;
+
+  @ViewChild('myInput')
+  myInputVariable: ElementRef;
+  @ViewChild('myInput1')
+  myInputVariable1: ElementRef;
 
   promotionList : Promotion[];
 
@@ -162,9 +170,10 @@ export class PromotionsComponent implements OnInit {
     this.promotionService.createPromotion(promotion).subscribe((data)=>{
       if (data['success']){
         // success msg
-        this._getPromotionList(0);
-        this.removeAddBackDrop();
+        this.closebutton1.nativeElement.click();
         this.clearPromotionAddText();
+        this._getPromotionList(0);
+        this.myInputVariable.nativeElement.value = "";
         this.alertService.success('Promotion added', this.options);
       }else {
         // error msg
@@ -196,9 +205,15 @@ export class PromotionsComponent implements OnInit {
 
   _updatePromotion(promotionId){
 
+    let a = null;
+
+    if (this.updateCardImageBase64 !== undefined){
+      a = this.updateCardImageBase64.split(',')[1];
+    }
+
     let promotion = {
       id : promotionId,
-      image : this.updateCardImageBase64,
+      image : a,
       description : this.updatePromotionDescription,
       heading : this.updatePromotionHeading,
       status : this.updatePromotionStatus
@@ -208,7 +223,12 @@ export class PromotionsComponent implements OnInit {
       if (data['success']){
         // success msg
         this.removebackdrop();
-
+        this.myInputVariable1.nativeElement.value = ''
+        this.updatePromotionDescription = '';
+        this.updatePromotionHeading = '';
+        this.updatePromotionStatus = '';
+        this.updateCardImageBase64 = null;
+        this.updateIsImageSaved = false;
         this._getPromotionList(0);
         this.alertService.success('promotion updated', this.options);
 
@@ -252,10 +272,6 @@ export class PromotionsComponent implements OnInit {
     this.closebutton.nativeElement.click();
   }
 
-  removeAddBackDrop(){
-    this.closebutton1.native.click();
-  }
-
   _promotionCustomSearch(){
     if (this.customSearchText !== '' || this.customSearchText !== undefined){
       this.promotionService.getAllPromotions(this.customSearchText,0).subscribe((data)=>{
@@ -279,7 +295,31 @@ export class PromotionsComponent implements OnInit {
   clearPromotionAddText(){
     this.addPromotionDescription = '';
     this.addPromotionHeading = '';
-    this.cardImageBase64 = '';
+    this.cardImageBase64 = null;
+    this.isImageSaved = false;
+  }
+  ngAfterViewInit(): void {
+
+    fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
+        // get value
+        map((event: any) => {
+
+          if (event.target.value.length == 0) {
+            this._promotionCustomSearch();
+          }
+          return event.target.value;
+        })
+
+        , filter(res => res.length > 1)
+
+        , debounceTime(1000)
+
+        , distinctUntilChanged()
+
+    ).subscribe((text: string) => {
+      this._promotionCustomSearch();
+    });
+
   }
 
 }

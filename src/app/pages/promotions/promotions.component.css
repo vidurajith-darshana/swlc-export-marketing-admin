@@ -19,3 +19,10 @@
         margin-left: 0%;
     }
 }
+
+.product-image{
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border-radius: 0.65rem;
+}

@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label class="control-label">Thumbnail</label>
                         <div>
-                            <input type="file" (change)="fileChangeEvent($event)" class="form-control-file">
+                            <input #myInput type="file" (change)="fileChangeEvent($event)" class="form-control-file">
                         </div>
                         {{imageError}}
                     </div>
@@ -51,7 +51,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                             </div>
-                            <input name="category_search" [(ngModel)]="customSearchText" (ngModelChange)="categoryCustomSearch()" class="form-control form-control-alternative" placeholder="Search Category By Name"
+                            <input name="category_search" [(ngModel)]="customSearchText" #searchElement class="form-control form-control-alternative" placeholder="Search Category By Name"
                                    type="text">
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                     <td>
                         <span class="badge badge-dot mr-4">
                             <a class="avatar rounded-circle mr-3">
-                                <img alt="Image placeholder" class="cat-image" src="{{categories.thumbnail}}">
+                                <img alt="Image placeholder" class="product-image" src="{{categories.thumbnail}}">
                               </a>
                         </span>
                     </td>
@@ -123,7 +123,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Edit Category</h1>
-                <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close" id="close">
+                <button type="button" #closebutton1 class="close" data-dismiss="modal" aria-label="Close" id="close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -140,7 +140,7 @@
                     <div class="form-group">
                         <label class="control-label">Thumbnail</label>
                         <div>
-                            <input type="file" (change)="updateFileChangeEvent($event)"  class="form-control-file">
+                            <input type="file" #myInput2 (change)="updateFileChangeEvent($event)"  class="form-control-file">
                         </div>
                         {{updateImageError}}
                     </div>
