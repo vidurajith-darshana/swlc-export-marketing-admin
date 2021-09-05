@@ -16,7 +16,7 @@ export const ADMIN_ROUTES: RouteInfo[] = [
     {path: '/manage-category', title: 'Manage Category', icon: 'ni-tv-2 text-primary', class: ''},
     {path: '/manage-orders', title: 'Manage Orders', icon: 'ni-planet text-blue', class: ''},
     {path: '/manage-products', title: 'Manage Products', icon: 'ni-bullet-list-67 text-red', class: ''},
-    {path: '/registration_DEO', title: 'DEO Register', icon: '', class: ''},
+    {path: '/registration_DEO', title: 'Manage DEO', icon: '', class: ''},
     {path: '/reviews', title: 'Customer Reviews Report', icon: '', class: ''},
     {path: '/testimonial', title: 'Testimonial', icon: '', class: ''},
     {path: '/promotions', title: 'Promotions', icon: '', class: ''},
@@ -28,7 +28,8 @@ export const ADMIN_ROUTES: RouteInfo[] = [
 export const DEO_ROUTES: RouteInfo[] = [
     {path: '/manage-category', title: 'Manage Category', icon: 'ni-tv-2 text-primary', class: ''},
     {path: '/manage-orders', title: 'Manage Orders', icon: 'ni-planet text-blue', class: ''},
-    {path: '/manage-products', title: 'Manage Products', icon: 'ni-bullet-list-67 text-red', class: ''}
+    {path: '/manage-products', title: 'Manage Products', icon: 'ni-bullet-list-67 text-red', class: ''},
+    {path: '/promotions', title: 'Promotions', icon: '', class: ''},
 
 ];
 

@@ -1,18 +1,18 @@
-import {Component,AfterViewInit, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, AfterViewInit, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../service/admin-web-services/product.service';
 import {Product} from '../model/product';
 import {CategoryService} from '../service/admin-web-services/category.service';
 import {Category} from '../model/category';
 import {NotifierService} from 'angular-notifier';
-import {fromEvent} from "rxjs";
-import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
+import {fromEvent} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-manage-products',
     templateUrl: './manage-products.component.html',
     styleUrls: ['./manage-products.component.css']
 })
-export class ManageProductsComponent implements OnInit,AfterViewInit {
+export class ManageProductsComponent implements OnInit, AfterViewInit {
 
     @ViewChild('closebutton') closebutton;
     @ViewChild('closeAddProductbutton') closeAddProductbutton;
@@ -21,8 +21,8 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
     @ViewChild('takeInput', {static: false}) InputVar: ElementRef;
     @ViewChild('takeInputa', {static: false}) InputVara: ElementRef;
 
-    @ViewChild('addImageInput', {static: false}) addImageInput :ElementRef;
-    @ViewChild('updateImageInput', {static: false}) updateImageInput :ElementRef;
+    @ViewChild('addImageInput', {static: false}) addImageInput: ElementRef;
+    @ViewChild('updateImageInput', {static: false}) updateImageInput: ElementRef;
 
     imageError: string;
     isImageSaved: boolean;
@@ -60,8 +60,8 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
 
     customSearchText: string = '';
 
-    public visible = false
-    public visibleAnimate = false
+    public visible = false;
+    public visibleAnimate = false;
 
     constructor(
         private productService: ProductService,
@@ -261,7 +261,7 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
             let data = {
                 id: this.selectedUpdateCategory.id,
                 name: this.selectedUpdateCategory.name
-            }
+            };
 
             this.updateCategoryList.push(data);
         } else {
@@ -352,22 +352,38 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
         } else {
             this.notifierService.notify('error', 'Please enter Product name');
         }
-        this.hideAddProduct()
+        this.hideAddProduct();
     }
 
     _clearText() {
+
         this.addProductName = '';
         this.addProductCode = '';
         this.addProductPrice = '';
-        this.InputVar.nativeElement.value = "";
-        this.InputVara.nativeElement.value = "";
+
+        this.addProductPrice = '';
+        this.addProductCode = '';
+        this.addTotalQty = 0;
+        this.addCurrentQty = 0;
+
+        this.InputVar.nativeElement.value = '';
+        this.InputVara.nativeElement.value = '';
         this.addTotalQty = 0;
         this.addCurrentQty = 0;
         this.selectCategoryList = new Array();
         this._getCategoryList();
         this.removeImage();
-        this.addImageInput.nativeElement.value = "";
-        this.updateImageInput.nativeElement.value = "";
+
+        this.addImageInput.nativeElement.value = '';
+        this.updateImageInput.nativeElement.value = '';
+
+        this.updateProductPrice = '';
+        this.updateProductCode = '';
+
+        this.updateTotalQty = 0;
+        this.updateCurrentQty = 0;
+
+        this.imageError = "";
     }
 
     removeImage() {
@@ -401,7 +417,7 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
 
         let categoryId = new Array();
 
-        let data:any;
+        let data: any;
 
         for (let i in this.updateCategoryList) {
 
@@ -412,7 +428,7 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
             categoryId.push(object);
         }
 
-        if (this.updateCardImageBase64==null){
+        if (this.updateCardImageBase64 == null) {
             data = {
                 id: this.updateProductId,
                 code: this.updateProductCode,
@@ -423,8 +439,8 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
                 currentQty: this.updateCurrentQty,
                 categories: categoryId,
                 status: this.updateProductStatus
-            }
-        } else{
+            };
+        } else {
             data = {
                 id: this.updateProductId,
                 code: this.updateProductCode,
@@ -435,13 +451,14 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
                 currentQty: this.updateCurrentQty,
                 categories: categoryId,
                 status: this.updateProductStatus
-            }
+            };
         }
 
 
         this.productService.updateProduct(data).subscribe((data) => {
             if (data['success']) {
                 this.notifierService.notify('success', 'Product update success');
+
                 this._clearText();
                 this._getAllProducts(0);
                 this.removebackdrop();
@@ -496,18 +513,19 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
     }
 
     hide() {
-        this.visibleAnimate = false
-        setTimeout(() => (this.visible = false), 300)
+        this.visibleAnimate = false;
+        setTimeout(() => (this.visible = false), 300);
     }
 
     hideAddProduct() {
-        this.visibleAnimate = false
-        setTimeout(() => (this.visible = false), 300)
+        this.visibleAnimate = false;
+        setTimeout(() => (this.visible = false), 300);
     }
 
     private removebackdropAddProduct() {
         this.closeAddProductbutton.nativeElement.click();
     }
+
     ngAfterViewInit(): void {
 
         fromEvent(this.searchElement.nativeElement, 'keyup').pipe(
@@ -525,7 +543,6 @@ export class ManageProductsComponent implements OnInit,AfterViewInit {
             , debounceTime(1000)
 
             , distinctUntilChanged()
-
         ).subscribe((text: string) => {
             this.productCustomSearch();
         });
